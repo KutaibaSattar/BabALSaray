@@ -11,5 +11,7 @@ namespace BabALSaray.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+
+        public DbSet<dbAccounts> Accounts {get;set;} 
     }
 }
