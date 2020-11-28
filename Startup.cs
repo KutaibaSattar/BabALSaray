@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using BabALSaray.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using AutoMapper;
+using BabALSaray.Helpers;
 
 namespace BabALSaray
 {
@@ -31,12 +32,15 @@ namespace BabALSaray
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
-           services.AddAplicationServices(_config); 
-          
-           services.AddIdentityServices(_config);
-            
+
+            services.AddAplicationServices(_config);
+
+            services.AddIdentityServices(_config);
+
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
 
             services.AddControllers().AddNewtonsoftJson
             (opt =>opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

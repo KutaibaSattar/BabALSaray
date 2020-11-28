@@ -24,12 +24,10 @@ namespace DTOs
 
         public int? ParentId {get;set;}
       
-
+         public ICollection <dbAccountsDto> Children { get; set; }
         public dbAccountsDto(){
 
-            Id = -1;
-            ParentId = -1;
-          
+            Children = new Collection<dbAccountsDto>(); 
 
         }
 
