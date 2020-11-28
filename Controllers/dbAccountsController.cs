@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AppEntities;
 using BabALSaray.Data;
@@ -18,7 +19,8 @@ namespace BabALSaray.Controllers
         [HttpGet]
          public async Task<ActionResult<IEnumerable<dbAccounts>>> GetdbAccounts()
         {
-            var dbaccounts = await _context.Accounts.ToListAsync();
+           
+            var dbaccounts = await  _context.Accounts.Include(ch => ch.Children).Where(p =>p.ParentId == null).ToListAsync();
 
             return dbaccounts;
 
