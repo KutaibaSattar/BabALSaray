@@ -32,9 +32,9 @@ namespace BabALSaray.Controllers
         {
             var users = await _userRepository.GetUserAsync();
 
-            var usersToReturn = _mapper.Map<UserDto>(users);
+            var usersToReturn = _mapper.Map<IEnumerable<AppUser>, IEnumerable<UserDto>>(users);
 
-            return Ok(usersToReturn);
+            return Ok(users);
 
 
         }
@@ -46,7 +46,7 @@ namespace BabALSaray.Controllers
         {
             var user = await _userRepository.GetUserByIdAsync(id);
 
-            var userToReturn = _mapper.Map<
+            var userToReturn = _mapper.Map<UserDto>(user);
 
             return user;
 

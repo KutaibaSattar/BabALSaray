@@ -24,11 +24,11 @@ namespace AppEntities
         public int? ParentId {get;set;}
         public ICollection <dbAccounts> Children { get; set; }
 
-        public dbAccounts(){
+      /*   public dbAccounts(){
 
             Children = new Collection<dbAccounts>(); 
 
-        }
+        } */
 
         
         

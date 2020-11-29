@@ -1,3 +1,5 @@
+using System;
+
 namespace AppEntities
 {
     public class AppUser
@@ -7,7 +9,11 @@ namespace AppEntities
 
        public byte[] PasswordHash { get; set; }
 
-       public byte[] PasswordSalt { get; set; }     
+       public byte[] PasswordSalt { get; set; } 
+       
+        public DateTime Created { get; set; }   = DateTime.Now;
+
+        public DateTime LastActive { get; set; } =  DateTime.Now;     
       
        
 
