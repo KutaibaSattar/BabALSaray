@@ -22,18 +22,25 @@ namespace BabALSaray.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dbAccountsDto>>> GetdbAccounts()
+        
         {
 
+           
+          
+           
             var dbaccounts = _context.Accounts.Include(ch => ch.Children).AsEnumerable().Where(p => p.ParentId == null)
-            .AsQueryable().ToListAsync();
+            .AsQueryable(); //.ToListAsync();
 
 
-            var dbaccountsToReturn = _mapper.Map<IEnumerable<dbAccounts>,IEnumerable<dbAccountsDto>>(dbaccounts);
+            var dbaccountsTree = await Task.FromResult(dbaccounts.ToList());
+            
+            
+            var dbaccountsToReturn = _mapper.Map<IEnumerable<dbAccountsDto>>(dbaccountsTree);
            
            
             //return Table .Include(x => x.Children) .AsEnumerable().Where(x => x.Parent == null).ToList();
 
-          return Ok(await dbaccounts.ToListAsync());
+          return Ok(dbaccountsToReturn);
 
            /*  var tmp = await dbaccounts.ToListAsync();
 

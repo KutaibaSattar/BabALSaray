@@ -1,5 +1,6 @@
 using AppEntities;
 using AutoMapper;
+using BabALSaray.DTOs;
 using DTOs;
 
 namespace BabALSaray.Helpers
@@ -9,6 +10,8 @@ namespace BabALSaray.Helpers
         public AutoMapperProfiles()
         {
           CreateMap<dbAccounts,dbAccountsDto>();
+          CreateMap<AppUser,UserDto>();
+          
         }
     }
 }
