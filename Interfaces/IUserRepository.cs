@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppEntities;
+using BabALSaray.DTOs;
 
 namespace BabALSaray.Interfaces
 {
@@ -16,6 +17,11 @@ namespace BabALSaray.Interfaces
         Task<AppUser> GetUserByIdAsync (int id);
                 
         Task <AppUser> GetUserByNameAsync (string username);
+
+        Task <IEnumerable<MemberDto>> GetMembersAsync();
+
+        Task<MemberDto> GetMemberAsync(int id);
+        
         
     }
 }

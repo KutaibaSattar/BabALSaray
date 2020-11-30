@@ -28,27 +28,25 @@ namespace BabALSaray.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var users = await _userRepository.GetUserAsync();
-
-            var usersToReturn = _mapper.Map<IEnumerable<AppUser>, IEnumerable<UserDto>>(users);
-
+            var users = await _userRepository.GetMembersAsync();
+                        
             return Ok(users);
 
 
         }
 
-        [Authorize]
+        //[Authorize]
         // api/users/3
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
 
-            var userToReturn = _mapper.Map<UserDto>(user);
+            var userToReturn = _mapper.Map<MemberDto>(user);
 
-            return user;
+            return Ok(userToReturn);
 
 
         }

@@ -11,6 +11,7 @@ namespace BabALSaray.Helpers
         {
           CreateMap<dbAccounts,dbAccountsDto>();
           CreateMap<AppUser,UserDto>();
+          CreateMap<AppUser,MemberDto>();
           
         }
     }
