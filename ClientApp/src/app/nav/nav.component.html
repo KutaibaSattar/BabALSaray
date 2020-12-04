@@ -1,27 +1,31 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">Bab ALSaray</a>
+      <a class="navbar-brand" routerLinkActive = 'active' routerLink ='/'>Bab ALSaray</a>
+     
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+     
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto" *ngIf="loggedIn" >
-         
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+        <ul class="navbar-nav mr-auto"  >
+         <ng-container *ngIf="accountService.currentUser$ | async">
+         <li class="nav-item">
+            <a class="nav-link" routerLink ='/home' routerLinkActive = 'active'>Home</a>
           </li>
           
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Accounts</a>
+          <li class="nav-item">
+            <a class="nav-link" routerLink ='/dbaccounts-list'>Accounts</a>
           </li>
+         </ng-container>
          
-          <li class="nav-item active">
-            <a class="nav-link" (click)="logout()" href="#">Logout</a>
-          </li>
+         <li class="nav-item">
+          <a class="nav-link" routerLink ='/errors'>Errors</a>
+        </li>
+                  
         </ul>
        
-        <div class="dropdown" *ngIf="loggedIn" dropdown>
-         <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a> 
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+         <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a> 
             <div class="dropdown-menu mt-3" *dropdownMenu>
               <a class="dropdown-item">Edit Profile </a>
               <div class="divider dropdown-divider"></div>
@@ -31,7 +35,7 @@
         </div>
       
       
-        <form *ngIf="!loggedIn" #loginForm='ngForm' class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+        <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm='ngForm' class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
           <input
            name="username" 
           [(ngModel)]="model.username"

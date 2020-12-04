@@ -8,26 +8,16 @@ import { AccountService } from './../_services/account.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  users : any;
-  title : 'Bab ALSaray Project'
   registerMode = false;
  
-  constructor (private http: HttpClient,private accountService : AccountService){}
+  constructor (private accountService : AccountService){}
  
   ngOnInit(){
-    this.getUsers();
     this.setCurrentUser();
  
    }
  
-   getUsers(){
-     this.http.get('/api/users').subscribe(Response=>{
-       this.users = Response
- 
-    },err=>{console.log(err)})
- 
-   }
-
+   
    setCurrentUser(){
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);

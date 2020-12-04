@@ -6,9 +6,12 @@ namespace BabALSaray.Interfaces
 {
     public interface IdbAccountRepository
     {
+        void Update(dbAccounts dbAccounts);
 
-        Task<IEnumerable<dbAccounts>> GetDbAccounts();
+        Task<bool> SaveAllAsync();
+        Task<IEnumerable<dbAccounts>> GetDbAccountsAsync();
 
+        Task<dbAccounts> GetAccountByIdAsync(int id);
         
         
     }

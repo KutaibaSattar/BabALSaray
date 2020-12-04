@@ -14,6 +14,8 @@ namespace BabALSaray.Extensions
              services.AddScoped<ITokenService,TokenService>();
 
              services.AddScoped<IUserRepository,UserRepository>();
+
+             services.AddScoped<IdbAccountRepository, dbAccountsRepository>();
               
               services.AddDbContext<DataContext>(options =>
             {
