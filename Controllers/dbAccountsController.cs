@@ -6,6 +6,7 @@ using AutoMapper;
 using BabALSaray.Data;
 using BabALSaray.Interfaces;
 using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ namespace BabALSaray.Controllers
 
         }
 
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dbAccountsDto>>> GetdbAccounts()
 

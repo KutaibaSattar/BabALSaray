@@ -19,6 +19,7 @@ import { SharedModule } from './_modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
     DbaccountDetailComponent,
     TestErrorsComponent,
     NotFoundComponent,
+    ServerErrorComponent,
     
   ],
   imports: [
@@ -56,7 +58,9 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 
       { path: 'errors', component: TestErrorsComponent},
       { path: 'not-found', component: NotFoundComponent},
-      { path: '**', component: HomeComponent, pathMatch: 'full' },
+      { path: 'server-error', component: ServerErrorComponent},
+
+      { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 
 
     ]),
