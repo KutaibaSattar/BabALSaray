@@ -6,4 +6,7 @@ export interface dbAccounts {
     created: Date;
     lastActive: Date;
     parentId?: any;
+
+    children : dbAccounts[]
+
   }

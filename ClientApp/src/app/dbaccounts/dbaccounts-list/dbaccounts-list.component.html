@@ -1,7 +1,32 @@
-<div class="row">
-  <div class="col-2">
-    <p *ngFor="let dbacct of testing">{{testing.id}} </p>
 
-  </div>
+ Hi
+ <table class='table table-striped' aria-labelledby="tableLabel">
+     <thead>
+       <tr>
+         <th>Id</th>
+         <th>Name</th>
+          <th>Children</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let p of dbaccounts, let i = index">
+        <td>{{i}}</td>
+        <td>{{p.id}}</td>
+         <td>{{p.name}}</td>
+          <td>
+               <ul *ngFor="let c of p.children ">
+                <li>{{c.name}} </li>         
 
-</div>
+               </ul>
+
+          </td>
+   
+       </tr>
+     </tbody>
+   </table>
+  
+   
+ 
+
+
+

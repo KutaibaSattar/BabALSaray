@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { dbAccounts } from 'src/app/_models/adaccounts';
 import { DbaccountsService } from 'src/app/_services/dbaccounts.service';
 
@@ -9,8 +10,9 @@ import { DbaccountsService } from 'src/app/_services/dbaccounts.service';
 })
 export class DbaccountsListComponent implements OnInit {
 
-  dbAccounts : dbAccounts[];
-  testing;
+  dbaccounts : dbAccounts[];
+  
+ 
 
   constructor(private dbAccountsService : DbaccountsService) { }
 
@@ -22,7 +24,7 @@ export class DbaccountsListComponent implements OnInit {
   loadDbAccounts(){
 
     this.dbAccountsService.getdbAccounts().subscribe(dbaccts => {
-      this.dbAccounts = dbaccts;
+    this.dbaccounts = dbaccts;
      console.log(dbaccts);
    
     
@@ -31,6 +33,14 @@ export class DbaccountsListComponent implements OnInit {
     })
 
   }
+
+ 
+    
+   
+  
+
+
+
 
  
 
