@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { dbAccounts } from '../_models/adaccounts';
 import { DbaccountsService } from '../_services/dbaccounts.service';
-interface Tree {
-	root: TreeNode;
-}
+
  
 interface TreeNode {
 	label: string;
+	name :string;
 	children: TreeNode[];
 }
 @Component({
@@ -18,63 +17,26 @@ interface TreeNode {
 
 export class CommentsComponent {
  
-	public data : Tree;
+	public data  = {key: "",name :"",	children: [	]}  
+	
 	public selectedTreeNode: TreeNode | null;
 	dbaccounts : dbAccounts[];
+	
 	// I initialize the app component.
-	constructor(private dbAccountsService : DbaccountsService) {		
-		
-		this.selectedTreeNode = null;
-	
-	
-		this.data = {
-			root: {
-				label: "first",
-				children: [
-					{
-						label: "second-a",
-						children: [
-							{
-								label: "third-first",
-								children: [
-									{
-										label: "ferth",
-										children: [
-											{
-												label: "fiver",
-												children: []
-											}
-										]
-									}
-								]
-							}
-						]
-					},
-					{
-						label: "second-b",
-						children: [
-							{
-								label: "third",
-								children: []
-							}
-						]
-					}
-				]
-			} 
-		}
- 
-	}
+	constructor(private dbAccountsService : DbaccountsService) {}
  
 	ngOnInit(): void {
-		this.loadDbAccounts();
-	
+	this.loadDbAccounts();
+	this.selectedTreeNode = null;
+			
 	  }
 
 	  loadDbAccounts(){
 
 		this.dbAccountsService.getdbAccounts().subscribe(dbaccts => {
 		this.dbaccounts = dbaccts;
-		 console.log(dbaccts);
+		this.data= this.dbaccounts[0];
+		console.log(dbaccts[0]);
 		//this.data = dbaccts[0];
 		console.log(this.data);
 		
