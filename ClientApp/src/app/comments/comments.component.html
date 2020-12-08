@@ -1,26 +1,35 @@
 <!-- Define the recursive template. -->
 
 
+
+	
+
+
 <ng-template #nodeTemplateRef let-node="node">
- 
-	<div class="node" [class.node--selected]="( node === selectedTreeNode )"  > <!-- -->
- 
-		 <!-- <a (click)="selectNode( node )" class="node__label">
+	
+	<div class="main" style="width:300px">
+	
+	
+	<!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"></div>  -->
+	
+		
+		<!-- <a (click)="selectNode( node )" class="node__label">
 			{{ node.id }}
 		</a> 
 		 -->
 			
-				<table style="width:100%" >
-					<tr>
-						<a (click)="selectNode( node )" class="node__label">
+				
+						<!-- <a (click)="selectNode( node )" class="node__label">
 
-						<td>{{node.id}}</td>	
-						</a> 
-						<td>{{node.parentId}}</td>
-					</tr>
-	
-				</table>
-		
+							
+						</a>  -->
+				<tr>				
+						<td style="width:50px ">{{node.id}}</td>	
+						<td style="width:300px ">{{node.key}}</td>
+					
+						
+				
+				</tr>	
 		
 		
 		<div *ngIf="node.children.length" class="node__children" > <!--  -->
@@ -29,6 +38,7 @@
  
 				<!-- Invoke the recursive template. -->
 				<ng-template [ngTemplateOutlet]="nodeTemplateRef"[ngTemplateOutletContext]="{ node: child }">
+					
 					<!--
 						Because we are using nested ngTemplates (rather than the template
 						input of the ngFor directive), we have more control over how the
@@ -41,24 +51,34 @@
  
 		</div>
  
-	</div>
+	</div>	
  
 </ng-template>
 
  
 <!-- Initiate the recursive template rendering. -->
-
-<table style="width:100%" class='table table-striped' aria-labelledby="tableLabel">
-	<thead>
+<div class="body"></div>
+<table class='table table-striped' aria-labelledby="tableLabel">
 	
-	<tr>
-		<th>key	</th>	
-		<th> name</th>
-	</tr>
-	</thead>
+		<thead>
+			
+			  <th  style="width:50px">Id </th>
+			  <th style="width:300px">Name</th>
+			
+		  </thead>	
+		  <tbody>
+			<ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }">
+	
+	
+			</ng-template>
+		  </tbody>
+
+	
+	 
+	
 </table>
-<ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }">
-</ng-template>
+
+
 
 
 
