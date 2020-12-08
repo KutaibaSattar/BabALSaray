@@ -8,6 +8,7 @@ interface TreeNode {
 	name :string;
 	children: TreeNode[];
 }
+
 @Component({
   selector: 'comments',
   templateUrl : './comments.component.html',
@@ -17,9 +18,10 @@ interface TreeNode {
 
 export class CommentsComponent {
  
-	public data  = {key: "",name :"",	children: [	]}  
+	public data = {id:0, parentId:0 ,key: "",name :"", lvl:0,children: [	]}  
 	
 	public selectedTreeNode: TreeNode | null;
+	
 	dbaccounts : dbAccounts[];
 	
 	// I initialize the app component.
@@ -50,7 +52,7 @@ export class CommentsComponent {
 	// ---
  
 	// I select the given tree node, and log it to the console.
-	/* public selectNode( node: TreeNode ) : void {
+	public selectNode( node: TreeNode ) : void {
  
 		this.selectedTreeNode = node;
  
@@ -59,6 +61,6 @@ export class CommentsComponent {
 		console.log( "Children:", node.children.length );
 		console.groupEnd();
  
-	} */
+	}
  
 }

@@ -1,0 +1,12 @@
+<div>
+    <ul>
+      <li>
+        
+      </li>
+      <div *ngIf="!isLeaf(node)">
+        <ul *ngFor="let innerNode of node.nodes">
+          <app-recursion [dbaccounts]="innerNode"></app-recursion>
+        </ul>
+      </div>
+    </ul>
+  </div>

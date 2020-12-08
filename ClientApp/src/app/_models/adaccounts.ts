@@ -5,7 +5,7 @@ export interface dbAccounts {
     lvl: number;
     created: Date;
     lastActive: Date;
-    parentId?: any;
+    parentId: any;
 
     children : dbAccounts[]
 
