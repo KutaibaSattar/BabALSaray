@@ -20,7 +20,9 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { CommentsComponent } from './comments/comments.component';
+import { DbaccountCardComponent } from './dbaccounts/dbaccount-card/dbaccount-card.component';
+
+
 
 
 
@@ -38,7 +40,8 @@ import { CommentsComponent } from './comments/comments.component';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    CommentsComponent,
+    DbaccountCardComponent
+    
   
     
   ],
@@ -62,10 +65,9 @@ import { CommentsComponent } from './comments/comments.component';
         ]
       },
 
-      { path: 'errors', component: CommentsComponent},
+      { path: 'errors', component: TestErrorsComponent},
       { path: 'not-found', component: NotFoundComponent},
       { path: 'server-error', component: ServerErrorComponent},
-
       { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 
 

@@ -1,29 +1,94 @@
 
- Hi
  <table class='table table-striped' aria-labelledby="tableLabel">
-     <thead>
-       <tr>
-         <th>Id</th>
-         <th>Name</th>
-          <th>Children</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr *ngFor="let p of dbaccounts, let i = index">
-        <td>{{i}}</td>
-        <td>{{p.id}}</td>
-         <td>{{p.name}}</td>
-          <td>
-               <ul *ngFor="let c of p.children ">
-                <li>{{c.name}} </li>         
-
-               </ul>
-
-          </td>
+  <thead>
+        
+    <th  style="width:50px">Id </th>
+    <th style="width:300px">Name</th>
+  </thead>	
+  
+  
+  <ng-template #nodeTemplateRef let-node="node">
+    
+    
+    
+    
+    <!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"></div>  -->
+    
+      
+      <!-- <a (click)="selectNode( node )" class="node__label">
+        {{ node.id }}
+      </a> 
+       -->
+        
+          
+              <!-- <a (click)="selectNode( node )" class="node__label">
+  
+                
+              </a>  -->
+          <tbody>
+            <tr>				
+              
+              <td style="width:50px ">{{node.id}}</td>	
+              <td style="width:300px "> <app-dbaccount-card [dbaccount]="node"></app-dbaccount-card></td>
+               
+          
+          </tr>	
+          </tbody>
+          
+      
+      
+      <ng-container *ngIf="node.children.length" class="node__children" > <!--  -->
    
-       </tr>
-     </tbody>
-   </table>
+        <ng-template ngFor let-child [ngForOf]="node.children">
+   
+          <!-- Invoke the recursive template. -->
+          <ng-template [ngTemplateOutlet]="nodeTemplateRef"[ngTemplateOutletContext]="{ node: child }">
+            
+            <!--
+              Because we are using nested ngTemplates (rather than the template
+              input of the ngFor directive), we have more control over how the
+              data is made available to the recursive template. In this case,
+              we're passing "child" through as "node".
+            -->
+          </ng-template>
+   
+        </ng-template>
+   
+    
+   
+      </ng-container>	
+   
+  </ng-template>
+  
+   
+  
+  
+  
+    
+      
+        
+        
+        
+      
+        <!-- Initiate the recursive template rendering. -->	
+        <ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }"></ng-template>
+        
+    
+        
+        
+  
+    
+      
+    
+  </table>
+  
+  
+  
+  
+  
+  <p class="note">
+    <em>(alternative) Ng-Template Template Rendering</em>
+  </p>
   
    
  
