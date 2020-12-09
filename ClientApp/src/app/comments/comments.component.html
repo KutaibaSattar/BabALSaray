@@ -1,13 +1,16 @@
 <!-- Define the recursive template. -->
 
-
-
-	
+<table class='table table-striped' aria-labelledby="tableLabel">
+<thead>
+			
+	<th  style="width:50px">Id </th>
+	<th style="width:300px">Name</th>
+</thead>	
 
 
 <ng-template #nodeTemplateRef let-node="node">
 	
-	<div class="main" style="width:300px">
+	
 	
 	
 	<!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"></div>  -->
@@ -23,16 +26,22 @@
 
 							
 						</a>  -->
-				<tr>				
-						<td style="width:50px ">{{node.id}}</td>	
-						<td style="width:300px ">{{node.key}}</td>
-					
+				<tbody>
+					<tr>				
 						
+						<td style="width:50px ">{{node.id}}</td>	
+						
+						
+						
+						<td style="width:300px ">{{node.key}}</td>
+							
 				
 				</tr>	
+				</tbody>
+				
 		
 		
-		<div *ngIf="node.children.length" class="node__children" > <!--  -->
+		<ng-container *ngIf="node.children.length" class="node__children" > <!--  -->
  
 			<ng-template ngFor let-child [ngForOf]="node.children">
  
@@ -49,32 +58,31 @@
  
 			</ng-template>
  
-		</div>
+	
  
-	</div>	
+		</ng-container>	
  
 </ng-template>
 
  
-<!-- Initiate the recursive template rendering. -->
-<div class="body"></div>
-<table class='table table-striped' aria-labelledby="tableLabel">
-	
-		<thead>
-			
-			  <th  style="width:50px">Id </th>
-			  <th style="width:300px">Name</th>
-			
-		  </thead>	
-		  <tbody>
-			<ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }">
-	
-	
-			</ng-template>
-		  </tbody>
+
+
 
 	
-	 
+		
+			
+			
+		  
+		
+			<!-- Initiate the recursive template rendering. -->	
+			<ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }"></ng-template>
+			
+	
+			
+		  
+
+	
+		
 	
 </table>
 
