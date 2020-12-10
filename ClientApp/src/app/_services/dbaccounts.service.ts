@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { dbAccounts } from '../_models/adaccounts';
 
+
+//code changed be adding jwt.interceptor
 const httpOptions = {
 headers: new HttpHeaders({
   Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user'))?.token
 
 })
 
-}
+} 
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +25,13 @@ export class DbaccountsService {
   getdbAccounts(){
     
    return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts', httpOptions);
+   //return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts');
+
   }
 
   getdbAccount(userid: number){
   return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + userid , httpOptions);
-
+  //return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + userid)
   }
 
 

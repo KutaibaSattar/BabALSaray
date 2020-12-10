@@ -28,7 +28,7 @@ namespace BabALSaray.Controllers
 
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dbAccountsDto>>> GetdbAccounts()
 

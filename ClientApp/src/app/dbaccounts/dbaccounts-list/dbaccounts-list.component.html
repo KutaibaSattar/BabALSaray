@@ -1,9 +1,9 @@
 
- <table class='table table-striped' aria-labelledby="tableLabel">
-  <thead>
+ <table class="table table-striped" >
+  <thead class="thead-dark">
         
-    <th  style="width:50px">Id </th>
-    <th style="width:300px">Name</th>
+    <th style="width:75px">Id </th>
+    <th>Name</th>
   </thead>	
   
   
@@ -28,8 +28,8 @@
           <tbody>
             <tr>				
               
-              <td style="width:50px ">{{node.id}}</td>	
-              <td style="width:300px "> <app-dbaccount-card [dbaccount]="node"></app-dbaccount-card></td>
+              <td >{{node.id}}</td>	
+              <td> <app-dbaccount-card [dbaccount]="node"></app-dbaccount-card></td>
                
           
           </tr>	
@@ -60,26 +60,12 @@
    
   </ng-template>
   
-   
-  
-  
-  
-    
-      
-        
-        
-        
+          
       
         <!-- Initiate the recursive template rendering. -->	
         <ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }"></ng-template>
         
-    
-        
-        
-  
-    
-      
-    
+   
   </table>
   
   
