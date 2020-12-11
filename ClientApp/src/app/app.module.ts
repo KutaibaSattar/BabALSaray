@@ -25,6 +25,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    DbaccountCardComponent
+    DbaccountCardComponent,
+   
     
   
     
@@ -74,8 +76,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
   ],
   providers: [
     
-    {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
-    {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
+    //{provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
+    //{provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
 
   ],
   bootstrap: [AppComponent]

@@ -29,9 +29,9 @@ export class DbaccountsService {
 
   }
 
-  getdbAccount(userid: number){
-  return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + userid , httpOptions);
-  //return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + userid)
+  getdbAccount(accountid: number){
+  return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid , httpOptions);
+ // return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid)
   }
 
 

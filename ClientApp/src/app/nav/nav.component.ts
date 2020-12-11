@@ -39,7 +39,7 @@ constructor(public accountService: AccountService, private router: Router,
   /* getCurrentUser(){
 
       this.accountService.currentUser$.subscribe(user =>{
-        this.loggedIn= !!user;
+        this.loggedIn= !!user; // double !! transfer object to boolean
 
       }, error=> { console.log(error);})
 

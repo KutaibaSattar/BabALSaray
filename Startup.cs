@@ -60,7 +60,7 @@ namespace BabALSaray
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             
-           //app.UseMiddleware<ExceptionMiddleware>();
+          //app.UseMiddleware<ExceptionMiddleware>();
            
          if (env.IsDevelopment())
             {

@@ -12,7 +12,7 @@ export class AccountService {
    baseUrl = environment.apiUrl
   private currentUserSource = new ReplaySubject<User>(1);
 
-  currentUser$ = this.currentUserSource.asObservable();
+  currentUser$ = this.currentUserSource.asObservable(); //$ at end as convention that is Observable
 
   constructor(private  http: HttpClient) { }
 
@@ -23,8 +23,10 @@ export class AccountService {
         map((response: User) =>{
             const user = response;
             if(user){
-              localStorage.setItem('user',JSON.stringify(user))  
+              localStorage.setItem('user',JSON.stringify(user))
               this.currentUserSource.next(user);
+              console.log(user)
+              
             }
         } )
 
@@ -33,7 +35,7 @@ export class AccountService {
 
    setCurrentUser(user:User){
     this.currentUserSource.next(user)
-
+ 
    } 
 
   logout(){
