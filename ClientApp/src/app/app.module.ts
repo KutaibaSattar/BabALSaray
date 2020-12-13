@@ -60,8 +60,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-          { path: 'dbaccounts-list', component: DbaccountsListComponent, canActivate: [AuthGuard] },
-          { path: 'dbaccount-detail', component: DbaccountDetailComponent },
+          { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard] },
+          { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
       },
 
@@ -76,8 +76,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
   ],
   providers: [
     
-    //{provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
-    //{provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
+    {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
+    {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
 
   ],
   bootstrap: [AppComponent]

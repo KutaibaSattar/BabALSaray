@@ -24,14 +24,14 @@ export class DbaccountsService {
 
   getdbAccounts(){
     
-   return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts', httpOptions);
-   //return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts');
+   //return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts', httpOptions);
+   return this.http.get<dbAccounts[]>(this.baseUrl + 'dbaccounts');
 
   }
 
   getdbAccount(accountid: number){
-  return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid , httpOptions);
- // return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid)
+ // return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid , httpOptions);
+  return this.http.get<dbAccounts>(this.baseUrl + 'dbaccounts/' + accountid)
   }
 
 
