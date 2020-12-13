@@ -40,20 +40,33 @@ namespace BabALSaray.Controllers
             var dbaccounts = _context.dbAccounts.Include(ch => ch.Children).AsEnumerable().Where(p => p.ParentId == null)
             .AsQueryable(); //.ToListAsync();
 
-
             //var dbaccountsTree = await Task.FromResult(dbaccounts.ToList());
 
 
             var dbaccountsToReturn = _mapper.Map<IEnumerable<dbAccountsDto>>(dbaccountsTree);
-
-          
+     
 
             return Ok(dbaccountsToReturn);
-
-           
+          
 
 
         }
+        [Authorize]
+        // api/dbAccounts/3
+        [HttpGet("{id}")]
+        public async Task<ActionResult<dbAccounts>> GetUser(int id)
+        {
+            var dbAccount = await _dbAccountRepository.GetDbAccountByIdAsync(id);
+
+            var dbAccountToReturn = _mapper.Map<dbAccountsDto>(dbAccount);
+
+            return Ok(dbAccountToReturn);
+
+
+        }
+
+
+
 
 
     }

@@ -15,12 +15,13 @@ export class DbaccountDetailComponent implements OnInit {
   constructor( private dbaccountsService : DbaccountsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     this.loadDbAccount();
   }
 
  loadDbAccount(){
 
-  this.dbaccountsService.getdbAccount(this.route.snapshot.paramMap.get('id')).subscribe(dbaccount =>{
+  this.dbaccountsService.getdbAccount(+this.route.snapshot.paramMap.get('id')).subscribe(dbaccount =>{
     this.dbaccount = dbaccount
 
   } )

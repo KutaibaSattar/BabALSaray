@@ -15,7 +15,7 @@ namespace BabALSaray.Data
             _context = context;
         }
 
-        public async Task<dbAccounts> GetAccountByIdAsync(int id)
+        public async Task<dbAccounts> GetDbAccountByIdAsync(int id)
         {
             return await _context.dbAccounts.FindAsync(id);
         }

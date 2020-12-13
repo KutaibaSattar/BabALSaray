@@ -11,7 +11,7 @@ namespace BabALSaray.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<dbAccounts>> GetDbAccountsAsync();
 
-        Task<dbAccounts> GetAccountByIdAsync(int id);
+        Task<dbAccounts> GetDbAccountByIdAsync(int id);
         
         
     }
