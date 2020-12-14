@@ -12,12 +12,12 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
   users : any;
 
   constructor( private http : HttpClient,private accountSrvice : AccountService){}
- 
+
   ngOnInit() {
 
-    this.getUsers();
+    //this.getUsers();
     this.setCurrentUser();
-    
+
   }
 
   setCurrentUser(){
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
 
   }
 
-  getUsers(){
+ /*  getUsers(){
     this.http.get('/api/users').subscribe(res => {
       this.users = res;},
       err =>{
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
       });
 
 
-  }
+  } */
 
 
 }

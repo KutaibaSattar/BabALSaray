@@ -23,9 +23,6 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { DbaccountCardComponent } from './dbaccounts/dbaccount-card/dbaccount-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,10 +37,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-   
-    
-  
-    
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -72,10 +66,11 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
     ]),
-   
+
+
   ],
   providers: [
-    
+
     {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
 

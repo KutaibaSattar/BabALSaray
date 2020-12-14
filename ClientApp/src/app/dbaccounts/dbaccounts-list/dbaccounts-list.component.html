@@ -1,49 +1,38 @@
 
  <table class="table table-striped" >
   <thead class="thead-dark">
-        
+
     <th style="width:75px">Id </th>
     <th>Name</th>
-  </thead>	
-  
-  
+  </thead>
+
   <ng-template #nodeTemplateRef let-node="node">
-    
-    
-    
-    
+
     <!-- <div class="node" [class.node--selected]="( node === selectedTreeNode )"></div>  -->
-    
-      
+
       <!-- <a (click)="selectNode( node )" class="node__label">
         {{ node.id }}
-      </a> 
+      </a>
        -->
-        
-          
+
               <!-- <a (click)="selectNode( node )" class="node__label">
-  
-                
+
               </a>  -->
           <tbody>
-            <tr>				
-              
-              <td >{{node.id}}</td>	
+            <tr>
+              <td >{{node.id}}</td>
               <td> <app-dbaccount-card [dbaccount]="node"></app-dbaccount-card></td>
-               
-          
-          </tr>	
+
+          </tr>
           </tbody>
-          
-      
-      
+
       <ng-container *ngIf="node.children.length" class="node__children" > <!--  -->
-   
+
         <ng-template ngFor let-child [ngForOf]="node.children">
-   
+
           <!-- Invoke the recursive template. -->
           <ng-template [ngTemplateOutlet]="nodeTemplateRef"[ngTemplateOutletContext]="{ node: child }">
-            
+
             <!--
               Because we are using nested ngTemplates (rather than the template
               input of the ngFor directive), we have more control over how the
@@ -51,33 +40,29 @@
               we're passing "child" through as "node".
             -->
           </ng-template>
-   
+
         </ng-template>
-   
-    
-   
-      </ng-container>	
-   
+
+      </ng-container>
+
   </ng-template>
-  
-          
-      
-        <!-- Initiate the recursive template rendering. -->	
+
+        <!-- Initiate the recursive template rendering. -->
         <ng-template  [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ node: data }"></ng-template>
-        
-   
+
+
   </table>
-  
-  
-  
-  
-  
+
+
+
+
+
   <p class="note">
     <em>(alternative) Ng-Template Template Rendering</em>
   </p>
-  
-   
- 
+
+
+
 
 
 
