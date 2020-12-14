@@ -12,12 +12,14 @@ namespace BabALSaray.Data
 
          protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<dbAccounts>()
+           /*  builder.Entity<dbAccounts>()
                 .HasMany(p => p.Children)
                 .WithOne(p => p.Parent)
-               .HasForeignKey( p => p.ParentId);
+               .HasForeignKey( p => p.ParentId); */
+             
 
                
+
         }
 
         public DbSet<AppUser> Users { get; set; }

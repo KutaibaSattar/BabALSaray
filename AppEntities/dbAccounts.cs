@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using BabALSaray.AppEntities;
 
 namespace AppEntities
 {
@@ -24,6 +25,9 @@ namespace AppEntities
         public int? ParentId {get;set;}
         public ICollection <dbAccounts> Children { get; set; }
 
+        public Address Address {get;set;}
+        
+      
       /*   public dbAccounts(){
 
             Children = new Collection<dbAccounts>(); 
@@ -33,4 +37,6 @@ namespace AppEntities
         
         
     }
+
+    
 }
