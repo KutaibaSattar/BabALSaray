@@ -1,2 +1,48 @@
+<div class="row" *ngIf="dbaccount">
 
-<h1 *ngIf="dbaccount">{{dbaccount.name}}</h1> <!-- because the page is loaded before component-->
+
+  <div class="col-4">
+
+    <div class="card">
+
+        <div class="card-header">
+            {{dbaccount.name}}
+
+        </div>
+
+        <div class="card-body">
+            <div>
+                <strong> Name: </strong>
+                <p> {{dbaccount.name}}</p>
+              </div>
+
+              <div>
+                <strong> City: </strong>
+                <p> {{dbaccount.city}}</p>
+
+              </div>
+
+        </div>
+      <div class="card-footer">
+        <div class="btn-group special" role="group">
+            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-secondary">Middle</button>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="col-8"> <!--2/3 of page -->
+   <tabset class="mystyle-tabset">
+    <tab heading= "About">{{dbaccount.name}}</tab>
+
+   </tabset>
+   
+    
+
+
+  </div>
+
+</div>

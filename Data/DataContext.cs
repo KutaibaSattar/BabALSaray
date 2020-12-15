@@ -16,14 +16,13 @@ namespace BabALSaray.Data
                 .HasMany(p => p.Children)
                 .WithOne(p => p.Parent)
                .HasForeignKey( p => p.ParentId); */
-             
+              // builder.Entity<dbAccounts>().OwnsOne(a => a.Address);
 
-               
 
         }
 
         public DbSet<AppUser> Users { get; set; }
 
-        public DbSet<dbAccounts> dbAccounts {get;set;} 
+        public DbSet<dbAccounts> dbAccounts {get;set;}
     }
 }

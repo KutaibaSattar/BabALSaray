@@ -48,7 +48,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     SharedModule,
 
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
       {
         path: '',
         runGuardsAndResolvers: 'always',

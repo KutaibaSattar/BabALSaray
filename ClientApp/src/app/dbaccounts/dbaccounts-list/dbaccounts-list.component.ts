@@ -36,7 +36,7 @@ export class DbaccountsListComponent implements OnInit {
 
 		this.dbAccountsService.getdbAccounts().subscribe(dbaccts => {
 		this.dbaccounts = dbaccts;
-		//this.data= this.dbaccounts[0];
+		this.data= this.dbaccounts[0];
 
 		})
 

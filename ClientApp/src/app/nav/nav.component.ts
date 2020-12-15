@@ -25,7 +25,7 @@ constructor(public accountService: AccountService, private router: Router,
 
   login(){
     this.accountService.login(this.model).subscribe(res=>
-    {this.router.navigateByUrl('/dbaccounts-list');
+    {this.router.navigateByUrl('/dbaccounts');
    })
   
   }
