@@ -24,5 +24,8 @@ namespace BabALSaray.Data
         public DbSet<AppUser> Users { get; set; }
 
         public DbSet<dbAccounts> dbAccounts {get;set;}
+
+        public DbSet<Product> Products {get;set;}
+        
     }
 }
