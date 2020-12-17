@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppEntities;
+using BabALSaray.AppEntities;
 using AutoMapper;
 using BabALSaray.Data;
 using BabALSaray.Interfaces;

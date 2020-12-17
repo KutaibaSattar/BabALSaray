@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AppEntities;
+using BabALSaray.AppEntities;
 using BabALSaray.DTOs;
 
 namespace BabALSaray.Interfaces
@@ -13,7 +13,12 @@ namespace BabALSaray.Interfaces
 
         Task<IEnumerable<ProductDto>> GetProductsAsync();
 
-        Task<ProductDto> GetProductByIdAsync (int id);
+        //Task<ProductDto> GetProductByIdAsync (int id);
+        Task<Product> GetProductByIdAsync (int id);
+        
+        Task<IEnumerable<ProductBrand>> GetProductBrandsAsync();
+
+        Task<IEnumerable<ProductType>> GetProductTypesAsync();
                 
 
 

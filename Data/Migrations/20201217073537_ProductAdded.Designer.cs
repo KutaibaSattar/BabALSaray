@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BabALSaray.data.migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201215155601_ProductsTableAdded")]
-    partial class ProductsTableAdded
+    [Migration("20201217073537_ProductAdded")]
+    partial class ProductAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace BabALSaray.data.migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("AppEntities.AppUser", b =>
+            modelBuilder.Entity("BabALSaray.AppEntities.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,21 +44,82 @@ namespace BabALSaray.data.migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AppEntities.Product", b =>
+            modelBuilder.Entity("BabALSaray.AppEntities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProdcuctBrandId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdcuctBrandId");
+
+                    b.HasIndex("ProductTypeId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BabALSaray.AppEntities.ProductBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ProductBrands");
                 });
 
-            modelBuilder.Entity("AppEntities.dbAccounts", b =>
+            modelBuilder.Entity("BabALSaray.AppEntities.ProductType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ProductTypes");
+                });
+
+            modelBuilder.Entity("BabALSaray.AppEntities.dbAccounts", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,9 +150,28 @@ namespace BabALSaray.data.migrations
                     b.ToTable("dbAccounts");
                 });
 
-            modelBuilder.Entity("AppEntities.dbAccounts", b =>
+            modelBuilder.Entity("BabALSaray.AppEntities.Product", b =>
                 {
-                    b.HasOne("AppEntities.dbAccounts", "Parent")
+                    b.HasOne("BabALSaray.AppEntities.ProductBrand", "ProductBrand")
+                        .WithMany()
+                        .HasForeignKey("ProdcuctBrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BabALSaray.AppEntities.ProductType", "ProductType")
+                        .WithMany()
+                        .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductBrand");
+
+                    b.Navigation("ProductType");
+                });
+
+            modelBuilder.Entity("BabALSaray.AppEntities.dbAccounts", b =>
+                {
+                    b.HasOne("BabALSaray.AppEntities.dbAccounts", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
@@ -131,7 +211,7 @@ namespace BabALSaray.data.migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("AppEntities.dbAccounts", b =>
+            modelBuilder.Entity("BabALSaray.AppEntities.dbAccounts", b =>
                 {
                     b.Navigation("Children");
                 });

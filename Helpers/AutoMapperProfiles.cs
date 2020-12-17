@@ -1,4 +1,4 @@
-using AppEntities;
+using BabALSaray.AppEntities;
 using AutoMapper;
 using BabALSaray.DTOs;
 using DTOs;

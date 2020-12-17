@@ -1,4 +1,4 @@
-using AppEntities;
+using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

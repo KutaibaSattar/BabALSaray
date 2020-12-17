@@ -1,4 +1,4 @@
-namespace AppEntities
+namespace BabALSaray.AppEntities
 {
     public class Site
     {

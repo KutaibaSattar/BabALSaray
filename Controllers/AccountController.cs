@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using AppEntities;
+using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
 using BabALSaray.Interfaces;

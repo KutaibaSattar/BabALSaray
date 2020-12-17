@@ -1,4 +1,4 @@
-using AppEntities;
+using BabALSaray.AppEntities;
 
 namespace BabALSaray.Interfaces
 {

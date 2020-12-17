@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using BabALSaray.AppEntities;
 
-namespace AppEntities
+namespace BabALSaray.AppEntities
 {
     public class dbAccounts
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AppEntities;
+using BabALSaray.AppEntities;
 
 namespace BabALSaray.Interfaces
 {

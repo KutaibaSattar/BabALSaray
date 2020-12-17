@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppEntities;
+using BabALSaray.AppEntities;
 using BabALSaray.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabALSaray.Data
 {
-    public class dbAccountsRepository : IdbAccountRepository
+    public class DbAccountsRepository : IdbAccountRepository
     {
         private readonly DataContext _context;
-        public dbAccountsRepository(DataContext context)
+        public DbAccountsRepository(DataContext context)
         {
             _context = context;
         }
@@ -22,10 +22,10 @@ namespace BabALSaray.Data
 
         public async Task<IEnumerable<dbAccounts>> GetDbAccountsAsync()
         {
-            var accountlist =  _context.dbAccounts.Include(ch => ch.Children).AsEnumerable()
+            var dbaccounts =  _context.dbAccounts.Include(ch => ch.Children).AsEnumerable()
              .Where(p => p.ParentId == null).AsQueryable();
             
-             return await Task.FromResult(accountlist.ToList());
+             return await Task.FromResult(dbaccounts.ToList());
 
              
             

@@ -1,6 +1,6 @@
 using System;
 
-namespace AppEntities
+namespace BabALSaray.AppEntities
 {
     public class AppUser
     {

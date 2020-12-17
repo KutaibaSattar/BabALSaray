@@ -15,7 +15,7 @@ namespace BabALSaray.Extensions
 
              services.AddScoped<IUserRepository,UserRepository>();
 
-             services.AddScoped<IdbAccountRepository, dbAccountsRepository>();
+             services.AddScoped<IdbAccountRepository, DbAccountsRepository>();
 
              services.AddScoped<IProductRepository, ProductRepository>();
               
