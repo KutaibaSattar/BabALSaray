@@ -41,9 +41,19 @@ namespace BabALSaray.Data
                  return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProductsAsync()
+        /* public async Task<IEnumerable<ProductDto>> GetProductsAsync()
         {
-            return await _context.Products.ProjectTo<ProductDto>(_mapper.ConfigurationProvider).ToListAsync();
+           
+             return await _context.Products.ProjectTo<ProductDto> (_mapper.ConfigurationProvider).ToListAsync(); 
+        }
+ */
+         public async Task<IReadOnlyList<Product>> GetProductsAsync()
+        {
+           
+             return await _context.Products
+             .Include(p => p.ProductType)
+             .Include(p => p.ProductBrand)
+             .ToListAsync();
         }
 
         public async Task<IEnumerable<ProductType>> GetProductTypesAsync()

@@ -68,6 +68,7 @@ namespace BabALSaray
            */
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {

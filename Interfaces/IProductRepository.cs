@@ -11,7 +11,9 @@ namespace BabALSaray.Interfaces
 
         Task<bool> SaveAllAsync();
 
-        Task<IEnumerable<ProductDto>> GetProductsAsync();
+        //Task<IEnumerable<ProductDto>> GetProductsAsync();
+
+        Task<IReadOnlyList<Product>> GetProductsAsync();
 
         //Task<ProductDto> GetProductByIdAsync (int id);
         Task<Product> GetProductByIdAsync (int id);
