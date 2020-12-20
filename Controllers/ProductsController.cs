@@ -5,9 +5,11 @@ using AutoMapper;
 using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
+using BabALSaray.Errors;
 using BabALSaray.Interfaces;
 using BabALSaray.Specifications;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabALSaray.Controllers
@@ -61,6 +63,8 @@ namespace BabALSaray.Controllers
 
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
            
@@ -68,6 +72,7 @@ namespace BabALSaray.Controllers
           
             var product = await _productRepo.GetEntityWithSpec(spec);
 
+            if (product==null) return NotFound(new ApiResponse(404));
 
             return Ok(_mapper.Map<Product,ProductToReturnDto>(product));
 

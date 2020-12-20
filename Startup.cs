@@ -9,6 +9,7 @@ using AutoMapper;
 using BabALSaray.Helpers;
 using BabALSaray.Middleware;
 
+
 namespace BabALSaray
 {
     public class Startup
@@ -34,6 +35,9 @@ namespace BabALSaray
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            
+           services.AddSwaggerDocumentation();
+           
 
 
             services.AddControllers().AddNewtonsoftJson
@@ -53,19 +57,11 @@ namespace BabALSaray
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             
-          app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>(); // because we catched in both mode (developement, production) 
            
-        /*  if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            } 
-           */
+                   
+
+          app.UseStatusCodePagesWithRedirects("/errors/{0}");
 
             app.UseHttpsRedirection();
             
@@ -79,8 +75,9 @@ namespace BabALSaray
 
             app.UseAuthentication();
             app.UseAuthorization();    
-           
-           
+
+           app.UseSwaggerDocumentation();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

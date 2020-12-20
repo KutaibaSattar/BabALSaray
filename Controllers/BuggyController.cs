@@ -1,10 +1,12 @@
 using BabALSaray.AppEntities;
 using BabALSaray.Data;
+using BabALSaray.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabALSaray.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class BuggyController : BaseApiController
     {
         private readonly DataContext _context;
@@ -24,32 +26,44 @@ namespace BabALSaray.Controllers
         }
        
          [HttpGet("not-found")]
-        public ActionResult<AppUser> GetNotFount()
+        public ActionResult GetNotFount()
         {
-               var thing = _context.Users.Find(-1); //not exist
+               var thing = _context.Products.Find(-1); //not exist
 
-               if (thing ==null) return NotFound();
+               if (thing ==null) 
+               {
+                    return NotFound(new ApiResponse(404));
+               }
+           
                 
                return Ok(thing); 
 
             
         }
          [HttpGet("server-error")]
-        public ActionResult<string> GetServerError()
+        public ActionResult GetServerError()
         {
                 var thing = _context.Users.Find(-1);
                
                 var thingToReturn = thing.ToString(); //null.ToString Generate error
 
-                return thingToReturn;
+                return Ok();
               
             
         }
        
         [HttpGet("bad-request")]
-       public ActionResult<string> GetBadRequest()
+       public ActionResult GetBadRequest()
         {
-                return BadRequest("This was not a good request");
+                return BadRequest(new ApiResponse(400));
+            
+        }
+
+        
+         [HttpGet("bad-request/{id}")] // Validation Error passing string instead of integer
+       public ActionResult GetBadRequest(int id)
+        {
+             return Ok();   
             
         }
 

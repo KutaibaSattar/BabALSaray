@@ -9,13 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace BabALSaray.Middleware
 {
-    public class ExceptionMiddleware
+    public class ExceptionMiddleware // on Startup class only for internal server error like null exceptions
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger,
-         IHostEnvironment env)
+         IHostEnvironment env /*Check if in developement mode*/)
         {
             _env = env;
             _logger = logger;
@@ -25,22 +25,22 @@ namespace BabALSaray.Middleware
 
         public async Task InvokeAsync (HttpContext context)
         {
-         try
+         try // we used try catch block because maybe get exception from our handling error
          {
-            await _next(context); 
+            await _next(context); // if no exception then reuest move to next stage
          }   
 
           catch  (Exception ex )
 
           {
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.Message); //console system
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = (int) HttpStatusCode.InternalServerError; // (500) interanal server error
                 var response = _env.IsDevelopment()
-                ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
-                : new ApiException(context.Response.StatusCode, "Internal Server Error");
+                ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString()) //devolopement more details
+                : new ApiException(context.Response.StatusCode, "Internal Server Error"); // production mode
 
-                var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
+                var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase}; // converting to camel case
                
                 var json = JsonSerializer.Serialize(response,options);
 
