@@ -49,10 +49,10 @@ namespace BabALSaray.Controllers
  
          
         } */
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string sort)
         {
           
-            var spec = new ProductsWithTypeAndBrandsSpecification();
+            var spec = new ProductsWithTypeAndBrandsSpecification(sort);
           
            var product = await _productRepo.ListAsync(spec);
             
