@@ -6,24 +6,30 @@ namespace BabALSaray.Specifications
 {
     public class ProductsWithTypeAndBrandsSpecification : BaseSpecifications<Product>
     {
-        public ProductsWithTypeAndBrandsSpecification(string sort)
+        public ProductsWithTypeAndBrandsSpecification(ProductSpecParams productParams )
+        : base( x =>
+           (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
+          (!productParams.BrandId.HasValue || x.ProdcuctBrandId == productParams.BrandId) &&
+          (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)  )
         {
            AddInclude(x => x.ProductType);
            AddInclude(x => x.ProductBrand);
            AddOrderBy(x => x.Name);
 
-            if (!string.IsNullOrEmpty(sort))
+           ApplyPaging(productParams.PageSize * (productParams.pageIndex-1), productParams.PageSize);
+
+            if (!string.IsNullOrEmpty(productParams.Sort))
 
             {
 
-                switch (sort)
+                switch (productParams.Sort)
                 {
 
-                    case "priceAsc":
+                    case "PriceAsc":
                         AddOrderBy(p => p.price);
                         break;
 
-                    case "priceDesc":
+                    case "PriceDesc":
                         AddOrderByDescending(p => p.price);
                         break;
                    

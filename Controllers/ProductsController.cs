@@ -6,6 +6,7 @@ using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
 using BabALSaray.Errors;
+using BabALSaray.Helpers;
 using BabALSaray.Interfaces;
 using BabALSaray.Specifications;
 using Microsoft.AspNetCore.Authorization;
@@ -49,15 +50,20 @@ namespace BabALSaray.Controllers
  
          
         } */
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(string sort)
+        public async Task<ActionResult<Pagination<IEnumerable<ProductToReturnDto>>>> GetProducts( [FromQuery] ProductSpecParams productParams )
         {
           
-            var spec = new ProductsWithTypeAndBrandsSpecification(sort);
+            var spec = new ProductsWithTypeAndBrandsSpecification(productParams);
+
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+
+            var totalItems = await _productRepo.CountAsync(countSpec);
           
            var product = await _productRepo.ListAsync(spec);
+
+           var data = _mapper.Map<IEnumerable<Product>,IEnumerable<ProductToReturnDto>>(product);
             
-            return Ok(_mapper.Map<IEnumerable<Product>,IEnumerable<ProductToReturnDto>>
-                     (product));
+            return Ok(new Pagination<ProductToReturnDto>(productParams.pageIndex,productParams.PageSize,totalItems,data));
 
         }
 

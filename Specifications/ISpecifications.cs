@@ -12,6 +12,9 @@ namespace BabALSaray.Specifications
       Expression <Func<T, Object>> OrderBy {get;}
       Expression <Func<T, Object>> OrderByDescending {get;}
 
+      int Take {get;} //to
+      int Skip {get;} //from
 
+      bool IspagingEnabled {get;}
     }
 }

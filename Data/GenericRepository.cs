@@ -17,6 +17,11 @@ namespace BabALSaray.Data
 
         }
 
+        public async Task<int> CountAsync(ISpecifications<T> spec)
+        {
+           return await ApplySpecification(spec).CountAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await  _context.Set<T>().ToListAsync();

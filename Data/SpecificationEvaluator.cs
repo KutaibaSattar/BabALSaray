@@ -21,13 +21,19 @@ namespace BabALSaray.Data
 
           if (spec.OrderBy != null)
           {
-              query = query.OrderBy(spec.OrderBy); // p => p.productid == id
-
+              query = query.OrderBy(spec.OrderBy); 
           }
 
           if (spec.OrderByDescending != null)
           {
-              query = query.OrderByDescending(spec.OrderByDescending); // p => p.productid == id
+              query = query.OrderByDescending(spec.OrderByDescending); 
+
+          }
+
+          if (spec.IspagingEnabled)
+          {
+
+             query = query.Skip(spec.Skip).Take(spec.Take);   
 
           }
 
