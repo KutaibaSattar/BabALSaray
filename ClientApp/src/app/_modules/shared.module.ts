@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
-import {TabsModule} from 'ngx-bootstrap/tabs'
 
 
 @NgModule({
@@ -9,11 +9,11 @@ import {TabsModule} from 'ngx-bootstrap/tabs'
   imports: [
     CommonModule,
     ToastrModule.forRoot({
-      positionClass : "toast-bottom-right"
+      positionClass : 'toast-bottom-right'
      }),
      TabsModule.forRoot(),
   ],
- exports:[
+ exports: [
     ToastrModule,
     TabsModule
 

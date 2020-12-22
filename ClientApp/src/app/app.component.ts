@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { IProduct } from './_models/product';
+import { IPagination } from './_models/pagination';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 
@@ -9,21 +11,21 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
   title = 'app';
-  products : any[];
+  products: IProduct[];
 
-  constructor( private http : HttpClient,private accountSrvice : AccountService){}
+  constructor( private http: HttpClient, private accountSrvice: AccountService) {}
 
   ngOnInit() {
 
-    this.http.get("https://localhost:5001/api/products").subscribe((rseponse : any) => {
+    this.http.get('https://localhost:5001/api/products').subscribe((rseponse: IPagination) => {
 
-    this.products = rseponse.data
+    this.products = rseponse.data;
     console.log(this.products);
 
-    })
-    
-    //this.getUsers();
-    //this.setCurrentUser();
+    });
+
+    // this.getUsers();
+    // this.setCurrentUser();
 
   }
 
