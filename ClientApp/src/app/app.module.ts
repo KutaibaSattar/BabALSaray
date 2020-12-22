@@ -49,6 +49,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
+      { path: 'main', component: AppComponent},
       {
         path: '',
         runGuardsAndResolvers: 'always',
@@ -56,7 +57,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
         children: [
           { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard] },
           { path: 'dbaccount/:id', component: DbaccountDetailComponent },
-        ]
+           ]
       },
 
       { path: 'errors', component: TestErrorsComponent},

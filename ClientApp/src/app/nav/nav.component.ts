@@ -32,7 +32,7 @@ constructor(public accountService: AccountService, private router: Router,
 
   logout(){
     this.accountService.logout();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/home');
 
   }
 

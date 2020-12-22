@@ -8,11 +8,13 @@ import { dbAccounts } from 'src/app/_models/adaccounts';
   templateUrl: './dbaccount-detail.component.html',
   styleUrls: ['./dbaccount-detail.component.css']
 })
+
+
 export class DbaccountDetailComponent implements OnInit {
 
-  dbaccount : dbAccounts;
+ dbaccount : dbAccounts;
 
-  constructor( private dbaccountsService : DbaccountsService, private route: ActivatedRoute) { }
+ constructor( private dbaccountsService : DbaccountsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     
