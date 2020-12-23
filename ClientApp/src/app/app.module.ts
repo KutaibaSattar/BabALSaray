@@ -21,6 +21,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { SharedModule } from './_modules/shared.module';
+import { ShopComponent } from './shop/shop.component';
+import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { SharedModule } from './_modules/shared.module';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
+    
 
   ],
   imports: [
@@ -45,6 +48,7 @@ import { SharedModule } from './_modules/shared.module';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     SharedModule,
+    ShopModule,
 
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },

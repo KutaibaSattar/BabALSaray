@@ -10,23 +10,13 @@ import { AccountService } from './_services/account.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
-  title = 'app';
-  products: IProduct[];
+  
+  constructor() {}
 
-  constructor( private http: HttpClient, private accountSrvice: AccountService) {}
-
-  ngOnInit() {
-
-    this.http.get('https://localhost:5001/api/products').subscribe((rseponse: IPagination) => {
-
-    this.products = rseponse.data;
-    console.log(this.products);
-
-    });
+  ngOnInit() {}
 
     // this.getUsers();
     // this.setCurrentUser();
-
   }
 
  /*  setCurrentUser(){
@@ -47,4 +37,4 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
   } */
 
 
-}
+
