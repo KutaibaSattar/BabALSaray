@@ -2,30 +2,46 @@
     
     <div class="row">
 
+      
+
         <section class="col-3">
-           
-           <div class="card" style="background-color:cadetblue; border-color:darkblue;">
+          <h2 class="card-title text-warning ml-3">Sort</h2>
+          <div class="form-group">
+            <label for=""></label>
+            <select class="custom-select mb-3" (change)="onSortSelected($event.target.value)"  >
+              <option *ngFor="let sort of sortOptions" [value]="sort.value" >
+                {{sort.name}}
+              </option>
+              
+          </select>
+          </div>
+         
+           <div class="card" >
                 <div class="card-body">
-                <h2 class="card-title">Brands</h2>
-                <ul class="list-group">
-                    
-                    
-                    <li class="list-group-item active" style="background-color: rgb(0, 102, 255);" aria-current="true">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                <h2 class="card-title text-warning ml-3">Brands</h2>
+                <ul class="list-group my-3">
+                    <li class="list-group-item" 
+                    *ngFor="let brand of brands"
+                    [class.active] = "brand.id ===  this.brandIdSelected"
+                    [value] ="brand.id"
+                    (click)="onBrandSelected(brand.id)"
+                    >
+                       {{brand.name}} 
+                    </li>
+                  
                   </ul>
                
-                  <h2 class="card-title">Types</h2>
-                <ul class="list-group">
-                    
-                    
-                    <li class="list-group-item active" style="background-color: rgb(0, 102, 255);" aria-current="true">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                  <h2 class="card-title text-warning ml-3">Types</h2>
+                <ul class="list-group my-3" >
+                    <li class="list-group-item"
+                    *ngFor="let type of types"
+                    [class.active] = "type.id ===  this.typeIdSelected"
+                    [value] ="type.id"
+                    (click)="onTypeSelected(type.id)"
+                    >
+                      {{type.name}}
+                    </li>
+                   
                   </ul>
             
             </div>
@@ -37,7 +53,27 @@
         </section>
       
         <section class="col-9">
-            Main Content
+
+             <div class="d-flex justify-content-between align-items-center pb2">
+                <header>
+                    <span> <strong>10 </strong> of <strong> 15</strong> Result </span>
+                </header>
+              <div class="form-inline mt-2">
+                 <input type="text" class="form-control mr-2" style="width: 300px;" placeholder="Search">
+                 <button class="btn btn-primary my-2  ml-2">Search</button>
+                 <button class="btn btn-success my-2 ml-2">Reset</button>
+                  
+              </div> 
+            </div>   
+            
+        
+            <div class="row">
+              <div class="col-4 mb-4" *ngFor="let item of products">
+                <app-product-item [product]="item" ></app-product-item>
+
+              </div>
+                
+              </div>
         </section>
 
     </div>
