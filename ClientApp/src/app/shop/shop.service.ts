@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { IBrand } from '../_models/brand';
 import { IPagination } from '../_models/pagination';
 import { IType } from '../_models/producttype';
+import { ShopParams } from '../_models/shopParams';
 /* So our services are singletons which means they're always available as long as our app is available.
 They're not like components where angular is going to initialize them and then destroy them as soon
 as we move away from the component.
@@ -19,22 +20,28 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(brandId?: number, typeId?: number, sort?: string ) {
+  getProducts(shopParams: ShopParams ) {
     let params = new HttpParams();
 
-    if (brandId) {
-      params = params.append('brandId', brandId.toString());
+    if (shopParams.brandId !== 0) {
+      params = params.append('brandId', shopParams.brandId.toString());
 
     }
-    if (typeId) {
-      params = params.append('typeId', typeId.toString());
+    if (shopParams.typeId !== 0) {
+      params = params.append('typeId', shopParams.typeId.toString());
 
     }
 
-    if (sort) {
-     params = params.append('sort', sort);
+    if (shopParams.search) {
+     params = params.append('search', shopParams.search);
 
     }
+
+     params = params.append('sort', shopParams.sort); // no need for if statement because he default is 'name'
+
+     params = params.append('pageIndex', shopParams.pageNumber.toString());
+
+     params = params.append('pageIndex', shopParams.pageSize.toString());
 
  /* Now this syntax might look a little bit strange if it's the first time you've encountered it this pipe
 is a wrapper around any are extra x operators that we want to use.

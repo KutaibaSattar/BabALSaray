@@ -24,6 +24,7 @@ import { SharedModule } from './_modules/shared.module';
 import { ShopComponent } from './shop/shop.component';
 import { ShopModule } from './shop/shop.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,6 @@ import { ShopModule } from './shop/shop.module';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-    
 
   ],
   imports: [
@@ -51,25 +51,22 @@ import { ShopModule } from './shop/shop.module';
     ShopModule,
 
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent },
-      { path: 'main', component: AppComponent},
-      {
+    { path: 'home', component: HomeComponent },
+    { path: 'main', component: AppComponent },
+    {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-          { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard] },
-          { path: 'dbaccount/:id', component: DbaccountDetailComponent },
-           ]
-      },
-
-      { path: 'errors', component: TestErrorsComponent},
-      { path: 'not-found', component: NotFoundComponent},
-      { path: 'server-error', component: ServerErrorComponent},
-      { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-
-
-    ]),
+            { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard] },
+            { path: 'dbaccount/:id', component: DbaccountDetailComponent },
+        ]
+    },
+    { path: 'errors', component: TestErrorsComponent },
+    { path: 'not-found', component: NotFoundComponent },
+    { path: 'server-error', component: ServerErrorComponent },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
+], { relativeLinkResolution: 'legacy' }),
 
 
   ],
