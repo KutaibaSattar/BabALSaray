@@ -23,6 +23,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { SharedModule } from './_modules/shared.module';
 import { ShopComponent } from './shop/shop.component';
 import { ShopModule } from './shop/shop.module';
+import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { ShopModule } from './shop/shop.module';
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent },
     { path: 'main', component: AppComponent },
-    {
+      {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
@@ -62,6 +63,8 @@ import { ShopModule } from './shop/shop.module';
             { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
     },
+    {path: 'shop', component: ShopComponent},
+    {path: 'shop/:id', component: ProductDetailsComponent},
     { path: 'errors', component: TestErrorsComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },

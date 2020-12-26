@@ -10,13 +10,16 @@
         <ul class="navbar-nav mr-auto"  >
          <ng-container *ngIf="accountService.currentUser$ | async">
          <li class="nav-item">
-            <a class="nav-link" routerLink ='/home' routerLinkActive = 'active'>Home</a>
+            <a class="nav-link" routerLink ='/home' routerLinkActive = 'active'>Home</a> <!-- active is bootstrap class -->
           </li>
-
           <li class="nav-item">
             <a class="nav-link" routerLink ='/dbaccounts'>Accounts</a>
           </li>
-         </ng-container>
+          <li class="nav-item">
+            <a class="nav-link" routerLink ='/shop'>Shop</a>
+          </li>
+        
+        </ng-container>
 
          <li class="nav-item">
           <a class="nav-link" routerLink ='/errors'>Errors</a>
