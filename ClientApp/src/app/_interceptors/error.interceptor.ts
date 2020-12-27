@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error) {
 
           switch (error.status) {
-            case 400:
+            case 400: // bad request
               if (error.error.errors) {
                 const modeStateError = [];
                 for (const key in error.error.errors) {
@@ -37,13 +37,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 
               }
               break;
-            case 401:
+            case 401: // auth
               this.toastr.error(error.error, error.status);
               break;
-            case 404:
+            case 404: // not found
               this.router.navigateByUrl('/not-found');
               break;
-            case 500:
+            case 500: // server inetrnal error
               const navigationExtras: NavigationExtras = { state: { error: error.error } };
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;

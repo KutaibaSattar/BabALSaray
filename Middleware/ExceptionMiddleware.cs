@@ -9,13 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace BabALSaray.Middleware
 {
-    public class ExceptionMiddleware // on Startup class only for internal server error like null exceptions
+    public class ExceptionMiddleware // on Startup class only for internal server error 500 like null exceptions
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger,
-         IHostEnvironment env /*Check if in developement mode*/)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, 
+         IHostEnvironment env /*Check mode id developement or production*/)
+       // next: meaning what is coming up next in the midldleware pipeline
+       // ILogger: for display what information we need to de dispalyed for us
         {
             _env = env;
             _logger = logger;
@@ -23,17 +25,17 @@ namespace BabALSaray.Middleware
 
         }
 
-        public async Task InvokeAsync (HttpContext context)
+        public async Task InvokeAsync (HttpContext context) // adding middleware can access the context of Httorequest
         {
-         try // we used try catch block because maybe get exception from our handling error
+         try // we used try catch block of top one of middleware
          {
-            await _next(context); // if no exception then reuest move to next stage
+            await _next(context); // This is the top of middleware so any exception bellow it will through to up until reach the top one
          }   
 
           catch  (Exception ex )
 
           {
-                _logger.LogError(ex, ex.Message); //console system
+                _logger.LogError(ex, ex.Message); //console system, this original exception message
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError; // (500) interanal server error
                 var response = _env.IsDevelopment()

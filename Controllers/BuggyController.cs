@@ -36,18 +36,18 @@ namespace BabALSaray.Controllers
                }
            
                 
-               return Ok(thing); 
+               return Ok(thing); // sure not reached here
 
             
         }
-         [HttpGet("server-error")]
+         [HttpGet("server-error")] // internal server error 500
         public ActionResult GetServerError()
         {
                 var thing = _context.Users.Find(-1);
                
-                var thingToReturn = thing.ToString(); //null.ToString Generate error
+                var thingToReturn = thing.ToString(); //null.ToString Generate error // we generate error
 
-                return Ok();
+                return Ok(); // sure not reached here
               
             
         }
@@ -55,7 +55,7 @@ namespace BabALSaray.Controllers
         [HttpGet("bad-request")]
        public ActionResult GetBadRequest()
         {
-                return BadRequest(new ApiResponse(400));
+                return BadRequest("this was not bad request"); //(new ApiResponse(400));
             
         }
 
