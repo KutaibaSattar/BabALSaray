@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { IBrand } from '../_models/brand';
 import { IPagination } from '../_models/pagination';
+import { IProduct } from '../_models/product';
 import { IType } from '../_models/producttype';
 import { ShopParams } from '../_models/shopParams';
 /* So our services are singletons which means they're always available as long as our app is available.
@@ -59,6 +60,11 @@ or do something with the observable as it comes back in.
         return response.body;
       })
     );
+  }
+
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
+
   }
 
   getBrands() {

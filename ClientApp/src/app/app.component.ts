@@ -10,7 +10,7 @@ import { AccountService } from './_services/account.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
-  
+
   constructor() {}
 
   ngOnInit() {}

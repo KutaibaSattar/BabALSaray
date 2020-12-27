@@ -49,8 +49,6 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     SharedModule,
-    ShopModule,
-
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent },
     { path: 'main', component: AppComponent },
@@ -63,8 +61,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
             { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
     },
-    {path: 'shop', component: ShopComponent},
-    {path: 'shop/:id', component: ProductDetailsComponent},
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
     { path: 'errors', component: TestErrorsComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
