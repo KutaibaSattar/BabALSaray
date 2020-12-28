@@ -1,9 +1,6 @@
 import { AccountService } from './../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -15,8 +12,7 @@ model: any={}
 //currentUser$: Observable<User>;
 //loggedIn : boolean
  
-constructor(public accountService: AccountService, private router: Router,
-  private toastr : ToastrService ) { }
+constructor(public accountService: AccountService, private router: Router ) { }
 
   ngOnInit(): void {
     //this.getCurrentUser();
@@ -24,7 +20,7 @@ constructor(public accountService: AccountService, private router: Router,
   }
 
   login(){
-    this.accountService.login(this.model).subscribe(res=>
+    this.accountService.login(this.model).subscribe(()=>
     {this.router.navigateByUrl('/dbaccounts');
    })
   

@@ -55,7 +55,7 @@ namespace BabALSaray.Controllers
         [HttpGet("bad-request")]
        public ActionResult GetBadRequest()
         {
-                return BadRequest("this was not bad request"); //(new ApiResponse(400));
+                return BadRequest("this was not good request"); //(new ApiResponse(400));
             
         }
 

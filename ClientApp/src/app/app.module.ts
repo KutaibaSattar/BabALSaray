@@ -24,6 +24,7 @@ import { SharedModule } from './_modules/shared.module';
 import { ShopComponent } from './shop/shop.component';
 import { ShopModule } from './shop/shop.module';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     SharedModule,
+    CoreModule,
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent },
     { path: 'main', component: AppComponent },
@@ -62,12 +64,12 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
         ]
     },
     {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
-    { path: 'errors', component: TestErrorsComponent },
-    { path: 'not-found', component: NotFoundComponent },
-    { path: 'server-error', component: ServerErrorComponent },
+    { path: 'errors', component: TestErrorsComponent , },
+    { path: 'not-found', component: NotFoundComponent ,},
+    { path: 'server-error', component: ServerErrorComponent, },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-], { relativeLinkResolution: 'legacy' }),
-
+    ],
+     { relativeLinkResolution: 'legacy' }),
 
   ],
   providers: [
