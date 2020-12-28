@@ -52,20 +52,20 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     CoreModule,
     RouterModule.forRoot([
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent, data: {breadcrumb: 'Home'} },
     { path: 'main', component: AppComponent },
       {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard] },
+            { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Accounts'} },
             { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
     },
-    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
-    { path: 'errors', component: TestErrorsComponent , },
-    { path: 'not-found', component: NotFoundComponent ,},
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: {breadcrumb: 'Shop'}},
+    { path: 'errors', component: TestErrorsComponent , data: {breadcrumb: 'Test Errors'} },
+    { path: 'not-found', component: NotFoundComponent , data: {breadcrumb: 'Not Found'}},
     { path: 'server-error', component: ServerErrorComponent, },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
     ],
