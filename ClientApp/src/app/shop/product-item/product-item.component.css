@@ -4,14 +4,21 @@ width: 300%;
 height: 40px;
 
 }
+.img {
+    float: right;
+    width: auto;
+    height:auto;
+    object-fit: contain;
+    
+}
 
-.image :hover {
+/* .image :hover {
     opacity: 1;
     & button {
         transform: none;
         opacity: 1;
     }
-}
+} */
 
 .hover-overlay {
 
@@ -24,4 +31,8 @@ height: 40px;
     opacity: 0;
     transition: all 0.5s;
 
+}
+.card-img-top {
+   
+    object-fit: cover;
 }

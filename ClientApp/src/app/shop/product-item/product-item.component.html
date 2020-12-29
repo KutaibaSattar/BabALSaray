@@ -1,7 +1,7 @@
 <div class="card h-100 shadow-sm">
  
   <div class="image position-relative" style="cursor: pointer;">
-    <img src="{{product.pictureUrl}}" alt="{{product.name}}"  class="img-fluid bg-info" > 
+    <img src="{{product.pictureUrl}}" alt="{{product.name}}"  class="img-fluid bg-info card-img-top" > 
     <div class="d-flex align-items-center justify-content-center hove-overlay">
       <button type="button" class="btn btn-primary fa fa-shopping-cart mr-2">Add</button>
       <button  routerLink="/shop/{{product.id}}" type="button" class="btn btn-primary">View</button>
@@ -18,3 +18,11 @@
       
     </div>
   </div>
+  <!-- <div class="card" alt="card-img-top">
+    <img class="card-img-top img" src="{{product.pictureUrl}}"  >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+  </div> -->
