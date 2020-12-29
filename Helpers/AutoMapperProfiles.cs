@@ -15,8 +15,9 @@ namespace BabALSaray.Helpers
           CreateMap<Product,ProductDto>();
          
           CreateMap<Product,ProductToReturnDto>()
-            .ForMember(d => d.ProductBrand, op => op.MapFrom(s => s.ProductBrand.Name))
-            .ForMember(d => d.ProductType, op => op.MapFrom(s => s.ProductType.Name));
+            .ForMember(d => d.ProductBrand, opt => opt.MapFrom(s => s.ProductBrand.Name))
+            .ForMember(d => d.ProductType, opt => opt.MapFrom(s => s.ProductType.Name))
+            .ForMember(d => d.PictureUrl, opt => opt.MapFrom<ProductUrlResolver>());
           
         }
     }

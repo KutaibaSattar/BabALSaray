@@ -154,5 +154,10 @@
       }
     }
   },
-  "defaultProject": "BabALSaray"
+  "defaultProject": "BabALSaray",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }

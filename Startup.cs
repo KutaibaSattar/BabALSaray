@@ -74,7 +74,9 @@ namespace BabALSaray
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();    
+            app.UseAuthorization(); 
+            
+            app.UseStaticFiles(); // for api static  
 
            app.UseSwaggerDocumentation();
 
