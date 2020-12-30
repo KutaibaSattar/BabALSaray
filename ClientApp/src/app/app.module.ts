@@ -5,7 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { CounterComponent } from './counter/counter.component';
 import { DbaccountCardComponent } from './dbaccounts/dbaccount-card/dbaccount-card.component';
 import { DbaccountDetailComponent } from './dbaccounts/dbaccount-detail/dbaccount-detail.component';
@@ -20,11 +22,8 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_modules/shared.module';
-import { ShopComponent } from './shop/shop.component';
-import { ShopModule } from './shop/shop.module';
-import { ProductDetailsComponent } from './shop/product-details/product-details.component';
-import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -51,6 +50,7 @@ import { CoreModule } from './core/core.module';
     BsDropdownModule.forRoot(),
     SharedModule,
     CoreModule,
+    NgxSpinnerModule,
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent, data: {breadcrumb: 'Home'} },
     { path: 'main', component: AppComponent },
@@ -76,6 +76,7 @@ import { CoreModule } from './core/core.module';
 
     {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
+    {provide : HTTP_INTERCEPTORS , useClass : LoadingInterceptor , multi: true},
 
   ],
   bootstrap: [AppComponent]

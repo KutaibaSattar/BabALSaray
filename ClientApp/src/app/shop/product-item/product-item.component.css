@@ -19,13 +19,22 @@ height: 31px;
     transition: all 0.5s;
 } 
 
- /* .hover-overlay  button{
-    transform: translateX(5%);
-    transition: all 5s;
-    opacity: 1;
+ .hover-overlay  button{
+   z-index: 1000;
+   transition: all 0.5s;
+} 
+
+.hover-overlay button:first-of-type{
+    transform: translateX(-20px);
+
+}
+.hover-overlay button:last-of-type{
+    transform: translateX(20px);
+
+}
 
 
-}  */
+
 .img {
     float: right;
     width: auto;

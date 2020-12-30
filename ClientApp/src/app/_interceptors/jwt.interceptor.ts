@@ -13,24 +13,24 @@ import { User } from '../_models/user';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor(private accountService : AccountService ) {}
+  constructor(private accountService: AccountService ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-   
-    let currentUser : User;
-    
-    
+
+    let currentUser: User;
+
+
     this.accountService.currentUser$.pipe(take(1)).subscribe(username => currentUser = username);
-    if (currentUser){
+    if (currentUser) {
       request = request.clone({
           setHeaders: {
              Authorization : 'Bearer ' + currentUser.token
           }
 
-      })
+      });
 
     }
 
-    return next.handle(request); //we recieved authorization headers with each request
+    return next.handle(request); // we recieved authorization headers with each request
   }
 }
