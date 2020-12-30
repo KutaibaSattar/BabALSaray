@@ -1,9 +1,31 @@
 
 .btn{
-width: 300%;
-height: 40px;
+width: 28%;
+height: 31px;
 
 }
+
+.image :hover {
+    opacity: 1;
+}
+.hover-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transition: all 0.5s;
+} 
+
+ /* .hover-overlay  button{
+    transform: translateX(5%);
+    transition: all 5s;
+    opacity: 1;
+
+
+}  */
 .img {
     float: right;
     width: auto;
@@ -12,27 +34,70 @@ height: 40px;
     
 }
 
-/* .image :hover {
-    opacity: 1;
-    & button {
-        transform: none;
-        opacity: 1;
-    }
-} */
-
-.hover-overlay {
-
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(255,255,255, 0.5);
-    opacity: 0;
-    transition: all 0.5s;
-
-}
 .card-img-top {
-   
+    width: 100%;
+    height: 15vw;
     object-fit: cover;
 }
+
+/* .btn or button */
+.image :hover .btn {     
+    transform: scale(1.1); 
+     transition: all 2s; 
+     opacity: 1;
+ }
+
+
+
+/* .image :hover {
+    opacity: 1;
+}
+.image :hover button {
+   transform: scale(1.2); 
+    transition: all 2s; 
+    opacity: 1;
+}
+
+.image :first-child button{
+
+    transform: translateX(-20px);
+
+}
+
+hover-overlay:hover .btn{
+
+    color: black;
+
+}
+
+ 
+ */
+/* .hover-overlay :hover button{
+    transform: scale(2) translateX(-20px);
+    transition: all 5s;
+    opacity: 1;
+
+
+} */
+
+ /* .mybtn:hover{
+     z-index: 1000;
+    transition: all 0.5s;
+    transform: translateX(-20px); 
+    transform: scale(2);
+} 
+
+
+
+.hover-overlay {
+  
+   
+    transform: translateX(-20px);
+}
+
+.hover-overlay:last-of-type {
+  
+    transform: translateX(20px);
+} 
+ */
+
