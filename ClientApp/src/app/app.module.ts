@@ -53,7 +53,7 @@ import { SharedModule } from './_modules/shared.module';
     NgxSpinnerModule,
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent, data: {breadcrumb: 'Home'} },
-    { path: 'main', component: AppComponent },
+    
       {
         path: '',
         runGuardsAndResolvers: 'always',

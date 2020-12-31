@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IBrand } from '../_models/brand';
 import { IPagination } from '../_models/pagination';
 import { IProduct } from '../_models/product';
@@ -16,8 +17,9 @@ Look we need to share across the application and it's also a very good place to 
   providedIn: 'root'
 })
 export class ShopService {
-
-  baseUrl = 'https://localhost:5001/api/';
+ 
+  baseUrl = environment.apiUrl
+  
 
   constructor(private http: HttpClient) { }
 

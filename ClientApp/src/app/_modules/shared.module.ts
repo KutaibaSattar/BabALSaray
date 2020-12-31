@@ -5,7 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PaginationModule} from 'ngx-bootstrap/pagination';
 import { PagingHeaderComponent } from './_shared/paging-header/paging-header.component';
 import { PagerComponent } from './_shared/pager/pager.component';
-
+import { CarouselModule} from 'ngx-bootstrap/carousel'
 
 @NgModule({
   declarations: [ PagingHeaderComponent, PagerComponent, ],
@@ -16,7 +16,7 @@ import { PagerComponent } from './_shared/pager/pager.component';
      }),
      TabsModule.forRoot(),
      PaginationModule.forRoot(),
-
+    CarouselModule.forRoot(),
    ],
  exports: [
     ToastrModule,
@@ -24,6 +24,8 @@ import { PagerComponent } from './_shared/pager/pager.component';
     PaginationModule,
     PagingHeaderComponent, // any module using share module can use this component
     PagerComponent,
+    CarouselModule
+   
  ]
 })
 export class SharedModule { }

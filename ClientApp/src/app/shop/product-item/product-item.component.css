@@ -52,7 +52,7 @@ height: 31px;
 /* .btn or button */
 .image :hover .btn {     
     transform: scale(1.1); 
-     transition: all 2s; 
+     transition: all 0.5s; 
      opacity: 1;
  }
 

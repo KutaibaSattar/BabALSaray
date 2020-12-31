@@ -8,6 +8,7 @@ using BabALSaray.Extensions;
 using AutoMapper;
 using BabALSaray.Helpers;
 using BabALSaray.Middleware;
+using StackExchange.Redis;
 
 
 namespace BabALSaray
@@ -30,8 +31,12 @@ namespace BabALSaray
 
             services.AddAplicationServices(_config);
 
-            services.AddIdentityServices(_config);
+            services.AddSingleton<ConnectionMultiplexer>(config => {
+                var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),true);
+                return ConnectionMultiplexer.Connect(configuration);
 
+            });
+           
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
