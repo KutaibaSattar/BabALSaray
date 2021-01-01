@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
 import { AccountService } from './../_services/account.service';
 
@@ -8,25 +7,26 @@ import { AccountService } from './../_services/account.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   registerMode = false;
- 
-  constructor (private accountService : AccountService){}
- 
-  ngOnInit(){
+
+  constructor (private accountService: AccountService) {}
+
+  ngOnInit() {
+
     this.setCurrentUser();
- 
+
    }
- 
-   
-   setCurrentUser(){
+
+
+   setCurrentUser() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
    }
-   
+
   resgisterToggle() {
 
-    this.registerMode = !this.registerMode
+    this.registerMode = !this.registerMode;
 
   }
 
@@ -35,5 +35,5 @@ export class HomeComponent {
 
 
  }
- 
+
  }

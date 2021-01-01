@@ -8,25 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-model: any={}
-//currentUser$: Observable<User>;
-//loggedIn : boolean
- 
+model: any = {};
+// currentUser$: Observable<User>;
+// loggedIn : boolean
+
 constructor(public accountService: AccountService, private router: Router ) { }
 
   ngOnInit(): void {
-    //this.getCurrentUser();
-    //this.currentUser$ = this.accountService.currentUser$;
+    // this.getCurrentUser();
+    // this.currentUser$ = this.accountService.currentUser$;
   }
 
-  login(){
-    this.accountService.login(this.model).subscribe(()=>
-    {this.router.navigateByUrl('/dbaccounts');
-   })
-  
+  login() {
+    this.accountService.login(this.model).subscribe(() => {this.router.navigateByUrl('/dbaccounts');
+   });
+
   }
 
-  logout(){
+  logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/home');
 
