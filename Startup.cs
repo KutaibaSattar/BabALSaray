@@ -32,7 +32,7 @@ namespace BabALSaray
             services.AddAplicationServices(_config);
             services.AddIdentityServices(_config);
 
-            services.AddSingleton<ConnectionMultiplexer>(config => {
+            services.AddSingleton<IConnectionMultiplexer>(config => {
                 var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),true);
                 return ConnectionMultiplexer.Connect(configuration);
 
