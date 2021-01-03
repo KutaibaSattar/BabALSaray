@@ -63,7 +63,11 @@ import { SharedModule } from './_modules/shared.module';
             { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
     },
-    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: {breadcrumb: 'Shop'}},
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), 
+    data: {breadcrumb: 'Shop'}},
+    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule), 
+    data: {breadcrumb: 'Basket'}},
+
     { path: 'errors', component: TestErrorsComponent , data: {breadcrumb: 'Test Errors'} },
     { path: 'not-found', component: NotFoundComponent , data: {breadcrumb: 'Not Found'}},
     { path: 'server-error', component: ServerErrorComponent, },
