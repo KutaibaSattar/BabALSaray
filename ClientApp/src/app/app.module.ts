@@ -40,8 +40,7 @@ import { SharedModule } from './_modules/shared.module';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-
-  ],
+    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -53,7 +52,7 @@ import { SharedModule } from './_modules/shared.module';
     NgxSpinnerModule,
     RouterModule.forRoot([
     { path: 'home', component: HomeComponent, data: {breadcrumb: 'Home'} },
-    
+
       {
         path: '',
         runGuardsAndResolvers: 'always',
@@ -63,9 +62,9 @@ import { SharedModule } from './_modules/shared.module';
             { path: 'dbaccount/:id', component: DbaccountDetailComponent },
         ]
     },
-    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), 
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
     data: {breadcrumb: 'Shop'}},
-    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule), 
+    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule),
     data: {breadcrumb: 'Basket'}},
 
     { path: 'errors', component: TestErrorsComponent , data: {breadcrumb: 'Test Errors'} },
