@@ -1,6 +1,9 @@
 import { AccountService } from './../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BasketService } from '../basket/basket.service';
+import { Observable } from 'rxjs';
+import { IBasket } from '../_models/basket';
 
 @Component({
   selector: 'app-nav',
@@ -9,18 +12,20 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 model: any = {};
+basket$: Observable<IBasket>;
 // currentUser$: Observable<User>;
 // loggedIn : boolean
 
-constructor(public accountService: AccountService, private router: Router ) { }
+constructor(public accountService: AccountService, private router: Router, private basketService: BasketService ) { }
 
   ngOnInit(): void {
     // this.getCurrentUser();
     // this.currentUser$ = this.accountService.currentUser$;
+    this.basket$ = this.basketService.basket$;
   }
 
   login() {
-    this.accountService.login(this.model).subscribe(() => {this.router.navigateByUrl('/dbaccounts');
+    this.accountService.login(this.model).subscribe(() => {this.router.navigateByUrl('/shop');
    });
 
   }

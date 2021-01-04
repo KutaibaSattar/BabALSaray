@@ -16,12 +16,17 @@ export interface IBasketItem {
 
 export class Basket implements IBasket {  // for generation unique Id
     id = uuidv4();
-    items: IBasketItem [];
-   
+    items:  IBasketItem[] = [];
+}
 
+export interface IBasktTotals {
+  shipping: number;
+  subtotal: number;
+  total: number;
 
 }
 
-function randomIntFromInterval(min, max) { // min and max included 
+/* function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
+ */
