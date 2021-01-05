@@ -60,6 +60,31 @@ export class BasketService {
     basket.items = this.addOrUpdateItem (basket.items,itemToAdd, quantity);
     this.setBasket(basket);
   }
+
+  incrementItemQuantity(item : IBasketItem){
+    const basket = this.getCurrentBasketValue();
+    const foundItemIndex = basket.items.findIndex( x => x.id === item.id);
+    basket.items[foundItemIndex].quantity++;
+    this.setBasket(basket);
+  }
+
+  decrementItemQuantity(item : IBasketItem){
+    const basket = this.getCurrentBasketValue();
+    const foundItemIndex = basket.items.findIndex( x => x.id === item.id);
+    if(basket.items[foundItemIndex].quantity>1){
+      basket.items[foundItemIndex].quantity--;
+      this.setBasket(basket);
+    } else {
+     this.removeItemFromBasket(item); 
+
+    }
+    
+  }
+  removeItemFromBasket(item: IBasketItem) {
+    throw new Error('Method not implemented.');
+  }
+
+
   
   private calculateTotals() {
     const basket = this.getCurrentBasketValue();
@@ -87,6 +112,7 @@ export class BasketService {
     return items;
 
   }
+  
  
   private createBasket(): IBasket {
    const basket = new Basket();
