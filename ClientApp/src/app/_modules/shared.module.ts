@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
 import { PaginationModule} from 'ngx-bootstrap/pagination';
-import { PagingHeaderComponent } from './_shared/paging-header/paging-header.component';
-import { PagerComponent } from './_shared/pager/pager.component';
-import { CarouselModule} from 'ngx-bootstrap/carousel'
+import { PagingHeaderComponent } from '../_shared/paging-header/paging-header.component';
+import { PagerComponent } from '../_shared/pager/pager.component';
+import { CarouselModule} from 'ngx-bootstrap/carousel';
+import { OrderTotalsComponent } from '../_shared/order-totals/order-totals.component';
 
 @NgModule({
-  declarations: [ PagingHeaderComponent, PagerComponent, ],
+  declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent ],
   imports: [
     CommonModule,
     ToastrModule.forRoot({
@@ -24,8 +25,8 @@ import { CarouselModule} from 'ngx-bootstrap/carousel'
     PaginationModule,
     PagingHeaderComponent, // any module using share module can use this component
     PagerComponent,
-    CarouselModule
-   
+    CarouselModule,
+    OrderTotalsComponent
  ]
 })
 export class SharedModule { }

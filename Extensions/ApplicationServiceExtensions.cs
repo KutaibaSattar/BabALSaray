@@ -1,4 +1,5 @@
 using System.Linq;
+using AppEntities.Identity;
 using BabALSaray.Data;
 using BabALSaray.Errors;
 using BabALSaray.Interfaces;
@@ -32,6 +33,11 @@ namespace BabALSaray.Extensions
             {
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
 
+            });
+
+            services.AddDbContext<StoreIdentityDbContext> ( options =>{
+
+               options.UseSqlite(config.GetConnectionString("IdentityConnection"));
             });
 
             // bad request service onfigure error
