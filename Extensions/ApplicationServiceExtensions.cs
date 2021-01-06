@@ -1,5 +1,5 @@
 using System.Linq;
-using AppEntities.Identity;
+using BabALSaray.AppEntities.Identity;
 using BabALSaray.Data;
 using BabALSaray.Errors;
 using BabALSaray.Interfaces;

@@ -2,7 +2,7 @@ using BabALSaray.AppEntities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppEntities.Identity
+namespace BabALSaray.AppEntities.Identity
 {
     public class StoreIdentityDbContext : IdentityDbContext<StoreUser>
     {

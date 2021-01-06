@@ -1,5 +1,4 @@
 using System.Text;
-using AppEntities.Identity;
 using BabALSaray.AppEntities.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
