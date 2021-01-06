@@ -3,14 +3,16 @@ using System;
 using AppEntities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BabALSaray.AppEntities.Identity.Migrations
 {
     [DbContext(typeof(StoreIdentityDbContext))]
-    partial class StoreIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210106112343_IdentitySeeded")]
+    partial class IdentitySeeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

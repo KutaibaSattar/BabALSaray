@@ -1,9 +1,10 @@
+using BabALSaray.AppEntities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppEntities.Identity
 {
-    public class StoreIdentityDbContext : IdentityDbContext
+    public class StoreIdentityDbContext : IdentityDbContext<StoreUser>
     {
          /* we don't need to add any D.B. sets inside here.
         Our identity DB context is taken care of all of this work for us and that's why we derive from this one. */
