@@ -32,10 +32,38 @@ namespace BabALSaray.Controllers
             return new UserDto
             {
               Token = "This will be a token",
+              Email = user.Email,
               Username =  user.DisplayName, 
 
             };
 
+        }
+
+        [HttpPost("register")]
+
+        public async Task <ActionResult<UserDto>> Register (RegisterDto registerDto)
+        {
+            var user = new StoreUser
+            {
+                UserName = registerDto.Username,
+                Email = registerDto.Email,
+                DisplayName = registerDto.Username,
+
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+          /*   check the results once again because this creates a sync method returns and identity results.
+                And this will give us a succeeded flag as well that we can check fo */
+            
+            if (!result.Succeeded) return BadRequest(new ApiResponse(400)); // many reason of faild 1-passowrd weak 2- same user , .....
+
+            return new UserDto
+            {
+              Token = "This will be a token",
+              Email = user.Email,
+              Username =  user.DisplayName, 
+            };
+            
         }
 
     }

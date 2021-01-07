@@ -1,18 +1,22 @@
 using System.Linq;
 using System.Reflection;
 using BabALSaray.AppEntities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabALSaray.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>,
+    AppUserRole,IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
+     >
     {
-        public DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
 
-        public DbSet<AppUser> Users { get; set; }
+       
 
         public DbSet<dbAccounts> dbAccounts {get;set;}
 
@@ -26,6 +30,19 @@ namespace BabALSaray.Data
         {
            
             base.OnModelCreating(modelbuilder);
+          
+            modelbuilder.Entity<AppUser>()
+                .HasMany (ur => ur.UserRoles)
+                .WithOne (u => u.User)
+                .HasForeignKey (ur => ur.UserId)
+                .IsRequired(); 
+
+             modelbuilder.Entity<AppRole>()
+                .HasMany (ur => ur.UserRoles)
+                .WithOne (u => u.Role)
+                .HasForeignKey (ur => ur.RoleId)
+                .IsRequired();                    
+          
             modelbuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
            
            /*  builder.Entity<dbAccounts>()

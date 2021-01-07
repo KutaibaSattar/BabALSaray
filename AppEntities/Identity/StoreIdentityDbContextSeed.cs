@@ -14,7 +14,7 @@ namespace BabALSaray.AppEntities.Identity
                {
                   DisplayName = "Kutaiba",
                   Email = "md@seraime.com",
-                  UserName =  "md@seraime.com",
+                  UserName =  "Kutaiba",
                   Address =  new UserAddress
                   {
                       FirstName = "Kutaiba",

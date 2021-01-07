@@ -1,5 +1,7 @@
 using System.Text;
+using BabALSaray.AppEntities;
 using BabALSaray.AppEntities.Identity;
+using BabALSaray.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +17,18 @@ namespace BabALSaray.Extensions
         public static IServiceCollection AddIdentityServices( this IServiceCollection services, IConfiguration config)
         {
             
+            services.AddIdentityCore<AppUser> (opt =>
+            {
+               opt.Password.RequireNonAlphanumeric = false; 
+
+            })
+               .AddRoles<AppRole>()
+               .AddRoleManager<RoleManager<AppRole>>()
+               .AddSignInManager<SignInManager<AppUser>>()
+               .AddRoleValidator<RoleValidator<AppRole>>()
+               .AddEntityFrameworkStores<DataContext>() ;
+
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer( options =>{
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -28,6 +42,9 @@ namespace BabALSaray.Extensions
                 
 
             });
+
+            
+
 
            // for allowing the user manager
             var builder = services.AddIdentityCore<StoreUser>();

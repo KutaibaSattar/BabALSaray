@@ -6,7 +6,9 @@ namespace BabALSaray.AppEntities.Identity
     {
       public string DisplayName { get; set; }
 
-      public UserAddress Address { get; set; }     
+      public UserAddress Address { get; set; }  
+
+     
         
     }
 }

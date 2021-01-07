@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BabALSaray.Services
 {
-    public class TokenService : ITokenService
+    public class TokenService : ITokenService // our interface
     {
         private readonly SymmetricSecurityKey _key;
         public TokenService(IConfiguration config)
@@ -42,6 +42,6 @@ namespace BabALSaray.Services
              
              return tokenHandler.WriteToken(token);
                 
-                 }
+        }
     }
 }
