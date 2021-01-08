@@ -46,7 +46,7 @@ namespace BabALSaray.Controllers
             var user = new StoreUser
             {
                 UserName = registerDto.Username,
-                Email = registerDto.Email,
+                //Email = registerDto.Email,
                 DisplayName = registerDto.Username,
 
             };

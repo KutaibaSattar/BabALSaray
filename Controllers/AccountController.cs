@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,12 +48,16 @@ namespace BabALSaray.Controllers
           
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+                       
+           if (!roleResult.Succeeded) return BadRequest(result.Errors);
+
            if (!result.Succeeded) return BadRequest(result.Errors);
 
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
 
             };
 
@@ -72,7 +77,7 @@ namespace BabALSaray.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
 
             };
 
