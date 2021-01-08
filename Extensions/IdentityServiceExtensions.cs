@@ -43,15 +43,6 @@ namespace BabALSaray.Extensions
 
             });
 
-            
-
-
-           // for allowing the user manager
-            var builder = services.AddIdentityCore<StoreUser>();
-            builder = new IdentityBuilder(builder.UserType , builder.Services);
-            builder.AddEntityFrameworkStores<StoreIdentityDbContext>();
-            builder.AddSignInManager<SignInManager<StoreUser>>();
-
             services.AddAuthentication();
 
             return services;

@@ -35,11 +35,7 @@ namespace BabALSaray.Extensions
 
             });
 
-            services.AddDbContext<StoreIdentityDbContext> ( options =>{
-
-               options.UseSqlite(config.GetConnectionString("IdentityConnection"));
-            });
-
+           
             // bad request service onfigure error
              services.Configure<ApiBehaviorOptions>( opt =>
             {
