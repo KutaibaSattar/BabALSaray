@@ -27,9 +27,10 @@ namespace BabALSaray.Services
 
         public async Task<String> CreateToken(AppUser user)
         {
-            var claims = new List<Claim>
+            var claims = new List<Claim> // not sensitive information
             {
-              new Claim(JwtRegisteredClaimNames.NameId,user.UserName)
+              new Claim(JwtRegisteredClaimNames.Email,user.Email),
+              new Claim(JwtRegisteredClaimNames.GivenName,user.UserName),
 
             };
 

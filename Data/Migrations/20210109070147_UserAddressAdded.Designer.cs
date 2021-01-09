@@ -3,14 +3,16 @@ using System;
 using BabALSaray.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BabALSaray.Data.Migrations
+namespace BabALSaray.data.migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210109070147_UserAddressAdded")]
+    partial class UserAddressAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,6 @@ namespace BabALSaray.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("DisplayName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -335,10 +334,13 @@ namespace BabALSaray.Data.Migrations
                             b1.Property<string>("Country")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("FirstName")
+                            b1.Property<string>("Email")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("LastName")
+                            b1.Property<string>("Line1")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Line2")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("Region")
@@ -410,10 +412,13 @@ namespace BabALSaray.Data.Migrations
                             b1.Property<string>("Country")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("FirstName")
+                            b1.Property<string>("Email")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("LastName")
+                            b1.Property<string>("Line1")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Line2")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("Region")

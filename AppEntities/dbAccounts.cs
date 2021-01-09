@@ -20,6 +20,7 @@ namespace BabALSaray.AppEntities
     
         public dbAccounts Parent { get; set; }
 
+       // Reference for self
         public int? ParentId {get;set;}
         public ICollection <dbAccounts> Children { get; set; }
 

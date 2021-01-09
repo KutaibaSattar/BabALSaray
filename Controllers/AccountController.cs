@@ -32,6 +32,9 @@ namespace BabALSaray.Controllers
 
         }
 
+       
+       
+       
         [HttpPost("register")]
 
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -57,7 +60,8 @@ namespace BabALSaray.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user),
+                Email = user.Email
 
             };
 
@@ -74,11 +78,13 @@ namespace BabALSaray.Controllers
             
             if (!result.Succeeded) return Unauthorized();
             
+           
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await _tokenService.CreateToken(user)
-
+                Token = await _tokenService.CreateToken(user),
+                Email = user.Email
+                
             };
 
         }
