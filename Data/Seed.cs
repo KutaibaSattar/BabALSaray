@@ -20,8 +20,8 @@ namespace BabALSaray.Data
                   UserName =  "Kutaiba",
                   Address =  new Address
                   {
-                      FirstName = "Kutaiba",
-                      LastName = "Sattar",
+                      Line1="Sharjah",
+                      Line2 = "Majaz",
                       Country = "UAE",
                       City = "Dubai"
 
@@ -34,11 +34,11 @@ namespace BabALSaray.Data
                {
                   DisplayName = "Huda",
                   Email = "info@seraime.com",
-                  UserName =  "Kutaiba",
+                  UserName =  "Huda",
                   Address =  new Address
                   {
-                      FirstName = "Kutaiba",
-                      LastName = "Sattar",
+                      Line1="Sharjah",
+                      Line2 = "Majaz",
                       Country = "UAE",
                       City = "Dubai"
 
@@ -54,8 +54,8 @@ namespace BabALSaray.Data
                   UserName =  "Abd",
                   Address =  new Address
                   {
-                      FirstName = "Abd",
-                      LastName = "Kutaiba",
+                      Line1="Sharjah",
+                      Line2 = "Majaz",
                       Country = "UAE",
                       City = "Dubai"
 
@@ -64,22 +64,7 @@ namespace BabALSaray.Data
                };
                await userManager.CreateAsync(user3, "Pa$$w0rd");
 
-                  var user4 = new AppUser
-               {
-                  DisplayName = "admin",
-                  Email = "admin@seraime.com",
-                  UserName =  "Kutaiba",
-                  Address =  new Address
-                  {
-                      FirstName = "Kutaiba",
-                      LastName = "Sattar",
-                      Country = "UAE",
-                      City = "Dubai"
-
-                  }
-
-               };
-               await userManager.CreateAsync(user3, "Pa$$w0rd");
+                
 
 
            } 
@@ -109,12 +94,24 @@ namespace BabALSaray.Data
 
             }
 
-            var admin = new AppUser
-            {
-                UserName = "admin"
-            };
+             var admin = new AppUser
+               {
+                  DisplayName = "admin",
+                  Email = "admin@seraime.com",
+                  UserName =  "admin",
+                  Address =  new Address
+                  {
+                      Line1="Sharjah",
+                      Line2 = "Majaz",
+                      Country = "UAE",
+                      City = "Dubai"
 
-            await userManager.CreateAsync(admin,"Pa$$w0rd");
+                  }
+
+               };
+               await userManager.CreateAsync(admin, "Pa$$w0rd");
+           
+                     
             
             await userManager.AddToRolesAsync(admin, new[] {"Admin","Moderator"});
             

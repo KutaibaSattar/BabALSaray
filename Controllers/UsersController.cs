@@ -37,7 +37,7 @@ namespace BabALSaray.Controllers
 
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.GivenName)?.Value;
+            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
             //var user = await _userManager.FindByNameAsync(email);
             
@@ -61,8 +61,8 @@ namespace BabALSaray.Controllers
 
         public async Task<ActionResult<Address>> GetUserAddress()
         {
-             var name = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
-             var user = await _userManager.FindByNameAsync(name);
+             var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+             var user = await _userManager.FindByEmailAsync(email);
 
               return user.Address  ;
         }
