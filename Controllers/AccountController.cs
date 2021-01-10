@@ -42,6 +42,12 @@ namespace BabALSaray.Controllers
 
             // because using ActionResult so we can return BadRequest
 
+            if (await CheckEmailExistsAsync(registerDto.Email).Result.Value)
+            {
+
+            }
+             return BadRequest("User Name is taken");
+            
             if (await UserExists(registerDto.Username)) return BadRequest("User Name is taken");
 
             var user = _mapper.Map<AppUser>(registerDto);
@@ -94,6 +100,14 @@ namespace BabALSaray.Controllers
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
 
 
+        }
+
+        [HttpGet("emailexists")]
+
+        public async Task<ActionResult<bool>> CheckEmailExistsAsync ([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
+           
         }
 
 

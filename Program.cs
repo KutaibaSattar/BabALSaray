@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BabALSaray.AppEntities;
-using BabALSaray.AppEntities.Identity;
 using BabALSaray.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

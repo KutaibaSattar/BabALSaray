@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using BabALSaray.Extensions;
+using DTOs;
 
 namespace BabALSaray.Controllers
 {
@@ -37,34 +39,48 @@ namespace BabALSaray.Controllers
 
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            //var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            //var user = await _userManager.FindByEmailAsync(email);
 
-            //var user = await _userManager.FindByNameAsync(email);
-            
-            var user = await _userManager.FindByEmailAsync(email);
+            // calling extension userManager from  UserManagerExtensions, HttpContext can reached only inside controller
+           
+            var user = await _userManager.FindByEmailFromClaimPrinciple(HttpContext.User); 
+
+
             var userToReturn = _mapper.Map<UserDto>(user);
 
             return Ok(userToReturn);
 
         }
 
-        [HttpGet("emailexists")]
-
-        public async Task<ActionResult<bool>> CheckEmailExistsAsync ([FromQuery] string email)
-        {
-            return await _userManager.FindByEmailAsync(email) != null;
-           
-        }
+        
 
         [Authorize]
         [HttpGetAttribute("address")]
 
-        public async Task<ActionResult<Address>> GetUserAddress()
+        public async Task<ActionResult<AddressDto>> GetUserAddress()
         {
              var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
              var user = await _userManager.FindByEmailAsync(email);
 
-              return user.Address  ;
+              return _mapper.Map<Address,AddressDto>(user.Address)  ;
+        }
+
+        [Authorize]
+        [HttpPut("address")]
+        public async Task<ActionResult<AddressDto>> UpdateUserAddress (AddressDto address)
+        {
+             var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+             var user = await _userManager.FindByEmailAsync(email);
+
+             user.Address = _mapper.Map<AddressDto,Address>(address);
+
+             var result = await _userManager.UpdateAsync(user);
+
+             if (result.Succeeded) return Ok(_mapper.Map<Address,AddressDto>(user.Address));
+
+             return BadRequest ("Problem updating the user");
+
         }
 
 

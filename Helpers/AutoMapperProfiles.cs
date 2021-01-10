@@ -14,6 +14,7 @@ namespace BabALSaray.Helpers
           CreateMap<AppUser,MemberDto>();
           CreateMap<Product,ProductDto>();
           CreateMap<RegisterDto,AppUser>();
+          CreateMap<Address,AddressDto>().ReverseMap();
          
           CreateMap<Product,ProductToReturnDto>()
             .ForMember(d => d.ProductBrand, opt => opt.MapFrom(s => s.ProductBrand.Name))
