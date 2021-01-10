@@ -15,9 +15,10 @@ namespace BabALSaray.Data
            {
                var user = new AppUser
                {
+                  UserName =  "kutaiba",
                   DisplayName = "Kutaiba",
                   Email = "md@seraime.com",
-                  UserName =  "Kutaiba",
+                
                   Address =  new Address
                   {
                       Line1="Sharjah",
@@ -32,9 +33,10 @@ namespace BabALSaray.Data
               
                var user2 = new AppUser
                {
+                  UserName =  "huda",
                   DisplayName = "Huda",
                   Email = "info@seraime.com",
-                  UserName =  "Huda",
+                  
                   Address =  new Address
                   {
                       Line1="Sharjah",
@@ -49,9 +51,10 @@ namespace BabALSaray.Data
               
                 var user3 = new AppUser
                {
+                  UserName =  "abd",
                   DisplayName = "Abd",
                   Email = "support@seraime.com",
-                  UserName =  "Abd",
+                 
                   Address =  new Address
                   {
                       Line1="Sharjah",
@@ -96,9 +99,10 @@ namespace BabALSaray.Data
 
              var admin = new AppUser
                {
+                 UserName =  "admin",
                   DisplayName = "admin",
                   Email = "admin@seraime.com",
-                  UserName =  "admin",
+                 
                   Address =  new Address
                   {
                       Line1="Sharjah",

@@ -12,9 +12,11 @@ namespace BabALSaray.Helpers
           CreateMap<dbAccounts,dbAccountsDto>();
           CreateMap<AppUser,UserDto>();
           CreateMap<AppUser,MemberDto>();
-          CreateMap<Product,ProductDto>();
+          CreateMap<Product,ProductToReturnDto>();
           CreateMap<RegisterDto,AppUser>();
           CreateMap<Address,AddressDto>().ReverseMap();
+          CreateMap<CustomerBasketDto, CustomerBasket>();
+          CreateMap<BasketItemDto, BasketItem>();
          
           CreateMap<Product,ProductToReturnDto>()
             .ForMember(d => d.ProductBrand, opt => opt.MapFrom(s => s.ProductBrand.Name))
