@@ -18,12 +18,13 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
-import { RegisterComponent } from './register/register.component';
+//import { RegisterComponent } from './account/register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_modules/shared.module';
+import { AccountModule } from './account/account.module';
 
 
 @NgModule({
@@ -33,13 +34,14 @@ import { SharedModule } from './_modules/shared.module';
     CounterComponent,
     FetchDataComponent,
     NavComponent,
-    RegisterComponent,
+    //RegisterComponent,
     DbaccountsListComponent,
     DbaccountDetailComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
+    
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,6 +70,8 @@ import { SharedModule } from './_modules/shared.module';
     data: {breadcrumb: 'Basket'}},
     {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
     data: {breadcrumb: 'Checkout'}},
+    {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule),
+    data: {breadcrumb: {skip: true}}},
     { path: 'errors', component: TestErrorsComponent , data: {breadcrumb: 'Test Errors'} },
     { path: 'not-found', component: NotFoundComponent , data: {breadcrumb: 'Not Found'}},
     { path: 'server-error', component: ServerErrorComponent, },

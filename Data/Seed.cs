@@ -70,7 +70,7 @@ namespace BabALSaray.Data
                 
 
 
-           } 
+           
 
          
           var users = await userManager.Users.ToListAsync();
@@ -92,8 +92,8 @@ namespace BabALSaray.Data
                 await roleManager.CreateAsync(role);
             }
 
-            foreach (var user in users){
-                await userManager.AddToRoleAsync(user, "Member");
+            foreach (var userAccount in users){
+                await userManager.AddToRoleAsync(userAccount, "Member");
 
             }
 
@@ -119,7 +119,7 @@ namespace BabALSaray.Data
             
             await userManager.AddToRolesAsync(admin, new[] {"Admin","Moderator"});
             
-
+        } 
 
 
         }  

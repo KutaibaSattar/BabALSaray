@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
@@ -11,11 +12,13 @@ import { User } from '../_models/user';
 export class AccountService {
    baseUrl = environment.apiUrl
   private currentUserSource = new ReplaySubject<User>(1);
+
+ // or private currentUserSource = new BehaviorSubject<User>(null);
   
   
   currentUser$ = this.currentUserSource.asObservable(); //$ at end as convention that is Observable
 
-  constructor(private  http: HttpClient) { }
+  constructor(private  http: HttpClient, private router: Router) { }
 
   
   login(model : any){
@@ -25,13 +28,12 @@ export class AccountService {
             const user = response;
             if(user){
               localStorage.setItem('user',JSON.stringify(user))
-              this.currentUserSource.next(user);
+              this.currentUserSource.next(user); // store user token in current user source
               console.log(user)
-              
             }
-        } )
+        })
 
-      )
+      );
     }
 
    setCurrentUser(user:User){
@@ -39,11 +41,7 @@ export class AccountService {
  
    } 
 
-  logout(){
-    localStorage.removeItem('user');
-    this.currentUserSource.next(null);
-
-  }   
+ 
   
   registor(model:any){
 
@@ -57,6 +55,18 @@ export class AccountService {
      
     )
 
+
+  }
+
+  logout(){
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
+    this.router.navigateByUrl('/');
+  }
+  
+  checkEmailExists( email: string )
+  {
+    return this.http.get(this.baseUrl + '/account/emailexists?email=' + email)
 
   }
 

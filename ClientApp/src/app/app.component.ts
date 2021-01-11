@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BasketService } from './basket/basket.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { BasketService } from './basket/basket.service';
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
 
-  constructor(private basketService: BasketService) {}
+  constructor(private basketService: BasketService, private router: Router) {}
 
   ngOnInit() {
     const basketId = localStorage.getItem('basket_id');
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
         console.log('initialized basket');
 
       }, error => {console.log(error); });
+
+      this.router.navigateByUrl('/home');
 
     }
   }
