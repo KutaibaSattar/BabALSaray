@@ -10,63 +10,61 @@ import { User } from '../_models/user';
   providedIn: 'root'
 })
 export class AccountService {
-   baseUrl = environment.apiUrl
+   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
 
  // or private currentUserSource = new BehaviorSubject<User>(null);
-  
-  
-  currentUser$ = this.currentUserSource.asObservable(); //$ at end as convention that is Observable
+
+
+  currentUser$ = this.currentUserSource.asObservable(); // $ at end as convention that is Observable
 
   constructor(private  http: HttpClient, private router: Router) { }
 
-  
-  login(model : any){
 
-      return  this.http.post(this.baseUrl + 'account/login',model).pipe(
-        map((response: User) =>{
+  login(model: any) {
+
+      return  this.http.post(this.baseUrl + 'account/login', model).pipe(
+        map((response: User) => {
             const user = response;
-            if(user){
-              localStorage.setItem('user',JSON.stringify(user))
+            if (user) {
+              localStorage.setItem('user', JSON.stringify(user));
               this.currentUserSource.next(user); // store user token in current user source
-              console.log(user)
-            }
+                     }
         })
 
       );
     }
 
-   setCurrentUser(user:User){
-    this.currentUserSource.next(user)
- 
-   } 
+   setCurrentUser(user: User) {
+    this.currentUserSource.next(user);
 
- 
-  
-  registor(model:any){
+   }
 
-    return this.http.post(this.baseUrl + 'account/register',model).pipe(
-      map(( user : User) =>{
-        if (user){
+
+
+  registor(model: any) {
+
+    return this.http.post(this.baseUrl + 'account/register', model).pipe(
+      map(( user: User) => {
+        if (user) {
             sessionStorage.setItem('user', JSON.stringify(user));
             this.currentUserSource.next(user);
         }
       })
-     
-    )
+
+    );
 
 
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
   }
-  
-  checkEmailExists( email: string )
-  {
-    return this.http.get(this.baseUrl + '/account/emailexists?email=' + email)
+
+  checkEmailExists( email: string ) {
+    return this.http.get(this.baseUrl + '/account/emailexists?email=' + email);
 
   }
 

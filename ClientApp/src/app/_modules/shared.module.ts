@@ -7,6 +7,7 @@ import { PagingHeaderComponent } from '../_shared/paging-header/paging-header.co
 import { PagerComponent } from '../_shared/pager/pager.component';
 import { CarouselModule} from 'ngx-bootstrap/carousel';
 import { OrderTotalsComponent } from '../_shared/order-totals/order-totals.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent ],
@@ -18,6 +19,7 @@ import { OrderTotalsComponent } from '../_shared/order-totals/order-totals.compo
      TabsModule.forRoot(),
      PaginationModule.forRoot(),
     CarouselModule.forRoot(),
+    ReactiveFormsModule,
    ],
  exports: [
     ToastrModule,
@@ -26,7 +28,8 @@ import { OrderTotalsComponent } from '../_shared/order-totals/order-totals.compo
     PagingHeaderComponent, // any module using share module can use this component
     PagerComponent,
     CarouselModule,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    ReactiveFormsModule,
  ]
 })
 export class SharedModule { }

@@ -9,23 +9,23 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class MemberListComponent implements OnInit {
 
-  members : User[];
- 
-  constructor(private memberService : MembersService) { }
+  members: User[];
+
+  constructor(private memberService: MembersService) { }
 
   ngOnInit(): void {
     this.loadMembers();
 
   }
 
-  loadMembers(){
+  loadMembers() {
 
-    this.memberService.getMenbers().subscribe(members =>{
-     
+    this.memberService.getMenbers().subscribe(members => {
+
       this.members = members;
 
 
-    })
+    });
 
   }
 

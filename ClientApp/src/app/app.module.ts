@@ -18,7 +18,7 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
-//import { RegisterComponent } from './account/register/register.component';
+// import { RegisterComponent } from './account/register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
@@ -34,14 +34,14 @@ import { AccountModule } from './account/account.module';
     CounterComponent,
     FetchDataComponent,
     NavComponent,
-    //RegisterComponent,
+   // RegisterComponent,
     DbaccountsListComponent,
     DbaccountDetailComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-    
+
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
