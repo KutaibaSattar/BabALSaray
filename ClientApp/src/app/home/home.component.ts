@@ -10,19 +10,16 @@ import { AccountService } from './../_services/account.service';
 export class HomeComponent implements OnInit {
   registerMode = false;
 
-  constructor (private accountService: AccountService) {}
+  constructor () {}
 
   ngOnInit() {
 
-    this.setCurrentUser();
+  
 
    }
 
-
-   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user'));
-    this.accountService.setCurrentUser(user);
-   }
+   //Starting form
+   
 
   resgisterToggle() {
 

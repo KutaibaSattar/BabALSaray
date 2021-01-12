@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasketService } from './basket/basket.service';
+import { User } from './_models/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,27 +10,39 @@ import { BasketService } from './basket/basket.service';
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
 
-  constructor(private basketService: BasketService, private router: Router) {}
+  constructor(private basketService: BasketService, private router: Router,private accountService: AccountService) {}
 
   ngOnInit() {
-    const basketId = localStorage.getItem('basket_id');
-    if (basketId) {
 
-      this.basketService.getBasket(basketId).subscribe(() => {
-        console.log('initialized basket');
-
-      }, error => {console.log(error); });
-
-      this.router.navigateByUrl('/home');
-
-    }
+    this.loadBasket();
+    this.setCurrentUser();
+   
   }
 
+  loadBasket(){
+    const basketId = localStorage.getItem('basket_id');
+     if (basketId) {
+ 
+       this.basketService.getBasket(basketId).subscribe(() => {
+         console.log('initialized basket');
+ 
+       }, error => {console.log(error); });
+ 
+       this.router.navigateByUrl('/home');
+ 
+     }
+ }
 
-
-    // this.getUsers();
+ setCurrentUser() {
+  const user: User = JSON.parse(localStorage.getItem('user'));
+  this.accountService.setCurrentUser(user);
+ }
+  
+   // this.getUsers();
     // this.setCurrentUser();
   }
+
+
 
  /*  setCurrentUser(){
 

@@ -6,6 +6,7 @@ using AutoMapper;
 using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
+using BabALSaray.Errors;
 using BabALSaray.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,13 +43,14 @@ namespace BabALSaray.Controllers
 
             // because using ActionResult so we can return BadRequest
 
-            /* if (await CheckEmailExistsAsync(registerDto.Email))
+            if (await CheckEmailExistsAsync(registerDto.Email))
             {
-                  return BadRequest("Email is taken");   
-            } */
+                  return new BadRequestObjectResult(new ApiValidationErrorResponse{Errors = new [] 
+                  {"Email address is in use"}});   
+            }
             
             
-            if (await UserExists(registerDto.Username)) return BadRequest("User Name is taken");
+            //if (await UserExists(registerDto.Username)) return BadRequest("User Name is taken");
 
             var user = _mapper.Map<AppUser>(registerDto);
 
@@ -77,12 +79,15 @@ namespace BabALSaray.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
-            if (user == null) return Unauthorized("Invalid username");
+          /*   var user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower()); */
 
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+           
+           if (user == null) return Unauthorized(new ApiResponse(401));
+            
             var result =  await _signInManager.CheckPasswordSignInAsync(user,loginDto.Password,false);
             
-            if (!result.Succeeded) return Unauthorized();
+            if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
             
            
             return new UserDto

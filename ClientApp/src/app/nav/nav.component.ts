@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BasketService } from '../basket/basket.service';
 import { Observable } from 'rxjs';
 import { IBasket } from '../_models/basket';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -13,14 +14,14 @@ import { IBasket } from '../_models/basket';
 export class NavComponent implements OnInit {
 model: any = {};
 basket$: Observable<IBasket>;
-// currentUser$: Observable<User>;
+currentUser$: Observable<User>;
 // loggedIn : boolean
 
 constructor(public accountService: AccountService, private router: Router, private basketService: BasketService ) { }
 
   ngOnInit(): void {
     // this.getCurrentUser();
-    // this.currentUser$ = this.accountService.currentUser$;
+    this.currentUser$ = this.accountService.currentUser$;
     this.basket$ = this.basketService.basket$;
   }
 
