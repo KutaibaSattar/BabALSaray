@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           switch (error.status) {
             case 400: // bad request
-              if (error.error.errors) {
+              /* if (error.error.errors) {
                 const modeStateError = [];
                 for (const key in error.error.errors) {
                   if (error.error.errors[key]) {
@@ -35,10 +35,12 @@ export class ErrorInterceptor implements HttpInterceptor {
               } else {
                 this.toastr.error(error.error, error.status);
 
-              }
+              } */
+              this.toastr.error(error.error.message, error.error.statusCode);
+                 
               break;
             case 401: // auth
-              this.toastr.error(error.error, error.status);
+            this.toastr.error(error.error.message, error.error.statusCode);
               break;
             case 404: // not found
               this.router.navigateByUrl('/not-found');

@@ -67,12 +67,19 @@
   <div class="d-flex align-items-center">
     <ng-container *ngIf="currentUser$ | async; else elseBlock">
       <div>
-        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
-          <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase}}</a>
+        <div class="dropdown ml-3 mr-5" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+          <a class="dropdown-toggle text-light" dropdownToggle> <strong> Welcome {{user.username | titlecase}} </strong> </a>
           <div class="dropdown-menu mt-auto" *dropdownMenu>
-            <a class="dropdown-item">Edit Profile </a>
+            <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-shopping-cart mr-3"></i> View Basket
+            </a>
+            <a routerLink="/orders" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-history mr-3"></i> View Orders
+            </a>
             <div class="divider dropdown-divider"></div>
-            <a class="dropdown-item" (click)="logout()">Logout</a>
+            <a class="dropdown-item d-flex align-items-center py-2" (click)="logout()">
+              <i class="fa fa-sign-out mr-3"></i> Logout
+            </a>
           </div>
   
         </div>

@@ -26,7 +26,9 @@ constructor(public accountService: AccountService, private router: Router, priva
   }
 
   login() {
-    this.accountService.login(this.model).subscribe(() => {this.router.navigateByUrl('/shop');
+    this.accountService.login(this.model).subscribe(() =>
+     {this.router.navigateByUrl('/shop');
+     console.log('Hi');
    });
 
   }
