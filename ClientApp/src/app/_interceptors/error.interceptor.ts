@@ -22,23 +22,25 @@ export class ErrorInterceptor implements HttpInterceptor {
 
           switch (error.status) {
             case 400: // bad request
-              /* if (error.error.errors) {
-                const modeStateError = [];
+              if (error.error.errors) {
+
+                const modalStateError = [];
                 for (const key in error.error.errors) {
                   if (error.error.errors[key]) {
-                    modeStateError.push(error.error.errors[key]);
+                    modalStateError.push(error.error.errors[key]);
+                    this.toastr.error(error.error.errors[key]);
                   }
                 }
 
-                throw modeStateError.flat();
+                // throw modalStateError.flat();
+
 
               } else {
-                this.toastr.error(error.error, error.status);
+                this.toastr.error(error.statusText, error.status);
 
-              } */
-              this.toastr.error(error.error.message, error.error.statusCode);
-                 
-              break;
+              }
+            break;
+
             case 401: // auth
             this.toastr.error(error.error.message, error.error.statusCode);
               break;
@@ -52,8 +54,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             default:
             this.toastr.error('Something unexpected went wrong');
             console.log(error);
-
-              break;
+            break;
           }
 
         }

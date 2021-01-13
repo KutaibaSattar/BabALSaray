@@ -11,7 +11,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class LoginComponent implements OnInit {
 loginForm: FormGroup;
 
-constructor(private accountService: AccountService,private router : Router) { }
+constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
     this.CreateLoginForm();
@@ -19,7 +19,7 @@ constructor(private accountService: AccountService,private router : Router) { }
   }
 CreateLoginForm () {
   this.loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
     password: new FormControl ('', Validators.required)
 
   });
