@@ -1,6 +1,9 @@
 import { AccountService } from '../../_services/account.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit} from '@angular/core';
+import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 
 
@@ -11,36 +14,57 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() cancelRegister = new EventEmitter();
-
-  model : any ={};
+ registerForm: FormGroup;
 
 
-  constructor(private accountService : AccountService, private toastr : ToastrService ) { }
+ 
+
+
+  constructor(private fb: FormBuilder, private accountService : AccountService, private router : Router ) { }
 
   ngOnInit(): void {
+    this.createRegisterForm();
   }
 
+  createRegisterForm() {
 
-  register(){
-    this.accountService.registor(this.model).subscribe(Response =>
+    this.registerForm = this.fb.group({
 
-      {
-        console.log(Response)
-        this.cancel();
+      userName: [null,[Validators.required]],
+      email: [null,[Validators.required,Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')],
+              [this.validateEmailNotTaken()]],
+      password: [null,[Validators.required] ]
 
-      }/* , error => {console.log(error);
-        this.toastr.error(error.error) }*/
-
-        );
-
-  }
-
-  cancel(){
-    this.cancelRegister.emit(false);
+    })
 
   }
 
+  onSubmit(){
+    this.accountService.registor(this.registerForm.value).subscribe( res => {
+      this.router.navigateByUrl('/shop');
+
+    }, error => {console.log(error);});
+
+  }
+
+  validateEmailNotTaken(): AsyncValidatorFn {
+
+    return control => {
+      return timer(500).pipe(
+        switchMap(() => {
+          if (!control.value) {
+            return of(null);
+          }
+
+          return this.accountService.checkEmailExists(control.value).pipe(
+            map (res => {
+              return res ? { emilExists: true } : null
+            })
+          );
+        })
+      );
+    };
+  }
 }
 
 

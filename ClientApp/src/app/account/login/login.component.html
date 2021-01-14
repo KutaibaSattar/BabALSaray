@@ -6,45 +6,15 @@
           <h1 class="h3 mb-3 font-weight-normal">Login</h1>
         </div>
     
-        <div class="form-label-group">
-          <input formControlName="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-          <label for="inputEmail">Email address</label>
-          <span class="text-danger" 
-          *ngIf="this.loginForm.get('email').status
-          && this.loginForm.get('email').touched
-          && this.loginForm.get('email').errors['required']">
-          Email address is required
-        </span>
-        <span class="text-danger" 
-          *ngIf="this.loginForm.get('email').status
-          && this.loginForm.get('email').touched
-          && this.loginForm.get('email').errors['pattern']">
-          Email address is not valid
-        </span>
-
-        </div>
+        <app-text-input formControlName="email" [label] = "'Email Address'"></app-text-input>
     
-        <div class="form-label-group">
-          <input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-          <label for="inputPassword">Password</label>
-          <span class="text-danger" 
-          *ngIf="this.loginForm.get('password').status
-          && this.loginForm.get('password').touched
-          && this.loginForm.get('password').errors['required']">
-          Password address is not valid
-        </span>
-        </div>
+        <app-text-input formControlName="password" [label] = "'Password'" [type]="'password'"></app-text-input>
+    
+      
        
         <button [disabled]="this.loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted text-center">BaB ALSaray © 2021</p>
       </form>
   </div>  
-  <div class="col-4">
-    <p>Form Status: {{this.loginForm.status}}</p>
-    <p>Email Status: {{this.loginForm.get('email').status}}</p>
-    <p>Email Touched: {{this.loginForm.get('email').touched}}</p>
-    <p>Email Dirty: {{this.loginForm.get('email').dirty}}</p>
-    <p>{{this.loginForm.value | json}} </p>
-  </div>
-
+  
 </div>

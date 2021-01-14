@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
 import { PaginationModule} from 'ngx-bootstrap/pagination';
-import { PagingHeaderComponent } from '../_shared/paging-header/paging-header.component';
-import { PagerComponent } from '../_shared/pager/pager.component';
+import { PagingHeaderComponent } from './paging-header/paging-header.component';
+import { PagerComponent } from './pager/pager.component';
 import { CarouselModule} from 'ngx-bootstrap/carousel';
-import { OrderTotalsComponent } from '../_shared/order-totals/order-totals.component';
+import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
-  declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent ],
+  declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent ],
   imports: [
     CommonModule,
     ToastrModule.forRoot({
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CarouselModule,
     OrderTotalsComponent,
     ReactiveFormsModule,
+    TextInputComponent,
  ]
 })
 export class SharedModule { }
