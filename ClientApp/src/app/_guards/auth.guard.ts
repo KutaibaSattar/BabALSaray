@@ -10,18 +10,18 @@ import { AccountService } from '../_services/account.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  
-  constructor(private accountService : AccountService, private toastr: ToastrService, private router: Router){}
-  
-  
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) :Observable<boolean> {
-   
+
+  constructor(private accountService: AccountService, private router: Router) {}
+
+
+  canActivate(next: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): Observable<boolean> {
+
     return this.accountService.currentUser$.pipe(
-    map(user=>{
+    map(user => {
       if (user) {
-        return true};
-        this.router.navigate(['account/login'],{queryParams: {returnUrl: state.url}});
+        return true; }
+        this.router.navigate(['account/login'], {queryParams: {returnUrl: routerState.url}});
       })
-   )
+   );
   }
 }

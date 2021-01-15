@@ -10,26 +10,26 @@ import { AccountService } from './_services/account.service';
 })
 export class AppComponent implements OnInit {   // onInite is lifecycle
 
-  constructor(private basketService: BasketService, private router: Router,private accountService: AccountService) {}
+  constructor(private basketService: BasketService, private router: Router, private accountService: AccountService) {}
 
   ngOnInit() {
 
     this.loadBasket();
     this.setCurrentUser();
-   
+
   }
 
-  loadBasket(){
+  loadBasket() {
     const basketId = localStorage.getItem('basket_id');
      if (basketId) {
- 
+
        this.basketService.getBasket(basketId).subscribe(() => {
          console.log('initialized basket');
- 
+
        }, error => {console.log(error); });
- 
+
        this.router.navigateByUrl('/home');
- 
+
      }
  }
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {   // onInite is lifecycle
   const user: User = JSON.parse(localStorage.getItem('user'));
   this.accountService.setCurrentUser(user);
  }
-  
+
    // this.getUsers();
     // this.setCurrentUser();
   }

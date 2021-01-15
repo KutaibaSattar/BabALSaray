@@ -14,12 +14,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-  
+
 
    }
 
-   //Starting form
-   
+   // Starting form
+
 
   resgisterToggle() {
 
