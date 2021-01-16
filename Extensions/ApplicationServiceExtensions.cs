@@ -3,10 +3,12 @@ using BabALSaray.Data;
 using BabALSaray.Errors;
 using BabALSaray.Interfaces;
 using BabALSaray.Services;
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services;
 
 namespace BabALSaray.Extensions
 {
@@ -26,6 +28,8 @@ namespace BabALSaray.Extensions
              services.AddScoped<IBasketRepository,BasketRepository>();
             
              services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+
+             services.AddScoped<IOrderService, OrderService>();
 
               
               services.AddDbContext<DataContext>(options =>

@@ -32,7 +32,7 @@ namespace BabALSaray
                 
                 //await context.Database.MigrateAsync();
                 
-                await Seed.SeedUsersAsync(userManager,roleManager); 
+                await Seed.SeedUsersAsync(userManager,roleManager,context); 
                 
             }
             catch (Exception ex)

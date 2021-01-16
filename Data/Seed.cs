@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BabALSaray.AppEntities;
+using BabALSaray.AppEntities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,18 @@ namespace BabALSaray.Data
 {
     public class Seed
     {
-        public static async Task SeedUsersAsync (UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        public static async Task SeedUsersAsync (UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, DataContext context)
         {
+          
+          if (! context.OrderMethods.Any())
+          {
+              var item =
+              context.OrderMethods.Add( new OrderMethod {ShortName="Installation"});
+              context.SaveChanges();
+
+          }
+          
+          
            if (!userManager.Users.Any())
            {
                var user = new AppUser

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using BabALSaray.AppEntities;
+using BabALSaray.AppEntities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ namespace BabALSaray.Data
     AppUserRole,IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>
      >
     {
+     
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
@@ -25,6 +28,11 @@ namespace BabALSaray.Data
         public DbSet<ProductBrand> ProductBrands { get; set; }
 
         public DbSet<ProductType> ProductTypes { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<OrderMethod> OrderMethods { get; set; }
+        
 
          protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
