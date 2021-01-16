@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BabALSaray.AppEntities.OrderAggregate;
 
-namespace Interfaces
+namespace BabALSaray.Interfaces
 {
     public interface IOrderService
     {
