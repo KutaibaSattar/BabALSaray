@@ -2,6 +2,7 @@ using BabALSaray.AppEntities;
 using AutoMapper;
 using BabALSaray.DTOs;
 using DTOs;
+using BabALSaray.AppEntities.OrderAggregate;
 
 namespace BabALSaray.Helpers
 {
@@ -15,6 +16,7 @@ namespace BabALSaray.Helpers
           CreateMap<Product,ProductToReturnDto>();
           CreateMap<RegisterDto,AppUser>();
           CreateMap<Address,AddressDto>().ReverseMap();
+          CreateMap<AddressDto,OrderAddress>().ReverseMap();
           CreateMap<CustomerBasketDto, CustomerBasket>();
           CreateMap<BasketItemDto, BasketItem>();
          
