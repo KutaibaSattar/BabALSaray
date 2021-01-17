@@ -16,6 +16,20 @@ namespace BabALSaray.Interfaces
         Task<IReadOnlyList<T>> ListAsync (ISpecifications<T> spec);
 
         Task<int> CountAsync (ISpecifications<T> spec);
+
+        // above only reading
+        /* None of these asynchronous methods.
+
+        And the reason for this is that we're not going to be directly adding these to the database when we
+        use any of these methods or we saying to entity framework when we use these is we want to add this.
+        So track it or we want to update this.
+        So track it and this is happening in memory it's not happening in a SQL databas or whatever
+        database technology we're using our repository is not responsible for saving changes to the database
+        that's left to our unit of work. */
+        void Add (T entity);
+        void Update(T entity );
+        void Delete (T entity);
+
          
     }
 }
