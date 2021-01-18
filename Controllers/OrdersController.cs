@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -39,6 +40,40 @@ namespace BabALSaray.Controllers
             return Ok(order);
 
         }
+
+        [HttpGet]
+
+        public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+        {
+           var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
+           var orders = await _orderService.GetOrdersForUserAsync(email);
+
+           return Ok(orders);
+
+        }
+
+         [HttpGet("{id}")]
+
+         public async Task<ActionResult<Order>> GetOrderByIdForUser(int id)
+         {
+             var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
+             var order =  await _orderService.GetOrderByIdAsync(id, email);
+
+             if (order == null) return NotFound (new ApiResponse(404));
+
+                return order;
+
+
+         }
+
+         [HttpGet("OrdrMethod")]
+
+         public async Task<ActionResult<IReadOnlyList<OrderMethod>>> GetOrderMethods()
+         {
+             return Ok(await _orderService.GetOrderMethodAsync());
+         }
 
     }
 
