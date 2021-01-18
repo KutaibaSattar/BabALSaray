@@ -15,6 +15,8 @@ namespace BabALSaray.Interfaces
 
         Task<IReadOnlyList<T>> ListAsync (ISpecifications<T> spec);
 
+         Task<IReadOnlyList<T>> ListAllAsync ();
+
         Task<int> CountAsync (ISpecifications<T> spec);
 
         // above only reading

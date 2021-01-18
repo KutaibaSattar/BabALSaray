@@ -5,23 +5,28 @@ using System.Threading.Tasks;
 using BabALSaray.AppEntities;
 using BabALSaray.AppEntities.OrderAggregate;
 using BabALSaray.Interfaces;
+using BabALSaray.Specifications;
 
 namespace BabALSaray.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IGenericRepository<Order> _orderRepo;
+       /*  private readonly IGenericRepository<Order> _orderRepo;
         private readonly IGenericRepository<OrderMethod> _orderMethodRepo;
-        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<Product> _productRepo; */
         private readonly IBasketRepository _basketRepository;
+        private readonly IunitOfWork _unitOfWork;
 
-        public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<OrderMethod> orderMethodRepo,
-         IGenericRepository<Product> productRepo, IBasketRepository basketRepository)
+
+       /*  public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<OrderMethod> orderMethodRepo,
+         IGenericRepository<Product> productRepo, IBasketRepository basketRepository) */
+         public OrderService( IBasketRepository basketRepository, IunitOfWork unitOfWork)
         {
             _basketRepository = basketRepository;
-            _productRepo = productRepo;
+            _unitOfWork = unitOfWork;
+           /*  _productRepo = productRepo;
             _orderMethodRepo = orderMethodRepo;
-            _orderRepo = orderRepo;
+            _orderRepo = orderRepo; */
 
         }
 
@@ -33,40 +38,55 @@ namespace BabALSaray.Services
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
-                var productItem = await _productRepo.GetByIdAsync(item.Id);
+                var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
                 var itemOrder = new ProductItemOrdered(productItem.Id,productItem.Name,productItem.PictureUrl);
                 var OrderItem = new OrderItem(itemOrder, decimal.ToDouble(productItem.price) , decimal.ToDouble(item.Quantity));
                 items.Add(OrderItem);
             }
 
-            // get delivery method from repo
-            var orderMethod = await _orderMethodRepo.GetByIdAsync(OrderMethodId);
+            // get order method from repo
+            //var orderMethod = await _orderMethodRepo.GetByIdAsync(OrderMethodId);
+            var orderMethod = await _unitOfWork.Repository<OrderMethod>().GetByIdAsync(OrderMethodId);
 
             // calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
             // create order
             var order = new Order(items , buyerEmail, orderAddress,orderMethod,subtotal);
+           _unitOfWork.Repository<Order>().Add(order); // memory
             // save to db
-            
-            // retyrn order
+           /* because our units of work owns our context.
+            Any changes that attract by entity framework are going to be saved into our database at this point.
+            we guarantee in this unit of work is that all of the changes in this method are going to be
+            applied or none of them. */
+           var result = await _unitOfWork.Complete();
+
+           if (result <=0) return null;
+
+           // delete basket
+           await _basketRepository.DeleteBasketAsync(basketId);
+           // return order
             return order;
 
         }
 
-        public Task<IReadOnlyList<OrderMethod>> GetDeliveryMethodAsync()
+        public async Task<IReadOnlyList<OrderMethod>> GetOrderMethodAsync()
         {
-            throw new System.NotImplementedException();
+             return await  _unitOfWork.Repository<OrderMethod>().ListAllAsync();
         }
 
-        public Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
+        public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
         {
-            throw new System.NotImplementedException();
+            var spec = new OrdersWithItemsAndOrderingSpecifications(id, buyerEmail);
+
+            return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
         }
 
-        public Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
+        public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
         {
-            throw new System.NotImplementedException();
+            var spec = new OrdersWithItemsAndOrderingSpecifications(buyerEmail);
+
+            return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
     }
 }
