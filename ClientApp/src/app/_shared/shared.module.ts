@@ -10,7 +10,8 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input/text-input.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
-import { StepperComponent } from './stepper/stepper.component'
+import { StepperComponent } from './stepper/stepper.component';
+
 
 @NgModule({
   declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent ],
