@@ -9,9 +9,11 @@ import { CarouselModule} from 'ngx-bootstrap/carousel';
 import { OrderTotalsComponent } from './order-totals/order-totals.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input/text-input.component';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import { StepperComponent } from './stepper/stepper.component'
 
 @NgModule({
-  declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent ],
+  declarations: [ PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent ],
   imports: [
     CommonModule,
     ToastrModule.forRoot({
@@ -21,6 +23,7 @@ import { TextInputComponent } from './text-input/text-input.component';
      PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     ReactiveFormsModule,
+    CdkStepperModule
    ],
  exports: [
     ToastrModule,
@@ -32,6 +35,8 @@ import { TextInputComponent } from './text-input/text-input.component';
     OrderTotalsComponent,
     ReactiveFormsModule,
     TextInputComponent,
+    CdkStepperModule,
+    StepperComponent
  ]
 })
 export class SharedModule { }

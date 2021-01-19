@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BabALSaray.AppEntities.OrderAggregate;
 using BabALSaray.Dtos;
+using BabALSaray.DTOs;
 using BabALSaray.Errors;
 using BabALSaray.Extensions;
 using BabALSaray.Interfaces;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BabALSaray.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
@@ -49,26 +50,26 @@ namespace BabALSaray.Controllers
 
            var orders = await _orderService.GetOrdersForUserAsync(email);
 
-           return Ok(orders);
+           return Ok(_mapper.Map<IReadOnlyList<Order>,IReadOnlyList<OrderToReturnDto>>(orders));
 
         }
 
          [HttpGet("{id}")]
 
-         public async Task<ActionResult<Order>> GetOrderByIdForUser(int id)
+         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
          {
-             var email = HttpContext.User.RetrieveEmailFromPrincipal();
+             var email = HttpContext.User.RetrieveEmailFromPrincipal(); // Checking current user
 
              var order =  await _orderService.GetOrderByIdAsync(id, email);
 
              if (order == null) return NotFound (new ApiResponse(404));
 
-                return order;
+                return _mapper.Map<Order, OrderToReturnDto>(order);
 
 
          }
 
-         [HttpGet("OrdrMethod")]
+         [HttpGet("OrdrMethods")]
 
          public async Task<ActionResult<IReadOnlyList<OrderMethod>>> GetOrderMethods()
          {

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using BabALSaray.AppEntities;
@@ -5,6 +6,7 @@ using BabALSaray.AppEntities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BabALSaray.Data
 {
@@ -64,10 +66,17 @@ namespace BabALSaray.Data
                 foreach (var entityType in modelbuilder.Model.GetEntityTypes() )
                 {
                     var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal));
+                    var dateTimeProperties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(DateTimeOffset));
 
                     foreach (var property in properties)
                     {
                         modelbuilder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                      
+                    }
+                    foreach (var property in dateTimeProperties)
+                    {
+                        modelbuilder.Entity(entityType.Name).Property(property.Name).HasConversion(new DateTimeOffsetToBinaryConverter());
+                      
                     }
 
                 }
