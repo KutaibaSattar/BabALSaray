@@ -1,0 +1,36 @@
+<div class="mt-4" [formGroup]="checkoutForm">
+    <div class="d-flex justify-content-between align-items-center">
+       <h4>Address</h4>
+       <button class="btn btn-outline-success mb-3"
+        (click)="saveUserAddress()"
+        [disabled]="!checkoutForm.get('addressForm').valid || 
+        !checkoutForm.get('addressForm').dirty">
+           Save as default address
+       </button>
+    </div>
+    <div class="row" formGroupName="addressForm">
+        <div class="form-group col-6">
+            <app-text-input [label] = "'Line 1'" formControlName ="line1"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+            <app-text-input [label] = "'Line 2'" formControlName ="line2"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+          <app-text-input [label] = "'Regin'" formControlName ="region"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+          <app-text-input [label] = "'City'" formControlName ="city"></app-text-input>
+        </div>
+        <div class="form-group col-6">
+          <app-text-input [label] = "'Country'" formControlName ="country"></app-text-input>
+        </div>
+    </div>
+</div>
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+  <button class="btn btn-outline-primary" routerLink="/basket">
+    <i class ="fa fa-angle-left"></i> Back to Basket
+  </button>
+  <button class="btn btn-primary" cdkStepperNext>
+   Go to Method <i class ="fa fa-angle-right"></i>
+  </button>
+</div>

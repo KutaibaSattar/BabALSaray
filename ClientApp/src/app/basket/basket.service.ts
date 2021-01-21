@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Basket, IBasket, IBasketItem, IBasktTotals } from '../_models/basket';
+import { IOrderMethod } from '../_models/ordeMethod';
 import { IProduct } from '../_models/product';
 
 @Injectable({
@@ -18,9 +19,17 @@ export class BasketService {
   private basketTotalSource = new BehaviorSubject<IBasktTotals>(null);
   basketTotal$ = this.basketTotalSource.asObservable();
 
+  service =0;
+
 
 
   constructor(private http: HttpClient) { }
+
+  setServicePrice (orderMethod: IOrderMethod)
+  {
+    this.service = orderMethod.price;
+    this.calculateTotals();
+  }
 
   /*Good place to do any initialization is in our roots component for our application and that's our
     app component.*/
@@ -108,7 +117,7 @@ export class BasketService {
 
   private calculateTotals() {
     const basket = this.getCurrentBasketValue();
-    const shipping = 0;
+    const service  = this.service;
    /*  B in this case represents the item and each item has a price and the quantity.
       And we're multiplying that together and then we're adding it to a now a represents the number the results
       that we're returning from this produce function so.
@@ -116,8 +125,8 @@ export class BasketService {
       So we start at zero we go to item 1 we times its price by its quantity and then we add it to a which
       becomes whatever that is. */
     const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0 );
-    const total = subtotal + shipping;
-    this.basketTotalSource.next({shipping, total, subtotal});
+    const total = subtotal + service;
+    this.basketTotalSource.next({service, total, subtotal});
 
   }
 

@@ -20,7 +20,7 @@ export class Basket implements IBasket {  // for generation unique Id
 }
 
 export interface IBasktTotals {
-  shipping: number;
+  service: number;
   subtotal: number;
   total: number;
 

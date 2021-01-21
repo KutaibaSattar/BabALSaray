@@ -6,7 +6,7 @@ namespace BabALSaray.AppEntities.OrderAggregate
         {
         }
 
-        public OrderItem(ProductItemOrdered itemOrdered, double price, double quantity)
+        public OrderItem(ProductItemOrdered itemOrdered, decimal price, decimal quantity)
         {
             ItemOrdered = itemOrdered;
             Price = price;
@@ -14,8 +14,8 @@ namespace BabALSaray.AppEntities.OrderAggregate
         }
 
         public ProductItemOrdered ItemOrdered { get; set; }
-        public double Price { get; set; }
-        public double Quantity { get; set; }
+        public decimal Price { get; set; }
+        public decimal Quantity { get; set; }
         
     }
 }

@@ -40,7 +40,7 @@ namespace BabALSaray.Services
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
                 var itemOrder = new ProductItemOrdered(productItem.Id,productItem.Name,productItem.PictureUrl);
-                var OrderItem = new OrderItem(itemOrder, decimal.ToDouble(productItem.price) , decimal.ToDouble(item.Quantity));
+                var OrderItem = new OrderItem(itemOrder, productItem.price , item.Quantity);
                 items.Add(OrderItem);
             }
 

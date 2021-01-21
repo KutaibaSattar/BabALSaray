@@ -16,7 +16,8 @@ namespace BabALSaray.Data
           if (! context.OrderMethods.Any())
           {
               var item =
-              context.OrderMethods.Add( new OrderMethod {ShortName="Installation"});
+              context.OrderMethods.Add( new OrderMethod {ShortName="Installation",
+              Description= "Installation and Services", Price = 100});
               context.SaveChanges();
 
           }

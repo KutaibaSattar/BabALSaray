@@ -69,7 +69,7 @@ namespace BabALSaray.Controllers
 
          }
 
-         [HttpGet("OrdrMethods")]
+         [HttpGet("OrderMethods")]
 
          public async Task<ActionResult<IReadOnlyList<OrderMethod>>> GetOrderMethods()
          {
