@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- And at run time, into the Head tag - you will get lot of script files.
+    That means, the compiled version of main.js file.
+    Through those scripts, the compiled version of main.ts file will be invoked.
+    See, I'm not saying at execution time - the actual main.ts file will be executed.
+    All these ".ts" files will be compiled into ".js" files. -->
   <head>
     <meta charset="utf-8" />
     <title>BabALSaray</title>
     <base href="/" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" /> 
   </head>
   <body>
-    <app-root>Loading...</app-root>
+   <!--  And it has a tag called app-root.In this place, actual content of AppComponent template will be replaced here.
+      That means, whatever you write in the AppComponent template, all that information will be substituted here. -->
+      <app-root>Loading...</app-root>
   </body>
 </html>

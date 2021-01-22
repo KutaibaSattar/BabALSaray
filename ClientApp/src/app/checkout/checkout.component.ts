@@ -33,7 +33,7 @@ checkoutForm: FormGroup;
       }),
       paymentForm: this.fb.group({
         nameOnCard: [null, Validators.required]
-  
+
         })
 
     });
@@ -51,7 +51,7 @@ checkoutForm: FormGroup;
 
       }
 
-    )
+    );
   }
 
 }
