@@ -1,26 +1,38 @@
-button.nav-link{
-    background: #e9ecef ;
+.nav-link{
+    background: black;
     border-radius: 0;
     border: none;
 
 }
 
-button.focus {
+
+.focus {
     outline: none;
+   
+}
+
+
+
+.nav-link:hover {
+color: rgb(0, 47, 255);
 
 }
-button.active:hover {
-color: white;
-
-}
-button:active{
+.nav-link:active{
     outline: none;
+ 
 
 }
-button.active:focus {
+.active:focus {
     outline: none;
+    color: rgb(0, 47, 255);
 
 }
+.activetab{
+    color: #df691a;
+    background-color: #abb6c2;
+    outline: none;
+}
+
 
 
 

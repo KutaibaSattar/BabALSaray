@@ -1,9 +1,9 @@
 <div class="container">
-    <ul class="nav nav-pills nav-justified">
+    <ul class="nav nav-pills nav-justified" >
       <li class="nav-item" *ngFor="let step of steps; let i = index">
           <button 
           (click)="onClick(i)"
-          [class.active]="this.selectedIndex === i"
+          [class.activetab]="this.selectedIndex === i"
           class="nav-link py-3 text-uppercase font-weight-bold btn-block">
           {{step.label}}:{{step.completed}}
         </button>
@@ -11,7 +11,7 @@
     </ul>
 <div>
     <ng-container [ngTemplateOutlet]="selected.content">
-
+ 
     </ng-container>
 </div>
 </div>

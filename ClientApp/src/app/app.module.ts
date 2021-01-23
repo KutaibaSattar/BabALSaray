@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppComponent } from './app.component';
@@ -23,8 +23,30 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_shared/shared.module';
+import { OrdersComponent } from './orders/orders.component';
 
+const routes: Routes = [
+  { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home'}},
+  { path: 'orders', component: OrdersComponent, data: { breadcrumb: 'MyHome'}},
+  { path: '',runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
+    children: [
+      { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Accounts' } },
+      { path: 'dbaccount/:id', component: DbaccountDetailComponent },
+      { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
+        data: { breadcrumb: 'Checkout'}},
+        ]},
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
+      data: { breadcrumb: 'Shop' }},
+    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule),
+      data: { breadcrumb: 'Basket' }},
+    {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule),
+      data: { breadcrumb: { skip: true } }},
+    { path: 'errors', component: TestErrorsComponent, data: { breadcrumb: 'Test Errors' } },
+    { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
+    { path: 'server-error', component: ServerErrorComponent, },
+    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 
+    ];
 
 
 @NgModule({
@@ -40,8 +62,7 @@ import { SharedModule } from './_shared/shared.module';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-
-
+    OrdersComponent,
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,36 +73,10 @@ import { SharedModule } from './_shared/shared.module';
     SharedModule,
     CoreModule,
     NgxSpinnerModule,
-    RouterModule.forRoot([
-    { path: 'home', component: HomeComponent, data: {breadcrumb: 'Home'} },
-
-      {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [AuthGuard],
-        children: [
-            { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Accounts'} },
-            { path: 'dbaccount/:id', component: DbaccountDetailComponent },
-            {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
-            data: {breadcrumb: 'Checkout'}},
-        ]
-    },
-    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
-    data: {breadcrumb: 'Shop'}},
-    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule),
-    data: {breadcrumb: 'Basket'}},
-    {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule),
-    data: {breadcrumb: {skip: true}}},
-    { path: 'errors', component: TestErrorsComponent , data: {breadcrumb: 'Test Errors'} },
-    { path: 'not-found', component: NotFoundComponent , data: {breadcrumb: 'Not Found'}},
-    { path: 'server-error', component: ServerErrorComponent, },
-    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
+    RouterModule.forRoot(routes,{relativeLinkResolution: 'legacy' }),
     ],
-     { relativeLinkResolution: 'legacy' }),
 
-  ],
-  providers: [
-
+   providers: [
     {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptor , multi: true} ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptor , multi: true},
     {provide : HTTP_INTERCEPTORS , useClass : LoadingInterceptor , multi: true},
