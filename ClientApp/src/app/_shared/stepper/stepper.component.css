@@ -1,5 +1,5 @@
 .nav-link{
-    background: black;
+    background: #74616b;;
     border-radius: 0;
     border: none;
 
@@ -28,8 +28,8 @@ color: rgb(0, 47, 255);
 
 }
 .activetab{
-    color: #df691a;
-    background-color: #abb6c2;
+    color: white;
+    background-color: #772953;
     outline: none;
 }
 
