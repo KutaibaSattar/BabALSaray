@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/_services/dashboard.service';
+
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
+    
 })
-export class OrdersComponent implements OnInit {
+
+
+
+export class dashboardComponent implements OnInit {
+
+  constructor(private DashboardService: DashboardService ){}
+
   Designation: string;
   Username: string;
   NoOfTeamMembers: number;
@@ -15,6 +24,7 @@ export class OrdersComponent implements OnInit {
   ProjectCost: number;
   CurrentExpenditure: number;
   AvailableFunds: number;
+  ToDay: Date;
 
   Clients: string[];
   Projects: string[];
@@ -28,10 +38,11 @@ export class OrdersComponent implements OnInit {
     this.NoOfTeamMembers = 67;
     this.TotalCostOfAllProjects = 240;
     this.PendingTasks = 15;
-    this.UpComingProjects = 2;
+    this.UpComingProjects = 0.2;
     this.ProjectCost = 2113507;
     this.CurrentExpenditure = 96788;
     this.AvailableFunds = 52536;
+    this.ToDay = new Date();
 
     this.Clients = [
       'ABC Infotech Ltd.',

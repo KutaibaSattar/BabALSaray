@@ -1,6 +1,9 @@
+
 <div class="row">
+ 
   <div class="col-lg-3 pb-3" style="background-color: #e9e6e6">
     <div class="row">
+      <h6 class="ml-5">{{ToDay | date:"d/M/yyyy"}}</h6> 
       <div
         class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 font-weight-bold"
         style="
@@ -8,8 +11,10 @@
           font-family: 'Arial Narrow Bold', sans-serif;
         "
       >
-        {{ Designation }}
+      
+      {{ Designation | uppercase }}
       </div>
+      
       <div class="col-12 text-center mt-2">
         <img src="assets/person-fill.svg" width="60" height="60">
       </div>
@@ -17,7 +22,7 @@
         class="col-12 text-center pt-2 pb-2 font-weight-bold"
         style="font-family: Tahoma"
       >
-        {{ Username }}
+        {{ Username | lowercase }}
       </div>
       <div class="col-12 text-center pt-2 pb-2" style="font-family: Arial">
         TEAM SUMMARY
@@ -61,7 +66,7 @@
             <span
               class="badge badge-secondary badge-pill"
               style="font-size: 13px"
-              >{{ UpComingProjects }}</span
+              >{{ UpComingProjects | percent }}</span
             >
           </li>
         </ul>
@@ -118,9 +123,17 @@
                 2019
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" *ngFor="let year of Years">{{
-                  year
-                }}</a>
+                <a class="dropdown-item" href="#" *ngFor="let year of Years">
+                  <span [ngSwitch]="year">
+                    <span *ngSwitchCase="2019" style="color: green;"> {{year}}</span>
+                    <span *ngSwitchCase="2018" style="color: blue;"> {{year}}</span>
+                    <span *ngSwitchCase="2017" style="color: red;"> {{year}}</span>
+                    <span *ngSwitchDefault style="color: black;"> {{year}}</span>
+                      
+                    
+                  </span>
+                </a>
+                
               </div>
             </div>
           </div>
@@ -136,15 +149,15 @@
         <table class="table table-borderless">
           <tr>
             <td>Project Cost</td>
-            <td>${{ ProjectCost }}</td>
+            <td>{{ ProjectCost |currency: "AED"}}</td>
           </tr>
           <tr>
             <td>Current Expenditure</td>
-            <td>${{ CurrentExpenditure }}</td>
+            <td>{{ CurrentExpenditure  |currency: "AED" }}</td>
           </tr>
           <tr>
             <td>Available Funds</td>
-            <td>${{ AvailableFunds }}</td>
+            <td>{{ AvailableFunds  |currency: "AED" }}</td>
           </tr>
         </table>
       </div>
@@ -190,6 +203,7 @@
             class="card"
             *ngFor="let teamMembersGroup of TeamMembers; let i = index"
           >
+          
             <div class="card-header bg-secondary" id="card1">
               <h2 class="mb-0">
                 <button
@@ -206,8 +220,26 @@
               [id]="'cardbody' + i"
               class="collapse"
               data-parent="#accordion1"
+              [ngClass]="(i==0)? 'show':''"
             >
-              <div class="card-body">
+            <div class="card-body">
+              <div
+                *ngIf="i == 0; then firstTemplate; else secondTemplate"
+              ></div>
+
+              <ng-template #firstTemplate>
+                <div
+                  class="card"
+                  *ngFor="let member of teamMembersGroup.Members"
+                >
+                  <div class="card-header bg-primary text-white">
+                    #{{ member.ID }} {{ member.Name }}
+                  </div>
+                  <div class="card-body">{{ member.Status }}</div>
+                </div>
+              </ng-template>
+
+              <ng-template #secondTemplate>
                 <table class="table">
                   <thead>
                     <tr>
@@ -219,16 +251,23 @@
                   <tbody>
                     <tr *ngFor="let member of teamMembersGroup.Members">
                       <td>{{ member.ID }}</td>
-                      <td>{{ member.Name }}</td>
+                      <td
+                        [style.color]="
+                          member.Status == 'Busy' ? 'red' : 'black'
+                        "
+                      >
+                        {{ member.Name }}
+                      </td>
                       <td>{{ member.Status }}</td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </ng-template>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

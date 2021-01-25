@@ -23,11 +23,16 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_shared/shared.module';
-import { OrdersComponent } from './orders/orders.component';
+import {registerLocaleData} from '@angular/common'
+import localeAr from '@angular/common/locales/en-AE';registerLocaleData(localeAr);
+import { AdminModule } from './_modules/admin/admin.module';
+import { dashboardComponent } from './_modules/admin/dashboard/dashboard.component';
+
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home'}},
-  { path: 'orders', component: OrdersComponent, data: { breadcrumb: 'MyHome'}},
+  { path: 'orders', component: dashboardComponent, data: { breadcrumb: 'MyHome'}},
   { path: '',runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
     children: [
       { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Accounts' } },
@@ -62,7 +67,7 @@ const routes: Routes = [
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-    OrdersComponent,
+   
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -74,6 +79,8 @@ const routes: Routes = [
     CoreModule,
     NgxSpinnerModule,
     RouterModule.forRoot(routes,{relativeLinkResolution: 'legacy' }),
+    AdminModule,
+    
     ],
 
    providers: [
