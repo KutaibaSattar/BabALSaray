@@ -6,14 +6,14 @@ import { DashboardService } from 'src/app/_services/dashboard.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-    
+
 })
 
 
 
-export class dashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
-  constructor(private DashboardService: DashboardService ){}
+  constructor(private dashboardService: DashboardService ) {}
 
   Designation: string;
   Username: string;
@@ -52,32 +52,10 @@ export class dashboardComponent implements OnInit {
 
     this.Projects = ['Project A', 'Project B', 'Project C', 'Project D'];
 
-    for (var i = 2019; i >= 2010; i--) {
+    for (let i = 2019; i >= 2010; i--) {
       this.Years.push(i);
     }
-
-    this.TeamMembersSummary = [
-      {
-        Region: 'East',
-        TeamMembersCount: 20,
-        TemporarilyUnavailableMembers: 4,
-      },
-      {
-        Region: 'West',
-        TeamMembersCount: 15,
-        TemporarilyUnavailableMembers: 8,
-      },
-      {
-        Region: 'South',
-        TeamMembersCount: 17,
-        TemporarilyUnavailableMembers: 1,
-      },
-      {
-        Region: 'North',
-        TeamMembersCount: 15,
-        TemporarilyUnavailableMembers: 6,
-      },
-    ];
+    this.TeamMembersSummary = this.dashboardService.getTeamMemberSummary();
 
     this.TeamMembers = [
       {
@@ -119,19 +97,19 @@ export class dashboardComponent implements OnInit {
     ];
   }
   onProjectChange($event) {
-    if ($event.target.innerHTML == 'Project A') {
+    if ($event.target.innerHTML === 'Project A') {
       this.ProjectCost = 2113507;
       this.CurrentExpenditure = 96788;
       this.AvailableFunds = 52436;
-    } else if ($event.target.innerHTML == 'Project B') {
+    } else if ($event.target.innerHTML === 'Project B') {
       this.ProjectCost = 88923;
       this.CurrentExpenditure = 22450;
       this.AvailableFunds = 2640;
-    } else if ($event.target.innerHTML == 'Project C') {
+    } else if ($event.target.innerHTML === 'Project C') {
       this.ProjectCost = 662183;
       this.CurrentExpenditure = 7721;
       this.AvailableFunds = 9811;
-    } else if ($event.target.innerHTML == 'Project D') {
+    } else if ($event.target.innerHTML === 'Project D') {
       this.ProjectCost = 928431;
       this.CurrentExpenditure = 562;
       this.AvailableFunds = 883;

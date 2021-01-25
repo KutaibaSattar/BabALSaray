@@ -23,17 +23,17 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_shared/shared.module';
-import {registerLocaleData} from '@angular/common'
-import localeAr from '@angular/common/locales/en-AE';registerLocaleData(localeAr);
+import {registerLocaleData} from '@angular/common';
+import localeAr from '@angular/common/locales/en-AE'; registerLocaleData(localeAr);
 import { AdminModule } from './_modules/admin/admin.module';
-import { dashboardComponent } from './_modules/admin/dashboard/dashboard.component';
+import { DashboardComponent } from './_modules/admin/dashboard/dashboard.component';
 
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home'}},
-  { path: 'orders', component: dashboardComponent, data: { breadcrumb: 'MyHome'}},
-  { path: '',runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
+  { path: 'orders', component: DashboardComponent, data: { breadcrumb: 'MyHome'}},
+  { path: '', runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
     children: [
       { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Accounts' } },
       { path: 'dbaccount/:id', component: DbaccountDetailComponent },
@@ -67,7 +67,7 @@ const routes: Routes = [
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-   
+
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -78,9 +78,9 @@ const routes: Routes = [
     SharedModule,
     CoreModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(routes,{relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy' }),
     AdminModule,
-    
+
     ],
 
    providers: [
