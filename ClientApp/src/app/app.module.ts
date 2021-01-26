@@ -18,40 +18,18 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
-import { AuthGuard } from './_guards/auth.guard';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { SharedModule } from './_shared/shared.module';
 import {registerLocaleData} from '@angular/common';
 import localeAr from '@angular/common/locales/en-AE'; registerLocaleData(localeAr);
-import { AdminModule } from './_modules/admin/admin.module';
-import { DashboardComponent } from './_modules/admin/dashboard/dashboard.component';
+import { AdminModule } from './admin/admin.module';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
-const routes: Routes = [
-  { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home'}},
-  { path: 'orders', component: DashboardComponent, data: { breadcrumb: 'MyHome'}},
-  { path: '', runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
-    children: [
-      { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Accounts' } },
-      { path: 'dbaccount/:id', component: DbaccountDetailComponent },
-      { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
-        data: { breadcrumb: 'Checkout'}},
-        ]},
-    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
-      data: { breadcrumb: 'Shop' }},
-    {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule),
-      data: { breadcrumb: 'Basket' }},
-    {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule),
-      data: { breadcrumb: { skip: true } }},
-    { path: 'errors', component: TestErrorsComponent, data: { breadcrumb: 'Test Errors' } },
-    { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
-    { path: 'server-error', component: ServerErrorComponent, },
-    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 
-    ];
 
 
 @NgModule({
@@ -67,6 +45,7 @@ const routes: Routes = [
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
+   
 
     ],
   imports: [
@@ -78,8 +57,8 @@ const routes: Routes = [
     SharedModule,
     CoreModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy' }),
     AdminModule,
+    AppRoutingModule,
 
     ],
 

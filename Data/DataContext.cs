@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using BabALSaray.AppEntities;
 using BabALSaray.AppEntities.OrderAggregate;
+using BabALSaray.AppEntities.Project;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace BabALSaray.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderMethod> OrderMethods { get; set; }
+        public DbSet<Project> Projects { get; set; }
         
 
          protected override void OnModelCreating(ModelBuilder modelbuilder)
