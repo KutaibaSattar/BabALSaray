@@ -4,6 +4,10 @@ import { DashboardComponent } from 'src/app/admin/dashboard/dashboard.component'
 import { MyProfileComponent } from 'src/app/admin/my-profile/my-profile.component';
 import { DashboardService } from 'src/app/_services/dashboard.service';
 import { ProjectsComponent } from './projects/projects.component';
+import { FormsModule } from '@angular/forms';
+
+
+
 
 
 
@@ -11,10 +15,13 @@ import { ProjectsComponent } from './projects/projects.component';
   declarations: [
     DashboardComponent,
     MyProfileComponent,
-    ProjectsComponent,
-  ],
-  imports: [ CommonModule ],
-  exports: [DashboardComponent,MyProfileComponent,ProjectsComponent ],
+    ProjectsComponent
+    ],
+  imports: [
+    CommonModule ,
+    FormsModule],
+
+  exports: [DashboardComponent, MyProfileComponent, ProjectsComponent ],
   providers: [DashboardService],
 })
 export class AdminModule { }

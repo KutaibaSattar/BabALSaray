@@ -45,8 +45,6 @@ import { AppRoutingModule } from './app-routing.module';
     NotFoundComponent,
     ServerErrorComponent,
     DbaccountCardComponent,
-   
-
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -59,7 +57,6 @@ import { AppRoutingModule } from './app-routing.module';
     NgxSpinnerModule,
     AdminModule,
     AppRoutingModule,
-
     ],
 
    providers: [

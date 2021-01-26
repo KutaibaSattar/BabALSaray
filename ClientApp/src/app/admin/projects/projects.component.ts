@@ -9,19 +9,27 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  projects : Project[]
-  constructor(private projectService : ProjectsService) { }
+  projects: Project[];
+  newProject: Project = new Project();
+  constructor(private projectService: ProjectsService) { }
 
 
   ngOnInit(): void {
-    
+
    this.projectService.getAllProjects().subscribe(
-    (response : Project[] ) => {
+    (response: Project[] ) => {
       this.projects = response;
-    } 
+    }
    );
   }
+  onSaveClick() {
 
+    this.projectService.InsertProject(this.newProject).subscribe(
+      (response) => {this.projects.push(response); },
+      (error) => { console.log(error); }
+      );
+
+  }
 
 
 }

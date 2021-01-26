@@ -40,6 +40,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy' }),
     CommonModule
   ],
-  exports :[ RouterModule]
+  exports : [ RouterModule]
 })
 export class AppRoutingModule { }
