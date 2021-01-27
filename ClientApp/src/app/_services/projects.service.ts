@@ -26,5 +26,11 @@ export class ProjectsService {
    
    }
 
+   UpdateProject(project: Project): Observable<Project> {
+
+    return this.httpClient.put<Project>(this.baseUrl + 'projects', project);
+    
+    } 
+
 
 }

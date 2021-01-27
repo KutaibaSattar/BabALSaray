@@ -9,15 +9,18 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
+import { DbaccountDetailComponent } from './dbaccounts/dbaccount-detail/dbaccount-detail.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home'}},
   { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'DashBoard'}},
   { path: 'projects', component: ProjectsComponent, data: { breadcrumb: 'Projects'}},
   { path: '', runGuardsAndResolvers: 'always', canActivate: [AuthGuard],
+  
     children: [
       { path: 'dbaccounts', component: DbaccountsListComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Accounts' } },
-      { path: 'dbaccount/:id', component: DbaccountsListComponent },
+      { path: 'dbaccount/:id', component: DbaccountDetailComponent },
       { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
         data: { breadcrumb: 'Checkout'}},
         ]},
@@ -31,7 +34,6 @@ const routes: Routes = [
     { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
     { path: 'server-error', component: ServerErrorComponent, },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
-
     ];
 
 @NgModule({

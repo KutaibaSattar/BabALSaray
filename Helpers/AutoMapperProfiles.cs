@@ -4,6 +4,7 @@ using BabALSaray.DTOs;
 using DTOs;
 using BabALSaray.AppEntities.OrderAggregate;
 using Helpers;
+using BabALSaray.AppEntities.Project;
 
 namespace BabALSaray.Helpers
 {
@@ -20,6 +21,7 @@ namespace BabALSaray.Helpers
           CreateMap<AddressDto,OrderAddress>().ReverseMap();
           CreateMap<CustomerBasketDto, CustomerBasket>();
           CreateMap<BasketItemDto, BasketItem>();
+          
          
           CreateMap<Product,ProductToReturnDto>()
             .ForMember(d => d.ProductBrand, opt => opt.MapFrom(s => s.ProductBrand.Name))
@@ -35,6 +37,8 @@ namespace BabALSaray.Helpers
             .ForMember( d => d.ProductName, o => o.MapFrom( s => s.ItemOrdered.ProductName))
             .ForMember( d => d.PictureUrl, o => o.MapFrom( s => s.ItemOrdered.pictureUrl))
             .ForMember( d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
+
+            CreateMap<Project,ProjectDto>().ReverseMap();
 
           
         }
