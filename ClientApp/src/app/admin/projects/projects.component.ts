@@ -11,13 +11,13 @@ export class ProjectsComponent implements OnInit {
 
   projects: Project[];
   newProject: Project = new Project();
-  editProject : Project = new Project();
+  editProject: Project = new Project();
   constructor(private projectService: ProjectsService) { }
 
 
   ngOnInit(): void {
 
-    
+
    this.projectService.getAllProjects().subscribe(
     (response: Project[] ) => {
       this.projects = response;
@@ -29,20 +29,19 @@ export class ProjectsComponent implements OnInit {
     this.projectService.InsertProject(this.newProject).subscribe(
       (response) => {this.projects.push(response);
       this.newProject.name = null;
-      this.newProject.startingDate = null
-      this.newProject.teamSize = null },
+      this.newProject.startingDate = null;
+      this.newProject.teamSize = null; },
       (error) => { console.log(error); }
       );
 
   }
 
-  onEditClick(event, index:number)
-  {
-    this.editProject = this.projects.find(p => p.id = index)
-    
+  onEditClick(event, index: number) {
+    this.editProject = this.projects.find(p => p.id = index);
+
   }
 
-  onUpdateClick(){
+  onUpdateClick() {
 
 
   }

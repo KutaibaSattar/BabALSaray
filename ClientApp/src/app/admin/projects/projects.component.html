@@ -8,6 +8,7 @@
         <th>Project Name</th>
         <th>Date of Start</th>
         <th>Team Size</th>
+        <th>Action</th>
       </thead>
       <tbody>
         <tr *ngFor="let project of this.projects">
@@ -15,6 +16,7 @@
           <td>{{project.name}}</td>
           <td>{{project.startingDate}}</td>
           <td>{{project.teamSize}}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
