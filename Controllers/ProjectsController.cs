@@ -28,7 +28,8 @@ namespace BabALSaray.Controllers
 
             var returnProjects = _mapper.Map<IEnumerable<ProjectDto>>(projects);
             
-            return Ok(returnProjects);
+        
+            return Ok(projects);
 
 
         }

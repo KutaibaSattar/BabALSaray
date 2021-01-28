@@ -20,30 +20,40 @@ export class ProjectsComponent implements OnInit {
 
    this.projectService.getAllProjects().subscribe(
     (response: Project[] ) => {
+      console.log(response);
       this.projects = response;
     }
    );
   }
   onSaveClick() {
-
+  
     this.projectService.InsertProject(this.newProject).subscribe(
+      
       (response) => {this.projects.push(response);
-      this.newProject.name = null;
-      this.newProject.startingDate = null;
-      this.newProject.teamSize = null; },
+     
+      this.resetingProject() },
       (error) => { console.log(error); }
       );
 
   }
 
   onEditClick(event, index: number) {
-    this.editProject = this.projects.find(p => p.id = index);
+     //this.resetingProject(); 
+    this.newProject = this.projects.find(p => p.id == (index));
+    this.newProject.startingDate = new Date(this.newProject.startingDate)
+   
 
   }
 
   onUpdateClick() {
 
 
+  }
+
+  resetingProject(){
+    this.newProject.name = null;
+    this.newProject.startingDate = null;
+    this.newProject.teamSize = null;
   }
 
 }

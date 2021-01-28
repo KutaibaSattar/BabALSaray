@@ -5,6 +5,7 @@ using DTOs;
 using BabALSaray.AppEntities.OrderAggregate;
 using Helpers;
 using BabALSaray.AppEntities.Project;
+using System;
 
 namespace BabALSaray.Helpers
 {
@@ -38,7 +39,8 @@ namespace BabALSaray.Helpers
             .ForMember( d => d.PictureUrl, o => o.MapFrom( s => s.ItemOrdered.pictureUrl))
             .ForMember( d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
 
-            CreateMap<Project,ProjectDto>().ReverseMap();
+            CreateMap<Project,ProjectDto>().ReverseMap().ForMember(x => x.StartingDate,
+  opt => opt.MapFrom(src => ((DateTime)src.StartingDate).ToBinary()));
 
           
         }

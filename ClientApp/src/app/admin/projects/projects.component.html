@@ -14,9 +14,9 @@
         <tr *ngFor="let project of this.projects">
           <td>{{project.id}}</td>
           <td>{{project.name}}</td>
-          <td>{{project.startingDate}}</td>
+          <td>{{project.startingDate |  date:'dd/MM/yyyy'}}</td>
           <td>{{project.teamSize}}</td>
-          <td></td>
+          <td> <button class="btn btn-info" (click)="onEditClick($event,project.id)" data-toggle="modal" data-target="#newModal"> Edit</button> </td>
         </tr>
       </tbody>
     </table>
@@ -52,7 +52,8 @@
             <label for="txtNewDateOfStart" class="col-sm-4 col-form-label">Date of Start</label>
             <div class="col-sm-8">
               <input type="date" id="txtNewDateOfStart" style="width:200px" class="form-control"
-                placeholder="Date of Start" name="DateOfStart" [(ngModel)]="newProject.startingDate">
+                placeholder="Date of Start" placeholder="dd-mm-yyyy" value=""
+                min="1997-01-01" max="2030-12-31" name="DateOfStart" [(ngModel)]="newProject.startingDate" >
             </div>
           </div>
 
