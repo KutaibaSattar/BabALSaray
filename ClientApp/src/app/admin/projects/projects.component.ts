@@ -16,8 +16,8 @@ export class ProjectsComponent implements OnInit {
   editProject: Project = new Project();
   today: string;
   constructor(private projectService: ProjectsService) { }
- 
- 
+
+
   @ViewChild('save') public save: ElementRef;
   @ViewChild('model') public model: ElementRef;
   @ViewChild('project') public project: ElementRef;
@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit {
   @ViewChild('team') public team: ElementRef;
 
   ngOnInit(): void {
-   
+
    this.projectService.getAllProjects().subscribe(
     (response: Project[] ) => {
       console.log(response);
@@ -34,10 +34,10 @@ export class ProjectsComponent implements OnInit {
    );
   }
   onSaveClick() {
-    if (this.test.nativeElement.innerHTML = 'Delete') {
+    if (this.save.nativeElement.innerHTML = 'Delete') {
 
       this.projectService.DeleteProject(this.newProject.id);
-      
+
       return;
 
     }
@@ -49,7 +49,7 @@ export class ProjectsComponent implements OnInit {
       return;
     }
 
-    
+
 
     this.projectService.InsertProject(this.newProject).subscribe(
 
@@ -66,10 +66,10 @@ export class ProjectsComponent implements OnInit {
    this.save.nativeElement.innerHTML = 'Delete';
    this.model.nativeElement.innerHTML = 'Delete';
    this.project.nativeElement.disabled = true;
-  
+
    this.save.nativeElement.className = 'btn btn-danger';
-   console.log(this.model , this.date )
-    
+   console.log(this.model , this.date );
+
 
 
    /*  modal.find('.modal-title').text('New message to ' + recipient)
