@@ -39,8 +39,7 @@ namespace BabALSaray.Helpers
             .ForMember( d => d.PictureUrl, o => o.MapFrom( s => s.ItemOrdered.pictureUrl))
             .ForMember( d => d.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
 
-            CreateMap<Project,ProjectDto>().ReverseMap().ForMember(x => x.StartingDate,
-  opt => opt.MapFrom(src => ((DateTime)src.StartingDate).ToBinary()));
+            CreateMap<Project,ProjectDto>().ReverseMap();
 
           
         }

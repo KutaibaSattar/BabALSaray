@@ -16,21 +16,28 @@ export class ProjectsService {
 
   getAllProjects(): Observable<Project[]> {
 
-   return this.httpClient.get<Project[]>(this.baseUrl + 'projects');
+   return this.httpClient.get<Project[]>(this.baseUrl + 'projects' , {responseType: 'json'});
 
   }
 
   InsertProject(project: Project): Observable<Project> {
 
-   return this.httpClient.post<Project>(this.baseUrl + 'projects', project);
-   
+   return this.httpClient.post<Project>(this.baseUrl + 'projects', project, {responseType: 'json'});
+
    }
 
    UpdateProject(project: Project): Observable<Project> {
 
-    return this.httpClient.put<Project>(this.baseUrl + 'projects', project);
-    
-    } 
+    return this.httpClient.put<Project>(this.baseUrl + 'projects', project, {responseType: 'json'});
+
+    }
+
+    DeleteProject(Id: number): Observable<string> {
+
+      return this.httpClient.delete<string>(this.baseUrl + 'projects?Id=' + Id);
+
+      }
+
 
 
 }

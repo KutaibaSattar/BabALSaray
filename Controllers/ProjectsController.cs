@@ -34,42 +34,62 @@ namespace BabALSaray.Controllers
 
         }
         [HttpPost]
-        public async Task<ActionResult<ProjectDto>> AddProject(ProjectDto project)
+        public async Task<ActionResult<ProjectDto>> AddProject(ProjectDto ProjectDto)
         {
 
-           var addProject = _mapper.Map<Project>(project);
+           var projectToInsert = _mapper.Map<Project>(ProjectDto);
             
-            _context.Projects.Add(addProject);
+            _context.Projects.Add(projectToInsert);
            
             await _context.SaveChangesAsync();
 
            
-            return Ok(addProject);
+            return Ok(ProjectDto);
 
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProjectDto>> UpdateProject(ProjectDto project)
+        public async Task<ActionResult<ProjectDto>> UpdateProject(ProjectDto ProjectDto)
         {
 
 
-            var updatedProject = _context.Projects.Find(project.Id);
+            var projectToUpdate = await _context.Projects.FindAsync(ProjectDto.Id);
 
 
 
-            if (updatedProject == null) return NotFound();
+            if (projectToUpdate == null) return NotFound();
 
-            _mapper.Map<ProjectDto, Project>(project, updatedProject);
+            _mapper.Map<ProjectDto, Project>(ProjectDto, projectToUpdate);
 
 
             await _context.SaveChangesAsync();
 
-            var result = _mapper.Map<Project, ProjectDto>(updatedProject);
+            var result = _mapper.Map<Project, ProjectDto>(projectToUpdate);
 
             
             return Ok(result);
 
+
+        }
+        [HttpDelete]
+
+        public async Task<ActionResult> DeleteProject(int Id)
+        {
+            var project = await _context.Projects.FindAsync(Id);
+
+            if (project == null)
+            {
+                return NotFound();
+            } 
+            
+             _context.Projects.Remove(project) ;
+
+            
+          
+           if ((await _context.SaveChangesAsync())>0) return Ok("Project has been deleted");
+          
+           return BadRequest("Faild to delete project !");
 
         }
 

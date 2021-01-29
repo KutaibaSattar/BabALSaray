@@ -11,7 +11,6 @@ namespace BabALSaray.DTOs
         public DateTime StartingDate { get; set; }
         public int TeamSize { get; set; }
 
-        public string path { get;set ;}
-        
+             
     }
 }
