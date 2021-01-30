@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BabALSaray.AppEntities.Project;
@@ -33,6 +34,23 @@ namespace BabALSaray.Controllers
 
 
         }
+       
+       [HttpGet("search/{searchby}/{searchtext}")]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> SearchProjects(string searchby, string searchtext)
+        {
+            
+           
+            var projects = await _context.Projects.Where(p => p.Id.ToString().Contains(searchtext)).ToListAsync();
+
+            var returnProjects = _mapper.Map<IEnumerable<ProjectDto>>(projects);
+            
+        
+            return Ok(projects);
+
+
+        }
+       
+       
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> AddProject(ProjectDto ProjectDto)
         {
@@ -43,8 +61,10 @@ namespace BabALSaray.Controllers
            
             await _context.SaveChangesAsync();
 
+             var result = _mapper.Map<Project, ProjectDto>(projectToInsert);
+
            
-            return Ok(ProjectDto);
+            return Ok(result);
 
 
         }
@@ -83,13 +103,12 @@ namespace BabALSaray.Controllers
                 return NotFound();
             } 
             
-             _context.Projects.Remove(project) ;
-
-            
+           _context.Projects.Remove(project) ;
+           
+           await _context.SaveChangesAsync();
+           return Ok(Id);
           
-           if ((await _context.SaveChangesAsync())>0) return Ok("Project has been deleted");
-          
-           return BadRequest("Faild to delete project !");
+           //return BadRequest("Faild to delete project !");
 
         }
 

@@ -15,6 +15,7 @@ export class ProjectsComponent implements OnInit {
   newProject: Project = new Project();
   editProject: Project = new Project();
   today: string;
+  action : string;
   constructor(private projectService: ProjectsService) { }
 
 
@@ -34,52 +35,89 @@ export class ProjectsComponent implements OnInit {
    );
   }
   onSaveClick() {
-    if (this.save.nativeElement.innerHTML = 'Delete') {
+   
+   switch (this.action) {
+     case 'delete':
+      this.projectService.DeleteProject(this.newProject.id).subscribe(
+        (response) => {
+           var index = this.projects.findIndex(p => p.id === this.newProject.id);
+            this.projects.splice(index,1);
+            this.resetingProject();
+        },
+        (response) =>{
+          console.log(response);
 
-      this.projectService.DeleteProject(this.newProject.id);
-
-      return;
-
-    }
-
-    if (this.newProject.id > 0) {
-      this.projectService.UpdateProject(this.newProject).subscribe(
-        (response) => {console.log(response); }
-      );
-      return;
-    }
-
+        }
 
 
-    this.projectService.InsertProject(this.newProject).subscribe(
-
-      (response) => {this.projects.push(response);
-
-      this.resetingProject(); },
-      (error) => { console.log(error); }
       );
 
-  }
+       break;
+   
+     case 'update':
+      if (this.newProject.id > 0) {
+        this.projectService.UpdateProject(this.newProject).subscribe(
+          (response) => {console.log(response); }
+        );
+        return;
+      }
+       break;
+      case 'insert':
+        this.projectService.InsertProject(this.newProject).subscribe(
 
-  onEditClick(event, index: number) {
-    const target = event.target.id;
-   this.save.nativeElement.innerHTML = 'Delete';
-   this.model.nativeElement.innerHTML = 'Delete';
-   this.project.nativeElement.disabled = true;
+          (response) => {this.projects.push(response);
+    
+          this.resetingProject(); },
+          (error) => { console.log(error); }
+          );
 
-   this.save.nativeElement.className = 'btn btn-danger';
-   console.log(this.model , this.date );
+   }
+   
+ }
 
+  onEditClick(event, index: number, currentaction : string) {
+   
+    this.action = currentaction;
 
+    switch (currentaction) {
+      case 'insert':
+        this.save.nativeElement.innerHTML = 'Save';
+        this.model.nativeElement.innerHTML = 'Add a project';
+        this.project.nativeElement.disabled = false;
+        this.date.nativeElement.disabled = false;
+        this.team.nativeElement.disabled = false;
+        this.save.nativeElement.className = 'btn btn-info';
+        
+      break;
 
-   /*  modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient) */
-   this.newProject = this.projects.find(p => p.id === (index));
+      case 'delete':
+        this.save.nativeElement.innerHTML = 'Delete';
+        this.model.nativeElement.innerHTML = 'Are you sure to delete This project';
+        this.project.nativeElement.disabled = true;
+        this.date.nativeElement.disabled = true;
+        this.team.nativeElement.disabled = true;
+        this.save.nativeElement.className = 'btn btn-danger';
+        this.newProject = this.projects.find(p => p.id === (index));
+      break;
+    
+      case 'update':
+        this.save.nativeElement.innerHTML = 'Update';
+        this.model.nativeElement.innerHTML = 'Update the project';
+        this.project.nativeElement.disabled = false;
+        this.date.nativeElement.disabled = false;
+        this.team.nativeElement.disabled = false;
+        this.save.nativeElement.className = 'btn btn-info';
+        this.newProject = this.projects.find(p => p.id === (index));
+      break;
+    }
+ 
+  
 
 
   }
 
    resetingProject() {
+    this.newProject.id = null;
     this.newProject.name = null;
     this.newProject.startingDate = null;
     this.newProject.teamSize = null;

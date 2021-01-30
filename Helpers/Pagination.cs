@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace BabALSaray.Helpers
 {
     public class Pagination<T> where T : class

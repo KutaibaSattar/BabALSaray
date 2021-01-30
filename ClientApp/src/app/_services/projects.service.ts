@@ -32,9 +32,9 @@ export class ProjectsService {
 
     }
 
-    DeleteProject(Id: number): Observable<string> {
+    DeleteProject(Id: number) : Observable<number> {
 
-      return this.httpClient.delete<string>(this.baseUrl + 'projects?Id=' + Id);
+      return this.httpClient.delete<number>(this.baseUrl + 'projects?Id=' + Id );
 
       }
 
