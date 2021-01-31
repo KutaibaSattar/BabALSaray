@@ -3,6 +3,7 @@ using BabALSaray.Data;
 using BabALSaray.Errors;
 using BabALSaray.Interfaces;
 using BabALSaray.Services;
+using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,8 @@ namespace BabALSaray.Extensions
              services.AddScoped<IProductRepository, ProductRepository>();
 
              services.AddScoped<IBasketRepository,BasketRepository>();
+
+             services.AddScoped<IProjectRepository, ProjectRepository>();
             
              services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 

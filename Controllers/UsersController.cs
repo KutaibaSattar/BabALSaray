@@ -109,6 +109,24 @@ namespace BabALSaray.Controllers
 
         }
 
+        [HttpPut]
+
+        public async Task<ActionResult> UpdateUser(MemberDto memberDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           
+            var user =  await _userRepository.GetUserByNameAsync(username);
+           
+            _mapper.Map(memberDto,user);
+           
+            _userRepository.Update(user);
+
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+            
+            return BadRequest("Faild to update user");
+
+        }
+
 
     }
 }

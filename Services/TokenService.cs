@@ -35,6 +35,7 @@ namespace BabALSaray.Services
             };
 
             var roles = await _userManager.GetRolesAsync(user);
+           
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role,role)));
             
 

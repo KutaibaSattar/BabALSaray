@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BabALSaray.AppEntities.Project;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
@@ -11,45 +15,61 @@ namespace Data
     public class ProjectRepository : IProjectRepository
     {
         private readonly DataContext _context;
-        public ProjectRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public ProjectRepository(DataContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
 
         }
 
-        public Task<ProjectDto> GetProjectByDateStartAsync(string datestart)
+        public async Task<IEnumerable<ProjectDto>> GetProjectByDateStartAsync(DateTime datestart)
         {
-            throw new System.NotImplementedException();
+            return await _context.Projects.Where(pd => pd.StartingDate == datestart)
+                .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
-        public Task<ProjectDto> GetProjectByIdAsync(int id)
+        public async Task<Project> GetProjectByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+           return await _context.Projects.FindAsync(id);
         }
 
-        public Task<ProjectDto> GetProjectByNameAsync(string projectname)
+        public async Task<ProjectDto> GetProjectByNameAsync(string projectname)
         {
-            throw new System.NotImplementedException();
+             return await _context.Projects.Where(pn => pn.Name.Contains(projectname))
+                 .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+                
         }
 
-        public Task<ProjectDto> GetProjectByTeamSizeAsync(string teamsize)
+        public async Task<IEnumerable<ProjectDto>> GetProjectByTeamSizeAsync(int teamsize)
         {
-            throw new System.NotImplementedException();
+             return await _context.Projects.Where(pt => pt.TeamSize == teamsize)
+                 .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public async Task<IEnumerable<ProjectDto>> GetProjectsAsync()
         {
-           return await _context.Projects.ToListAsync();
+            return await _context.Projects.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _context.SaveChangesAsync() >0 ;
         }
 
-        public void Update(Project user)
+        public void Update(Project project) // marked entity it has been modified
         {
-            throw new System.NotImplementedException();
+            _context.Entry(project).State = EntityState.Modified;
+        }
+
+         public void AddMessage(Message message)
+        {
+            _context.Messages.Add(message);
+        }
+
+        public void DeleteMessage(Message message)
+        {
+            _context.Messages.Remove(message);
         }
     }
 }

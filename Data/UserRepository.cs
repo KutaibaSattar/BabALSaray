@@ -23,7 +23,16 @@ namespace BabALSaray.Data
 
         public async Task<MemberDto> GetMemberAsync(int id)
         {
-             return await _context.Users.Where(a => a.Id == id).ProjectTo<MemberDto> (_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+             return await _context.Users.Where(a => a.Id == id)
+             .ProjectTo<MemberDto> (_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+
+            /* OR return await _context.Users.Where(a => a.Id == id).Select( user => new MemberDto{
+                 Id = user.Id,
+                 UserName = user.UserName,
+                
+
+             }).SingleOrDefaultAsync(); */
+        
         }
 
         public async Task<IEnumerable<MemberDto>> GetMembersAsync()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BabALSaray.AppEntities.Project;
@@ -7,17 +8,15 @@ namespace BabALSaray.Interfaces
 {
     public interface IProjectRepository
     {
-       void Update(Project user);
-
+       void Update(Project project);
         Task<bool> SaveAllAsync();
-
         Task<IEnumerable<ProjectDto>> GetProjectsAsync();
-
-        Task<ProjectDto> GetProjectByIdAsync (int id);
-                
+        Task<Project> GetProjectByIdAsync (int id);
         Task <ProjectDto> GetProjectByNameAsync (string projectname);
-        Task <ProjectDto> GetProjectByDateStartAsync (string datestart);
-        Task <ProjectDto> GetProjectByTeamSizeAsync (string teamsize);
+        Task<IEnumerable<ProjectDto>> GetProjectByDateStartAsync (DateTime datestart);
+        Task<IEnumerable<ProjectDto>> GetProjectByTeamSizeAsync (int teamsize);
+        void AddProject(ProjectDto project);
+        void DeleteMessage(ProjectDto message);
 
 
         
