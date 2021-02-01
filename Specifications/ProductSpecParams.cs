@@ -1,6 +1,6 @@
 namespace BabALSaray.Specifications
 {
-    public class ProductSpecParams
+    public class ProductParams
     {
            private const int MaxPageSize = 50;
 
@@ -8,7 +8,7 @@ namespace BabALSaray.Specifications
 
            private int _pageSize = 6;
 
-           public int PageSize
+           public int PageSize // not allowed more than 50
            {
             get => _pageSize;
 

@@ -15,8 +15,8 @@ namespace BabALSaray.Interfaces
         Task <ProjectDto> GetProjectByNameAsync (string projectname);
         Task<IEnumerable<ProjectDto>> GetProjectByDateStartAsync (DateTime datestart);
         Task<IEnumerable<ProjectDto>> GetProjectByTeamSizeAsync (int teamsize);
-        void AddProject(ProjectDto project);
-        void DeleteMessage(ProjectDto message);
+        void AddProject(Project project);
+        void DeleteProject(Project project);
 
 
         

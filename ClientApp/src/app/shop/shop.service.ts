@@ -44,7 +44,7 @@ export class ShopService {
 
      params = params.append('pageIndex', shopParams.pageNumber.toString());
 
-     params = params.append('pageIndex', shopParams.pageSize.toString());
+     params = params.append('pageSize','6' );
 
  /* Now this syntax might look a little bit strange if it's the first time you've encountered it this pipe
 is a wrapper around any are extra x operators that we want to use.

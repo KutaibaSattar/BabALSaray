@@ -28,7 +28,7 @@ namespace BabALSaray.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
+        public async Task<ActionResult<Order>> CreateOrder(Dtos.OrderDto orderDto)
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
@@ -50,13 +50,13 @@ namespace BabALSaray.Controllers
 
            var orders = await _orderService.GetOrdersForUserAsync(email);
 
-           return Ok(_mapper.Map<IReadOnlyList<Order>,IReadOnlyList<OrderToReturnDto>>(orders));
+           return base.Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<DTOs.OrderToReturnDto>>(orders));
 
         }
 
          [HttpGet("{id}")]
 
-         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
+         public async Task<ActionResult<DTOs.OrderToReturnDto>> GetOrderByIdForUser(int id)
          {
              var email = HttpContext.User.RetrieveEmailFromPrincipal(); // Checking current user
 
@@ -64,7 +64,7 @@ namespace BabALSaray.Controllers
 
              if (order == null) return NotFound (new ApiResponse(404));
 
-                return _mapper.Map<Order, OrderToReturnDto>(order);
+                return _mapper.Map<Order, DTOs.OrderToReturnDto>(order);
 
 
          }

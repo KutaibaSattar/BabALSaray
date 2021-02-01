@@ -23,6 +23,16 @@ namespace Data
 
         }
 
+        public void AddProject(Project project)
+        {
+            _context.Projects.Add(project);
+        }
+
+        public void DeleteProject(Project project)
+        {
+            _context.Projects.Remove(project);
+        }
+
         public async Task<IEnumerable<ProjectDto>> GetProjectByDateStartAsync(DateTime datestart)
         {
             return await _context.Projects.Where(pd => pd.StartingDate == datestart)
@@ -62,14 +72,6 @@ namespace Data
             _context.Entry(project).State = EntityState.Modified;
         }
 
-         public void AddMessage(Message message)
-        {
-            _context.Messages.Add(message);
-        }
-
-        public void DeleteMessage(Message message)
-        {
-            _context.Messages.Remove(message);
-        }
+       
     }
 }

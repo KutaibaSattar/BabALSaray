@@ -7,6 +7,8 @@ using AutoMapper.QueryableExtensions;
 using BabALSaray.DTOs;
 using BabALSaray.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using BabALSaray.Specifications;
+using BabALSaray.Helpers;
 
 namespace BabALSaray.Data
 {
@@ -47,13 +49,14 @@ namespace BabALSaray.Data
              return await _context.Products.ProjectTo<ProductDto> (_mapper.ConfigurationProvider).ToListAsync(); 
         }
  */
-         public async Task<IReadOnlyList<Product>> GetProductsAsync()
+         public async Task<PagedList<ProductDto>> GetProductsAsync(ProductParams productParams)
         {
            
-             return await _context.Products
-             .Include(p => p.ProductType)
-             .Include(p => p.ProductBrand)
-             .ToListAsync();
+             var query = _context.Products
+                .Include(p => p.ProductType).Include(p => p.ProductBrand)
+                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking();
+
+                return await PagedList<ProductDto>.CreateAsync(query,productParams.pageIndex,productParams.PageSize);
         }
 
         public async Task<IEnumerable<ProductType>> GetProductTypesAsync()

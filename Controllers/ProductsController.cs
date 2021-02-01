@@ -6,6 +6,7 @@ using BabALSaray.AppEntities;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
 using BabALSaray.Errors;
+using BabALSaray.Extensions;
 using BabALSaray.Helpers;
 using BabALSaray.Interfaces;
 using BabALSaray.Specifications;
@@ -42,15 +43,18 @@ namespace BabALSaray.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-       /*  public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
+      public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductParams productParams )
         {
-            var products = await _productRepository.GetProductsAsync();
+          
+           
+           var products = await _productRepository.GetProductsAsync(productParams);
 
-            var productsToReturn = _mapper.Map<IEnumerable<ProductDto>>(products);
- 
-         
-        } */
-        public async Task<ActionResult<Pagination<IEnumerable<ProductToReturnDto>>>> GetProducts( [FromQuery] ProductSpecParams productParams )
+           Response.AddPaginationHeader(products.CurrentPage, products.PageSize,products.TotalCount,products.TotalPages);        
+                  
+            return Ok(products);
+
+        }
+        /* public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductParams productParams )
         {
           
             var spec = new ProductsWithTypeAndBrandsSpecification(productParams);
@@ -61,17 +65,19 @@ namespace BabALSaray.Controllers
           
            var product = await _productRepo.ListAsync(spec);
 
-           var data = _mapper.Map<IEnumerable<Product>,IEnumerable<ProductToReturnDto>>(product);
-            
-            return Ok(new Pagination<ProductToReturnDto>(productParams.pageIndex,productParams.PageSize,totalItems,data));
+           
+           var data = _mapper.Map<IEnumerable<Product>,IEnumerable<ProductDto>>(product);
+          
+        
+            return Ok(new PagedList<ProductDto>(product,,totalItems,data));
 
-        }
+        } */
 
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
            
             var spec = new ProductsWithTypeAndBrandsSpecification(id);
@@ -80,7 +86,7 @@ namespace BabALSaray.Controllers
 
             if (product==null) return NotFound(new ApiResponse(404));
 
-            return Ok(_mapper.Map<Product,ProductToReturnDto>(product));
+            return Ok(_mapper.Map<Product,ProductDto>(product));
 
 
         }

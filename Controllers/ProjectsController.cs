@@ -68,38 +68,37 @@ namespace BabALSaray.Controllers
         {
 
            
-            var projectToInsert = _mapper.Map<Project>(ProjectDto);
+            var project = _mapper.Map<Project>(ProjectDto);
 
-            _projectRepository.Update()
-            _context.Projects.Add(projectToInsert);
+            _projectRepository.AddProject(project);
+           
+         
 
-            await _context.SaveChangesAsync();
+           if  (await _projectRepository.SaveAllAsync()) {
+              var result =  _mapper.Map<Project, ProjectDto>(project);
+              return Ok(result);
 
-            var result = _mapper.Map<Project, ProjectDto>(projectToInsert);
+           }
 
-
-            return Ok(result);
-
-
+           return BadRequest("Problem addding project");
         }
 
         [HttpPut]
         public async Task<ActionResult<ProjectDto>> UpdateProject(ProjectDto ProjectDto)
         {
 
-
            
-            var projectToUpdate = await _projectRepository.GetProjectByIdAsync(ProjectDto.Id);
+            var project = await _projectRepository.GetProjectByIdAsync(ProjectDto.Id);
 
             
-            if (projectToUpdate == null) return NotFound();
+            if (project == null) return NotFound();
 
-            _mapper.Map<ProjectDto, Project>(ProjectDto, projectToUpdate);
+            _mapper.Map(ProjectDto, project);
 
 
             await _projectRepository.SaveAllAsync();
 
-            var result = _mapper.Map<Project, ProjectDto>(projectToUpdate);
+            var result = _mapper.Map<Project, ProjectDto>(project);
 
 
             return Ok(result);
@@ -114,14 +113,17 @@ namespace BabALSaray.Controllers
 
             if (project == null) return NotFound();
            
+            _projectRepository.DeleteProject(project);
 
-            _context.Projects.Remove(project);
+           
+             if  (await _projectRepository.SaveAllAsync()) {
+             
+              return Ok(Id);
 
-            await _context.SaveChangesAsync();
+           }
 
-            return Ok(Id);
-
-            //return BadRequest("Faild to delete project !");
+           return BadRequest("Faild to delete project !");
+        
 
         }
 

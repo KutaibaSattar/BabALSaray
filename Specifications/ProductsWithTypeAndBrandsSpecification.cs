@@ -6,7 +6,7 @@ namespace BabALSaray.Specifications
 {
     public class ProductsWithTypeAndBrandsSpecification : BaseSpecifications<Product>
     {
-        public ProductsWithTypeAndBrandsSpecification(ProductSpecParams productParams )
+        public ProductsWithTypeAndBrandsSpecification(ProductParams productParams )
         : base( x =>
            (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
           (!productParams.BrandId.HasValue || x.ProdcuctBrandId == productParams.BrandId) &&
