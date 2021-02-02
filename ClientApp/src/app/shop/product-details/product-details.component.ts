@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IProduct } from 'src/app/_models/product';
 import { BreadcrumbService } from 'xng-breadcrumb';
-import { ShopService } from '../shop.service';
+import { ShopService } from '../../_services/shop.service';
 
 @Component({
   selector: 'app-product-details',

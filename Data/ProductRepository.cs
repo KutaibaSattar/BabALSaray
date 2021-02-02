@@ -52,10 +52,18 @@ namespace BabALSaray.Data
          public async Task<PagedList<ProductDto>> GetProductsAsync(ProductParams productParams)
         {
            
+             
+             
              var query = _context.Products
                 .Include(p => p.ProductType).Include(p => p.ProductBrand)
-                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking();
+                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider).AsNoTracking().AsQueryable();
 
+                //query = query.Where(p => p.ProductBrand == productParams. )
+                
+               
+               
+               // Then we return page list count pageindex and pagesize
+               
                 return await PagedList<ProductDto>.CreateAsync(query,productParams.pageIndex,productParams.PageSize);
         }
 

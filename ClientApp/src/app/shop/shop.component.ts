@@ -3,7 +3,7 @@ import { IBrand } from '../_models/brand';
 import { IProduct } from '../_models/product';
 import { IType } from '../_models/producttype';
 import { ShopParams } from '../_models/shopParams';
-import { ShopService } from './shop.service';
+import { ShopService } from '../_services/shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -33,11 +33,17 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe(res => {
-      this.products = res.data;
+      // if need only response then no need to use pipe
+      this.shopService.getProducts(this.shopParams,this.shopParams.pageNumber,6).subscribe(res => {
+    /*   this.products = res.data;
       this.shopParams.pageNumber = res.pageIndex;
       this.shopParams.pageSize = res.pageSize;
-      this.totalCount = res.count;
+      this.totalCount = res.count; */
+      this.products = res.result;
+      this.shopParams.pageNumber = res.pagination.currentPage;
+      this.shopParams.pageSize = res.pagination.itemsPerPage;
+      this.totalCount = res.pagination.totalItems;
+
       }, error => {console.log(error); });
   }
   /*

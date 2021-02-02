@@ -45,16 +45,27 @@ namespace BabALSaray.Controllers
         [AllowAnonymous]
       public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductParams productParams )
         {
-          
            
+           var spec = new ProductsWithTypeAndBrandsSpecification(productParams);
+
+              // Just taking total Items
+           /* var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+          
+           var totalItems = await _productRepo.CountAsync(countSpec); */
+                //-----------------------------------------------------------------------
+         
+           var product = await _productRepo.ListAsync(spec);
+       
+
            var products = await _productRepository.GetProductsAsync(productParams);
 
+           // only header
            Response.AddPaginationHeader(products.CurrentPage, products.PageSize,products.TotalCount,products.TotalPages);        
                   
-            return Ok(products);
+           return Ok(product);
 
         }
-        /* public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductParams productParams )
+      /*  public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProductsSpare( [FromQuery] ProductParams productParams )
         {
           
             var spec = new ProductsWithTypeAndBrandsSpecification(productParams);
@@ -69,7 +80,7 @@ namespace BabALSaray.Controllers
            var data = _mapper.Map<IEnumerable<Product>,IEnumerable<ProductDto>>(product);
           
         
-            return Ok(new PagedList<ProductDto>(product,,totalItems,data));
+          return Ok(new PagedList<ProductDto>(productParams.pageIndex,productParams.PageSize,totalItems,data);
 
         } */
 
