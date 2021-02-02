@@ -44,13 +44,13 @@ namespace BabALSaray.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersForUser()
         {
            var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
            var orders = await _orderService.GetOrdersForUserAsync(email);
 
-           return base.Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<DTOs.OrderToReturnDto>>(orders));
+           return base.Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<DTOs.OrderToReturnDto>>(orders));
 
         }
 

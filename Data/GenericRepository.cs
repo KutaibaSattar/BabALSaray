@@ -37,6 +37,8 @@ namespace BabALSaray.Data
             return await  _context.Set<T>().ToListAsync();
         }
 
+        
+
         public async Task<T> GetByIdAsync(int id)
         {
           return await  _context.Set<T>().FindAsync(id);
@@ -47,12 +49,12 @@ namespace BabALSaray.Data
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-       public async Task<IReadOnlyList<T>> ListAllAsync()
+       public async Task<IEnumerable<T>> ListAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> ListAsync(ISpecifications<T> spec)
+        public async Task<IEnumerable<T>> ListAsync(ISpecifications<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync();
         }

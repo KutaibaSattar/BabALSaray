@@ -13,9 +13,9 @@ namespace BabALSaray.Interfaces
 
         Task<T> GetEntityWithSpec(ISpecifications<T> spec);
 
-        Task<IReadOnlyList<T>> ListAsync (ISpecifications<T> spec);
+        Task<IEnumerable<T>> ListAsync (ISpecifications<T> spec);
 
-         Task<IReadOnlyList<T>> ListAllAsync ();
+         Task<IEnumerable<T>> ListAllAsync ();
 
         Task<int> CountAsync (ISpecifications<T> spec);
 
