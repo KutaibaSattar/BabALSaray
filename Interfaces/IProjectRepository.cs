@@ -6,18 +6,12 @@ using BabALSaray.DTOs;
 
 namespace BabALSaray.Interfaces
 {
-    public interface IProjectRepository
+    public interface IProjectRepository : IRepository<Project>
     {
-       void Update(Project project);
-        Task<bool> SaveAllAsync();
-        Task<IEnumerable<ProjectDto>> GetProjectsAsync();
-        Task<Project> GetProjectByIdAsync (int id);
-        Task <ProjectDto> GetProjectByNameAsync (string projectname);
-        Task<IEnumerable<ProjectDto>> GetProjectByDateStartAsync (DateTime datestart);
-        Task<IEnumerable<ProjectDto>> GetProjectByTeamSizeAsync (int teamsize);
-        void AddProject(Project project);
-        void DeleteProject(Project project);
-
+        Project GetProjectByName (string projectname);
+        Task<IEnumerable<Project>> GetProjectByDateStart (DateTime datestart);
+        Task<IEnumerable<Project>> GetProjectByTeamSize (int teamsize);
+      
 
         
     }

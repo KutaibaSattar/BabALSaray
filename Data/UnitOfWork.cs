@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using BabALSaray.AppEntities;
 using BabALSaray.Interfaces;
+using Data;
 
 namespace BabALSaray.Data
 {
@@ -13,8 +14,11 @@ namespace BabALSaray.Data
         public UnitOfWork(DataContext context)
         {
             _context = context;
+            Project =  new ProjectRepository(_context); 
         }
+        public IProjectRepository Project {get; private set;}
 
+       
         public async Task<int> Complete()
         {
            return await _context.SaveChangesAsync() ;
@@ -24,6 +28,8 @@ namespace BabALSaray.Data
         {
             _context.Dispose();
         }
+
+
 
        // creating method repository of type TEntity
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity

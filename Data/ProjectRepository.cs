@@ -12,9 +12,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
-    public class ProjectRepository : IProjectRepository
+    public class ProjectRepository : Repository<Project>, IProjectRepository
     {
+
         private readonly DataContext _context;
+        public ProjectRepository(DataContext context) : base(context)
+        {
+            _context = context;
+        }
+
+        
+        public Task<IEnumerable<Project>> GetProjectByDateStart(DateTime datestart)
+        {
+            
+            throw new NotImplementedException();
+        }
+
+        public Project GetProjectByName(string projectname)
+        {
+            
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Project>> GetProjectByTeamSize(int teamsize)
+        {
+            throw new NotImplementedException();
+        }
+
+        /* private readonly DataContext _context;
         private readonly IMapper _mapper;
         public ProjectRepository(DataContext context, IMapper mapper)
         {
@@ -71,7 +96,7 @@ namespace Data
         {
             _context.Entry(project).State = EntityState.Modified;
         }
+ */
 
-       
     }
 }

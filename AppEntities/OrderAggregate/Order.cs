@@ -11,7 +11,7 @@ namespace BabALSaray.AppEntities.OrderAggregate
             
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems,string buyerEmail, OrderAddress orderAddress,
+        public Order(IEnumerable<OrderItem> orderItems,string buyerEmail, OrderAddress orderAddress,
          OrderMethod orderMethod,  decimal subtotal)
         {
             BuyerEmail = buyerEmail;
@@ -26,7 +26,7 @@ namespace BabALSaray.AppEntities.OrderAggregate
         public DateTimeOffset OrderDate { get; set; }= DateTimeOffset.Now;
         public OrderAddress OrderAddress { get; set; }
         public OrderMethod  OrderMethod { get; set; }
-        public IReadOnlyList<OrderItem> OrderItems { get; set; }
+        public IEnumerable<OrderItem> OrderItems { get; set; }
         public decimal Subtotal { get; set; }
         
         [Column(TypeName = "nvarchar(10)")]

@@ -1,24 +1,21 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BabALSaray.AppEntities.Project;
-using BabALSaray.Data;
 using BabALSaray.DTOs;
 using BabALSaray.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BabALSaray.Controllers
 {
     public class ProjectsController : BaseApiController
     {
-        private readonly IProjectRepository _projectRepository;
+        private readonly IunitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
-        public ProjectsController(IProjectRepository projectRepository, IMapper mapper)
+        public ProjectsController(IunitOfWork unitOfWork, IMapper mapper)
         {
-            _projectRepository = projectRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
 
 
@@ -28,8 +25,8 @@ namespace BabALSaray.Controllers
         public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
         {
 
-                      
-            return Ok(await _projectRepository.GetProjectsAsync());
+
+            return Ok(await _unitOfWork.Project.GetAll());
 
 
         }
@@ -39,7 +36,7 @@ namespace BabALSaray.Controllers
         {
 
 
-            var projects = await _projectRepository.GetProjectByIdAsync(Id);
+            var projects = await _unitOfWork.Project.GetById(Id);
 
             var returnProjects = _mapper.Map<IEnumerable<ProjectDto>>(projects);
 
@@ -49,54 +46,55 @@ namespace BabALSaray.Controllers
 
         }
 
-         [HttpGet("{projectname}")]
+        /* [HttpGet("{projectname}")]
         public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectByName(string projectname)
         {
 
 
-            var projects = await _projectRepository.GetProjectByNameAsync(projectname);
+            var projects = await _projectRepository.GetProjectByName(projectname);
 
-            
+
             return Ok(projects);
 
 
-        }
+        } */
 
 
         [HttpPost]
         public async Task<ActionResult<ProjectDto>> AddProject(ProjectDto ProjectDto)
         {
 
-           
+
             var project = _mapper.Map<Project>(ProjectDto);
 
-            _projectRepository.AddProject(project);
-           
-         
+            _unitOfWork.Project.Add(project);
 
-           if  (await _projectRepository.SaveAllAsync()) {
-              var result =  _mapper.Map<Project, ProjectDto>(project);
-              return Ok(result);
 
-           }
 
-           return BadRequest("Problem addding project");
+            if (await _unitOfWork.Complete() > 0)
+            {
+                var result = _mapper.Map<Project, ProjectDto>(project);
+                return Ok(result);
+
+            }
+
+            return BadRequest("Problem addding project");
         }
 
         [HttpPut]
         public async Task<ActionResult<ProjectDto>> UpdateProject(ProjectDto ProjectDto)
         {
 
-           
-            var project = await _projectRepository.GetProjectByIdAsync(ProjectDto.Id);
 
-            
+            var project = await _unitOfWork.Project.GetById(ProjectDto.Id);
+
+
             if (project == null) return NotFound();
 
             _mapper.Map(ProjectDto, project);
 
 
-            await _projectRepository.SaveAllAsync();
+            await _unitOfWork.Complete();
 
             var result = _mapper.Map<Project, ProjectDto>(project);
 
@@ -109,21 +107,22 @@ namespace BabALSaray.Controllers
 
         public async Task<ActionResult> DeleteProject(int Id)
         {
-            var project = await _projectRepository.GetProjectByIdAsync(Id);
+            var project = await _unitOfWork.Project.GetById(Id);
 
             if (project == null) return NotFound();
-           
-            _projectRepository.DeleteProject(project);
 
-           
-             if  (await _projectRepository.SaveAllAsync()) {
-             
-              return Ok(Id);
+            _unitOfWork.Project.Remove(project);
 
-           }
 
-           return BadRequest("Faild to delete project !");
-        
+            if (await  _unitOfWork.Complete() > 0)
+            {
+
+                return Ok(Id);
+
+            }
+
+            return BadRequest("Faild to delete project !");
+
 
         }
 

@@ -70,7 +70,7 @@ namespace BabALSaray.Services
 
         }
 
-        public async Task<IReadOnlyList<OrderMethod>> GetOrderMethodAsync()
+        public async Task<IEnumerable<OrderMethod>> GetOrderMethodAsync()
         {
              return await  _unitOfWork.Repository<OrderMethod>().ListAllAsync();
         }
@@ -82,7 +82,7 @@ namespace BabALSaray.Services
             return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
         }
 
-        public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
+        public async Task<IEnumerable<Order>> GetOrdersForUserAsync(string buyerEmail)
         {
             var spec = new OrdersWithItemsAndOrderingSpecifications(buyerEmail);
 
