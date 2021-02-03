@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { ViewChild } from '@angular/core';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Project } from 'src/app/_models/Project';
@@ -12,10 +11,12 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 export class ProjectsComponent implements OnInit {
 
   projects: Project[];
+  allProjects: Project[];
   newProject: Project = new Project();
   editProject: Project = new Project();
   today: string;
-  action : string;
+  action: string;
+  filter: any = {};
   constructor(private projectService: ProjectsService) { }
 
 
@@ -35,16 +36,16 @@ export class ProjectsComponent implements OnInit {
    );
   }
   onSaveClick() {
-   
+
    switch (this.action) {
      case 'delete':
       this.projectService.DeleteProject(this.newProject.id).subscribe(
         (response) => {
-           var index = this.projects.findIndex(p => p.id === this.newProject.id);
-            this.projects.splice(index,1);
+            const index = this.projects.findIndex(p => p.id === this.newProject.id);
+            this.projects.splice(index, 1);
             this.resetingProject();
         },
-        (response) =>{
+        (response) => {
           console.log(response);
 
         }
@@ -53,7 +54,7 @@ export class ProjectsComponent implements OnInit {
       );
 
        break;
-   
+
      case 'update':
       if (this.newProject.id > 0) {
         this.projectService.UpdateProject(this.newProject).subscribe(
@@ -66,17 +67,17 @@ export class ProjectsComponent implements OnInit {
         this.projectService.InsertProject(this.newProject).subscribe(
 
           (response) => {this.projects.push(response);
-    
+
           this.resetingProject(); },
           (error) => { console.log(error); }
           );
 
    }
-   
+
  }
 
-  onEditClick(event, index: number, currentaction : string) {
-   
+  onEditClick(event, index: number, currentaction: string) {
+
     this.action = currentaction;
 
     switch (currentaction) {
@@ -87,7 +88,7 @@ export class ProjectsComponent implements OnInit {
         this.date.nativeElement.disabled = false;
         this.team.nativeElement.disabled = false;
         this.save.nativeElement.className = 'btn btn-info';
-        
+
       break;
 
       case 'delete':
@@ -99,7 +100,7 @@ export class ProjectsComponent implements OnInit {
         this.save.nativeElement.className = 'btn btn-danger';
         this.newProject = this.projects.find(p => p.id === (index));
       break;
-    
+
       case 'update':
         this.save.nativeElement.innerHTML = 'Update';
         this.model.nativeElement.innerHTML = 'Update the project';
@@ -110,8 +111,8 @@ export class ProjectsComponent implements OnInit {
         this.newProject = this.projects.find(p => p.id === (index));
       break;
     }
- 
-  
+
+
 
 
   }
@@ -122,5 +123,21 @@ export class ProjectsComponent implements OnInit {
     this.newProject.startingDate = null;
     this.newProject.teamSize = null;
   }
+
+  onFilterChange() {
+
+    let projects = this.allProjects;
+
+    if (this.filter.Id) {
+      projects = projects.filter(p => p.id = 9);
+    }
+    this.filter.Id = 9;
+    projects = this.projects.filter(p => p.id === this.filter.Id);
+    this.projects = projects;
+
+  }
+
+
+
 
 }
