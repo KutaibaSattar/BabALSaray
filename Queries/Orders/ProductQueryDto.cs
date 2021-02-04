@@ -1,24 +1,26 @@
 namespace BabALSaray.Specifications
 {
-    public class ProductParams
+    public class ProductQueryDto
     {
+          
+           public int? BrandId {get;set;}
+
+           public int? TypeId {get;set;}
+
+
            private const int MaxPageSize = 50;
 
            public int pageIndex{get;set;} =1;
 
            private int _pageSize = 6;
 
-           public int PageSize // not allowed more than 50
-           {
+           public int PageSize 
+           { // not allowed more than 50
             get => _pageSize;
 
             set => _pageSize = (value > MaxPageSize ) ? MaxPageSize : value;
 
            }
-
-           public int? BrandId {get;set;}
-
-           public int? TypeId {get;set;}
 
            public string Sort {get;set;}
 

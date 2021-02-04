@@ -49,7 +49,7 @@ namespace BabALSaray.Data
              return await _context.Products.ProjectTo<ProductDto> (_mapper.ConfigurationProvider).ToListAsync(); 
         }
  */
-         public async Task<PagedList<ProductDto>> GetProductsAsync(ProductParams productParams)
+         public async Task<PagedList<ProductDto>> GetProductsAsync(ProductQueryDto productParams)
         {
            
              

@@ -22,7 +22,7 @@ namespace BabALSaray.Data
             _context.Set<T>().Add(entity);
         }
 
-        public async Task<int> CountAsync(ISpecifications<T> spec)
+        public async Task<int> CountAsync(IGenericQuery<T> spec)
         {
            return await ApplySpecification(spec).CountAsync();
         }
@@ -44,7 +44,7 @@ namespace BabALSaray.Data
           return await  _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> GetEntityWithSpec(ISpecifications<T> spec)
+        public async Task<T> GetEntityWithSpec(IGenericQuery<T> spec)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
@@ -54,7 +54,7 @@ namespace BabALSaray.Data
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> ListAsync(ISpecifications<T> spec)
+        public async Task<IEnumerable<T>> ListAsync(IGenericQuery<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync();
         }
@@ -65,11 +65,15 @@ namespace BabALSaray.Data
             _context.Entry(entity).State = EntityState.Modified;
         }
 
-        private IQueryable<T> ApplySpecification (ISpecifications<T> spec)
+        private IQueryable<T> ApplySpecification (IGenericQuery<T> spec)
         
         {
+            //Calling from here
+           
+            return QueryEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec);
 
-            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(),spec);
+            // -> SpecificationEvaluater from-> BaseSpecification from-> ISpecification
+            
             
         }
     }

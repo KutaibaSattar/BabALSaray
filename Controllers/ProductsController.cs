@@ -43,10 +43,10 @@ namespace BabALSaray.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-      public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductParams productParams )
+      public async Task<ActionResult<PagedList<IEnumerable<ProductDto>>>> GetProducts( [FromQuery] ProductQueryDto productParams )
         {
            
-           var spec = new ProductsWithTypeAndBrandsSpecification(productParams);
+           var spec = new ProductsTypeBrandsQuery(productParams);
 
               // Just taking total Items
            /* var countSpec = new ProductWithFiltersForCountSpecification(productParams);
@@ -91,7 +91,7 @@ namespace BabALSaray.Controllers
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
            
-            var spec = new ProductsWithTypeAndBrandsSpecification(id);
+            var spec = new ProductsTypeBrandsQuery(id);
           
             var product = await _productRepo.GetEntityWithSpec(spec);
 

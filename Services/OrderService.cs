@@ -77,14 +77,14 @@ namespace BabALSaray.Services
 
         public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
         {
-            var spec = new OrdersWithItemsAndOrderingSpecifications(id, buyerEmail);
+            var spec = new OrdersItemsOrderingQuery(id, buyerEmail);
 
             return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
         }
 
         public async Task<IEnumerable<Order>> GetOrdersForUserAsync(string buyerEmail)
         {
-            var spec = new OrdersWithItemsAndOrderingSpecifications(buyerEmail);
+            var spec = new OrdersItemsOrderingQuery(buyerEmail);
 
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }

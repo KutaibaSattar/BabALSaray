@@ -10,13 +10,13 @@ namespace BabALSaray.Interfaces
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
 
-        Task<T> GetEntityWithSpec(ISpecifications<T> spec);
+        Task<T> GetEntityWithSpec(IGenericQuery<T> spec);
 
-        Task<IEnumerable<T>> ListAsync (ISpecifications<T> spec);
+        Task<IEnumerable<T>> ListAsync (IGenericQuery<T> spec);
 
          Task<IEnumerable<T>> ListAllAsync ();
 
-        Task<int> CountAsync (ISpecifications<T> spec);
+        Task<int> CountAsync (IGenericQuery<T> spec);
 
         // above only reading
         /* None of these asynchronous methods.

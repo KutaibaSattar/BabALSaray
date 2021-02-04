@@ -15,7 +15,7 @@ namespace BabALSaray.Interfaces
 
         //Task<IEnumerable<ProductDto>> GetProductsAsync();
 
-        Task<PagedList<ProductDto>> GetProductsAsync(ProductParams productParams);
+        Task<PagedList<ProductDto>> GetProductsAsync(ProductQueryDto productParams);
 
         //Task<ProductDto> GetProductByIdAsync (int id);
         Task<Product> GetProductByIdAsync (int id);

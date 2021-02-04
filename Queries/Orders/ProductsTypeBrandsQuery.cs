@@ -4,9 +4,9 @@ using BabALSaray.AppEntities;
 
 namespace BabALSaray.Specifications
 {
-    public class ProductsWithTypeAndBrandsSpecification : BaseSpecifications<Product>
+    public class ProductsTypeBrandsQuery : GenericQuery<Product>
     {
-        public ProductsWithTypeAndBrandsSpecification(ProductParams productParams )
+        public ProductsTypeBrandsQuery(ProductQueryDto productParams )
         : base( x =>
            (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
           (!productParams.BrandId.HasValue || x.ProdcuctBrandId == productParams.BrandId) &&
@@ -44,7 +44,7 @@ namespace BabALSaray.Specifications
            
         }
 
-        public ProductsWithTypeAndBrandsSpecification(int id) : base(x => x.Id == id)
+        public ProductsTypeBrandsQuery(int id) : base(x => x.Id == id)
         {
            AddInclude(x => x.ProductType);
            AddInclude(x => x.ProductBrand); 

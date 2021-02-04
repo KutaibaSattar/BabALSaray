@@ -4,16 +4,18 @@ using BabALSaray.AppEntities.OrderAggregate;
 
 namespace BabALSaray.Specifications
 {
-    public class OrdersWithItemsAndOrderingSpecifications : BaseSpecifications<Order>
+    public class OrdersItemsOrderingQuery : GenericQuery<Order>
     {
-        public OrdersWithItemsAndOrderingSpecifications(string email) : base(o => o.BuyerEmail == email)
+        public OrdersItemsOrderingQuery(string email) 
+            : base(o => o.BuyerEmail == email)
         {
             AddInclude( o => o.OrderItems);
             AddInclude( o => o.OrderMethod);
             AddOrderByDescending( o => o.OrderDate);
         }
 
-        public OrdersWithItemsAndOrderingSpecifications(int id, string email) : base( o => o.Id == id && o.BuyerEmail == email)
+        public OrdersItemsOrderingQuery(int id, string email) 
+        : base( o => o.Id == id && o.BuyerEmail == email)
         {
              AddInclude( o => o.OrderItems);
             AddInclude( o => o.OrderMethod);

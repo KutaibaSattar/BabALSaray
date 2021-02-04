@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BabALSaray.Data
 {
-    public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
+    public class QueryEvaluator<TEntity> where TEntity : class
     {
-       public  static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecifications<TEntity> spec)
+       public  static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, IGenericQuery<TEntity> spec)
 
        {
 

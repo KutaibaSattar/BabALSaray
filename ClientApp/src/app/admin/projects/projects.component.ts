@@ -32,6 +32,7 @@ export class ProjectsComponent implements OnInit {
     (response: Project[] ) => {
       console.log(response);
       this.projects = response;
+      this.allProjects = response;
     }
    );
   }
@@ -126,14 +127,21 @@ export class ProjectsComponent implements OnInit {
 
   onFilterChange() {
 
+    this.projects =  this.allProjects
     let projects = this.allProjects;
 
-    if (this.filter.Id) {
-      projects = projects.filter(p => p.id = 9);
+       if (this.filter.Id) {
+      projects = this.projects.filter(p => p.id === +this.filter.Id);
+      this.projects = projects;
     }
-    this.filter.Id = 9;
-    projects = this.projects.filter(p => p.id === this.filter.Id);
-    this.projects = projects;
+  }
+ 
+  onResetFilter() {
+     
+    if (this.filter.reset) {
+     this.filter = {};
+     this.onFilterChange();
+    }
 
   }
 

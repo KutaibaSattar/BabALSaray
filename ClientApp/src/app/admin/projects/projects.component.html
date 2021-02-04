@@ -8,9 +8,10 @@
           class="form-control"
           id="drpSearchBy"
           name="SearchBy"
-          [(ngModel)]="this.filter.projectId"
-          (change)="onFilterChange()"
+          (change)="onResetFilter()"
+          [(ngModel)]="this.filter.reset"
         >
+        <option value="All">All</option>
           <option value="ProjectID">Project ID</option>
           <option value="ProjectName">Project Name</option>
           <option value="DateOfStart">Date of Start</option>
@@ -27,10 +28,11 @@
             class="form-control"
             id="txtSearchText"
             name="SearchText"
-            
+            [(ngModel)]="this.filter.Id"
+                        
           />
           <div class="input-group-append" >
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
+            <span class="input-group-text" (click)="onFilterChange()"><i class="fa fa-search"></i></span>
           </div>
         </div>
       </div>
