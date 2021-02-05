@@ -14,9 +14,24 @@ export class ProjectsService {
   constructor(private httpClient: HttpClient ) { }
 
 
-  getAllProjects(): Observable<Project[]> {
+  getAllProjects(filter): Observable<Project[]> {
 
-   return this.httpClient.get<Project[]>(this.baseUrl + 'projects' , {responseType: 'json'});
+   return this.httpClient.get<Project[]>(this.baseUrl + 'projects' + '?' + this.toQueryString(filter) , {responseType: 'json'});
+
+  }
+
+  toQueryString(obj) {
+    const parts = [];
+      for (const property in obj) {
+        if (obj.hasOwnProperty(property)) {
+          const value = obj[property];
+          if (value !== null && value !== undefined) {
+          parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+          }
+        }
+       }
+
+      return parts.join('&');
 
   }
 
@@ -32,7 +47,7 @@ export class ProjectsService {
 
     }
 
-    DeleteProject(Id: number) : Observable<number> {
+    DeleteProject(Id: number): Observable<number> {
 
       return this.httpClient.delete<number>(this.baseUrl + 'projects?Id=' + Id );
 

@@ -6,6 +6,7 @@ using BabALSaray.AppEntities.OrderAggregate;
 using Helpers;
 using BabALSaray.AppEntities.Project;
 using System;
+using BabALSaray.Queries.Project;
 
 namespace BabALSaray.Helpers
 {
@@ -22,6 +23,7 @@ namespace BabALSaray.Helpers
           CreateMap<AddressDto,OrderAddress>().ReverseMap();
           CreateMap<CustomerBasketDto, CustomerBasket>();
           CreateMap<BasketItemDto, BasketItem>();
+          CreateMap<ProjectQueryDto,ProjectQuery>();
           
          
           CreateMap<Product,ProductDto>()

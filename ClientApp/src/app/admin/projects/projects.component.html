@@ -41,7 +41,7 @@
 
   
   <div class="col-8 mx-auto">
-    <button class="btn btn-primary" data-toggle="modal" (click)="onEditClick($event,project.id,'insert')" data-target="#newModal">Create Project</button>
+    <button class="btn btn-primary" data-toggle="modal" (click)="onEditClick(project.id,'insert')" data-target="#newModal">Create Project</button>
     <table class="table">
       <thead>
         <th>Project ID</th>
@@ -56,8 +56,8 @@
           <td>{{project.name}}</td>
           <td>{{project.startingDate |  date:'dd/MM/yyyy'}}</td>
           <td>{{project.teamSize}}</td>
-          <td> <button class="btn btn-info" (click)="onEditClick($event,project.id,'update')" data-toggle="modal" data-target="#newModal"> Edit</button>
-            <button class="btn btn-danger" (click)="onEditClick($event,project.id,'delete')" id="test" data-toggle="modal" data-target="#newModal"> Delete</button> </td>
+          <td> <button class="btn btn-info" (click)="onEditClick(project.id,'update')" data-toggle="modal" data-target="#newModal"> Edit</button>
+            <button class="btn btn-danger" (click)="onEditClick(project.id,'delete')" id="test" data-toggle="modal" data-target="#newModal"> Delete</button> </td>
         </tr>
       </tbody>
     </table>

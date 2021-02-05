@@ -1,7 +1,7 @@
-namespace Queries.Project
+namespace BabALSaray.Queries.Project
 {
     public class ProjectQueryDto
     {
-        public int? ProjectId { get; set; }
+        public int? Id { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using BabALSaray.AppEntities.Project;
 using BabALSaray.Data;
 using BabALSaray.DTOs;
 using BabALSaray.Interfaces;
+using BabALSaray.Queries.Project;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
@@ -21,25 +22,13 @@ namespace Data
             _context = context;
         }
 
-        
-        public Task<IEnumerable<Project>> GetProjectByDateStart(DateTime datestart)
+        public async Task<IEnumerable<Project>> GetAllProjects(ProjectQuery projectQuery)
         {
-            
-            throw new NotImplementedException();
+            var query = _context.Projects.AsQueryable();
+            query = query.Where(p => p.Id == projectQuery.Id.Value);
+
+            return await query.ToListAsync();
+
         }
-
-        public Project GetProjectByName(string projectname)
-        {
-            
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Project>> GetProjectByTeamSize(int teamsize)
-        {
-            throw new NotImplementedException();
-        }
-
-      
-
     }
 }

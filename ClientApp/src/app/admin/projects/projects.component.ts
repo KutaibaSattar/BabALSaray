@@ -28,14 +28,20 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.projectService.getAllProjects().subscribe(
-    (response: Project[] ) => {
-      console.log(response);
-      this.projects = response;
-      this.allProjects = response;
-    }
-   );
+  this.PopulateProject();
   }
+
+  PopulateProject() {
+    this.projectService.getAllProjects(this.filter).subscribe(
+      (response: Project[] ) => {
+        console.log(response);
+        this.projects = response;
+        this.allProjects = response;
+      }
+     );
+
+  }
+
   onSaveClick() {
 
    switch (this.action) {
@@ -77,7 +83,7 @@ export class ProjectsComponent implements OnInit {
 
  }
 
-  onEditClick(event, index: number, currentaction: string) {
+  onEditClick( index: number, currentaction: string) {
 
     this.action = currentaction;
 
@@ -85,11 +91,8 @@ export class ProjectsComponent implements OnInit {
       case 'insert':
         this.save.nativeElement.innerHTML = 'Save';
         this.model.nativeElement.innerHTML = 'Add a project';
-        this.project.nativeElement.disabled = false;
-        this.date.nativeElement.disabled = false;
-        this.team.nativeElement.disabled = false;
         this.save.nativeElement.className = 'btn btn-info';
-
+        this.resetElement();
       break;
 
       case 'delete':
@@ -105,16 +108,18 @@ export class ProjectsComponent implements OnInit {
       case 'update':
         this.save.nativeElement.innerHTML = 'Update';
         this.model.nativeElement.innerHTML = 'Update the project';
-        this.project.nativeElement.disabled = false;
-        this.date.nativeElement.disabled = false;
-        this.team.nativeElement.disabled = false;
         this.save.nativeElement.className = 'btn btn-info';
         this.newProject = this.projects.find(p => p.id === (index));
-      break;
+        this.resetElement();
+        break;
     }
 
+  }
 
-
+  resetElement() {
+    this.project.nativeElement.disabled = false;
+    this.date.nativeElement.disabled = false;
+    this.team.nativeElement.disabled = false;
 
   }
 
@@ -127,17 +132,18 @@ export class ProjectsComponent implements OnInit {
 
   onFilterChange() {
 
-    this.projects =  this.allProjects
+   this.PopulateProject();
+    /*  this.projects =  this.allProjects;
     let projects = this.allProjects;
 
        if (this.filter.Id) {
       projects = this.projects.filter(p => p.id === +this.filter.Id);
       this.projects = projects;
-    }
+    } */
   }
- 
+
   onResetFilter() {
-     
+
     if (this.filter.reset) {
      this.filter = {};
      this.onFilterChange();

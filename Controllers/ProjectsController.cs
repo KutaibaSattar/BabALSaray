@@ -4,6 +4,7 @@ using AutoMapper;
 using BabALSaray.AppEntities.Project;
 using BabALSaray.DTOs;
 using BabALSaray.Interfaces;
+using BabALSaray.Queries.Project;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabALSaray.Controllers
@@ -22,11 +23,15 @@ namespace BabALSaray.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects([FromQuery]ProjectQueryDto projectQueryDto)
         {
 
+            var filter = _mapper.Map<ProjectQueryDto,ProjectQuery>(projectQueryDto);
 
-            return Ok(await _unitOfWork.Project.GetAll());
+           if (projectQueryDto.Id.HasValue)  return Ok(await _unitOfWork.Project.GetAllProjects(filter));  
+
+          return Ok(await _unitOfWork.Project.GetAll());    
+            
 
 
         }
