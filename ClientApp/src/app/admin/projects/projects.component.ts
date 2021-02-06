@@ -52,11 +52,16 @@ export class ProjectsComponent implements OnInit {
             this.projects.splice(index, 1);
             this.resetingProject();
         },
-        (response) => {
-          console.log(response);
+        (error : Response) => {
+          if (error.status == 404)
+            //this.form.SetErrors(error.json())
+            alert('This post already has been deleted')
+          else{
+              alert('An unexpected error occurred')
+              console.log(error);
+          }
 
         }
-
 
       );
 
